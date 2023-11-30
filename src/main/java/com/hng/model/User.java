@@ -1,6 +1,5 @@
 package com.hng.model;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class User {

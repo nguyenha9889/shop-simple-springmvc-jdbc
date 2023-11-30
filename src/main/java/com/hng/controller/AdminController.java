@@ -31,14 +31,14 @@ public class AdminController {
     */
    @RequestMapping
    public String login(Model model){
-      model.addAttribute("formLogin", new FormLogin());
+      model.addAttribute("form_login", new FormLogin());
       return "admin/login";
    }
 
    // Xử lý login
    @RequestMapping(value = "/auth", method = RequestMethod.POST)
    public String doLogin(HttpSession session,
-                         @ModelAttribute("formLogin") FormLogin formLogin,
+                         @ModelAttribute("form_login") FormLogin formLogin,
                          Model model, BindingResult bindingResult){
       loginValidate.validate(formLogin, bindingResult);
       if (bindingResult.hasErrors()) {

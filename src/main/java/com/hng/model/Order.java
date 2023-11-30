@@ -10,7 +10,7 @@ public class Order {
    private String phone;
    private String address;
    private double total;
-   private enum status {};
+   private String status;
    List<OrderDetail> orderDetails;
    private LocalDateTime orderAt;
    private LocalDateTime deliverAt;
@@ -85,5 +85,13 @@ public class Order {
 
    public void setDeliverAt(LocalDateTime deliverAt) {
       this.deliverAt = deliverAt;
+   }
+
+   public String getStatus() {
+      return status;
+   }
+
+   public void setStatus(String status) {
+      this.status = status;
    }
 }

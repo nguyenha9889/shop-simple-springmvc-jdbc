@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import java.util.Objects;
+
 @Component
 public class FormLoginValidate implements Validator {
    @Autowired
@@ -22,16 +24,16 @@ public class FormLoginValidate implements Validator {
       FormLogin formLogin = (FormLogin) target;
       User user = userService.findByUserName(formLogin.getUsername());
       if (formLogin.getUsername().trim().isEmpty()) {
-         errors.reject("username", "login.username.empty");
+         errors.rejectValue("username", "login.username.empty");
       } else if (user == null) {
-         errors.reject("username", "login.username.incorrect");
+         errors.rejectValue("username", "login.username.incorrect");
       }
       if (formLogin.getPassword().trim().isEmpty()){
-         errors.reject("password", "login.password.empty");
+         errors.rejectValue("password", "login.password.empty");
       }else {
          assert user != null;
-         if (!user.getPassword().equals(formLogin.getPassword().trim())){
-            errors.reject("password", "login.password.incorrect");
+         if (!Objects.equals(user.getPassword(), formLogin.getPassword().trim())){
+            errors.rejectValue("password", "login.password.incorrect");
          }
       }
    }
