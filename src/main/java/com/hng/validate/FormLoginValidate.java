@@ -30,11 +30,8 @@ public class FormLoginValidate implements Validator {
       }
       if (formLogin.getPassword().trim().isEmpty()){
          errors.rejectValue("password", "login.password.empty");
-      }else {
-         assert user != null;
-         if (!Objects.equals(user.getPassword(), formLogin.getPassword().trim())){
+      }else if (user!= null && !Objects.equals(user.getPassword(), formLogin.getPassword().trim())){
             errors.rejectValue("password", "login.password.incorrect");
-         }
       }
    }
 }
