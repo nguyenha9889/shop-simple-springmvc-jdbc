@@ -11,8 +11,6 @@ public class User {
    private String password;
    private boolean role;
    private boolean status;
-   private LocalDateTime createdAt;
-   private LocalDateTime updatedAt;
    private List<OrderDetail> cart;
 
    public Long getId() {
@@ -69,22 +67,6 @@ public class User {
 
    public void setStatus(boolean status) {
       this.status = status;
-   }
-
-   public LocalDateTime getCreatedAt() {
-      return createdAt;
-   }
-
-   public void setCreatedAt(LocalDateTime createdAt) {
-      this.createdAt = createdAt;
-   }
-
-   public LocalDateTime getUpdatedAt() {
-      return updatedAt;
-   }
-
-   public void setUpdatedAt(LocalDateTime updatedAt) {
-      this.updatedAt = updatedAt;
    }
 
    public List<OrderDetail> getCart() {

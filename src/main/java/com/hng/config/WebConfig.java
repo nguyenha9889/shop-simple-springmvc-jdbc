@@ -23,7 +23,13 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebMvc
 @ComponentScan({
-      "com.hng.config", "com.hng.controller", "com.hng.dao", "com.hng.model", "com.hng.service"
+      "com.hng.config",
+      "com.hng.controller",
+      "com.hng.dao",
+      "com.hng.dto",
+      "com.hng.model",
+      "com.hng.service",
+      "com.hng.validate"
 })
 public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
     private ApplicationContext applicationContext;
@@ -84,7 +90,7 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
     public DataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/shopDb");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/kfcDb");
         dataSource.setUsername("root");
         dataSource.setPassword("Ha@8385426");
         return dataSource;

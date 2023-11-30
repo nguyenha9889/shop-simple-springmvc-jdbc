@@ -6,7 +6,7 @@ import java.util.List;
 public class Order {
    private Long id;
    private Long userId;
-   private String name;
+   private String receivedName;
    private String phone;
    private String address;
    private double total;
@@ -31,12 +31,12 @@ public class Order {
       this.userId = userId;
    }
 
-   public String getName() {
-      return name;
+   public String getReceivedName() {
+      return receivedName;
    }
 
-   public void setName(String name) {
-      this.name = name;
+   public void setReceivedName(String receivedName) {
+      this.receivedName = receivedName;
    }
 
    public String getPhone() {
