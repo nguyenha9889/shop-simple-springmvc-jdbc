@@ -28,7 +28,6 @@ public class CatalogDao implements ICatalogDao {
                return ca;
             });
    }
-   }
 
    @Override
    public Catalog findByName(String name) {
