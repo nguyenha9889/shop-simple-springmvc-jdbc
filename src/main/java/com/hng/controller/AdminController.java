@@ -31,21 +31,29 @@ public class AdminController {
     */
    @RequestMapping
    public String login(Model model){
-      model.addAttribute("form_login", new FormLogin());
+      model.addAttribute("formLogin", new FormLogin());
       return "admin/login";
    }
 
    // Xử lý login
    @RequestMapping(value = "/auth", method = RequestMethod.POST)
    public String doLogin(HttpSession session,
-                         @ModelAttribute("form_login") FormLogin formLogin,
+                         @ModelAttribute("formLogin") FormLogin formLogin,
                          Model model, BindingResult bindingResult){
       loginValidate.validate(formLogin, bindingResult);
       if (bindingResult.hasErrors()) {
          return "admin/login";
       }
-      User admin = userService.findByUserName(formLogin.getUsername());
-      session.setAttribute("adminLogin", admin);
-      return "admin/index";
+      User user = userService.findByUserName(formLogin.getUsername());
+
+      if (user.isRole()) {
+         session.setAttribute("adminLogin", user);
+         model.addAttribute("view", "dashboard");
+         return "admin/index";
+      } else {
+         // Từ chối truy cập nếu ko có quyền admin
+         model.addAttribute("unauthorized", "You do not have permission to access this page");
+         return "admin/login";
+      }
    }
 }
