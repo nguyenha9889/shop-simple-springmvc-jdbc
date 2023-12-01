@@ -1,6 +1,6 @@
 package com.hng.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 public class Order {
@@ -12,8 +12,8 @@ public class Order {
    private double total;
    private String status;
    List<OrderDetail> orderDetails;
-   private LocalDateTime orderAt;
-   private LocalDateTime deliverAt;
+   private LocalDate orderAt;
+   private LocalDate deliverAt;
 
    public Long getId() {
       return id;
@@ -71,19 +71,19 @@ public class Order {
       this.orderDetails = orderDetails;
    }
 
-   public LocalDateTime getOrderAt() {
+   public LocalDate getOrderAt() {
       return orderAt;
    }
 
-   public void setOrderAt(LocalDateTime orderAt) {
+   public void setOrderAt(LocalDate orderAt) {
       this.orderAt = orderAt;
    }
 
-   public LocalDateTime getDeliverAt() {
+   public LocalDate getDeliverAt() {
       return deliverAt;
    }
 
-   public void setDeliverAt(LocalDateTime deliverAt) {
+   public void setDeliverAt(LocalDate deliverAt) {
       this.deliverAt = deliverAt;
    }
 

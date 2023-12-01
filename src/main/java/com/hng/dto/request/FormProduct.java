@@ -1,19 +1,15 @@
-package com.hng.model;
+package com.hng.dto.request;
 
-import java.time.LocalDate;
+import org.springframework.web.multipart.MultipartFile;
 
-
-public class Product {
+public class FormProduct {
    private Long id;
    private String name;
    private Long categoryId;
    private String description;
-   private String imagePath;
+   private MultipartFile image;
    private double unitPrice;
    private int stock;
-   private LocalDate createdAt;
-   private LocalDate updatedAt;
-   private boolean status;
 
    public Long getId() {
       return id;
@@ -47,12 +43,12 @@ public class Product {
       this.description = description;
    }
 
-   public String getImagePath() {
-      return imagePath;
+   public MultipartFile getImage() {
+      return image;
    }
 
-   public void setImagePath(String imagePath) {
-      this.imagePath = imagePath;
+   public void setImage(MultipartFile image) {
+      this.image = image;
    }
 
    public double getUnitPrice() {
@@ -69,29 +65,5 @@ public class Product {
 
    public void setStock(int stock) {
       this.stock = stock;
-   }
-
-   public LocalDate getCreatedAt() {
-      return createdAt;
-   }
-
-   public void setCreatedAt(LocalDate createdAt) {
-      this.createdAt = createdAt;
-   }
-
-   public LocalDate getUpdatedAt() {
-      return updatedAt;
-   }
-
-   public void setUpdatedAt(LocalDate updatedAt) {
-      this.updatedAt = updatedAt;
-   }
-
-   public boolean isStatus() {
-      return status;
-   }
-
-   public void setStatus(boolean status) {
-      this.status = status;
    }
 }

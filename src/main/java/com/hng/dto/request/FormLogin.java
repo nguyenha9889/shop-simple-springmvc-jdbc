@@ -20,11 +20,6 @@ public class FormLogin {
       this.password = password;
    }
 
-   public FormLogin(String username, String password) {
-      this.username = username;
-      this.password = password;
-   }
-
    public FormLogin() {
    }
 }
