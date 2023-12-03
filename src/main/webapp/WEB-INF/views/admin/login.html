@@ -1,54 +1,77 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Admin Login</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="shortcut icon" th:href="@{/images/favicon.svg}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
 
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/font-awesome.min.css" rel="stylesheet">
-    <!--<link href="/css/nprogress.css" rel="stylesheet">-->
-    <link href="/css/animate.min.css" rel="stylesheet">
-    <link href="/css/custom.min.css" rel="stylesheet">
-  </head>
+<body>
+<div id="auth">
 
-  <body class="login">
-    <div>
-      <div class="login_wrapper">
-        <div class="animate form login_form">
-          <section class="login_content">
-            <form action="/admin/auth" method="post" th:object="${formLogin}">
-              <h1>Admin Login Form</h1>
-              <div class="mb-3">
-                <input type="text" class="form-control" style="margin-bottom: 8px" placeholder="Username" th:field="*{username}"/>
-                <p style="text-align: left; color: #dc3545" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
-              </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 col-sm-12 mx-auto">
+                <div class="card pt-4">
+                    <div class="card-body">
+                        <div class="text-center mb-5">
+                            <img th:src="@{/images/favicon.svg}" height="48" class='mb-4' alt="logo">
+                            <h3>Sign In</h3>
+                            <p>Please sign in to continue going to Dashboard.</p>
+                        </div>
+                        <form th:action="@{/admin}" th:object="${formLogin}" method="post">
+                            <div class="form-group position-relative has-icon-left">
+                                <label for="username">Username</label>
+                                <div class="position-relative">
+                                    <input type="text" class="form-control" id="username" th:field="*{username}">
+                                    <div class="form-control-icon">
+                                        <i data-feather="user"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="form-text text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
 
-              <div class="mb-3">
-                <input type="password" class="form-control" style="margin-bottom: 8px" placeholder="Password" th:field="*{password}"/>
-                <p style="text-align: left; color: #dc3545" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
-              </div>
+                            <div class="form-group position-relative has-icon-left">
+                                <div class="clearfix">
+                                    <label for="password">Password</label>
+                                    <a class='float-end' onclick="return confirm('Please contact support@voler.com to help')">
+                                        <small>Forgot password?</small>
+                                    </a>
+                                </div>
+                                <div class="position-relative">
+                                    <input type="password" class="form-control" id="password" th:field="*{password}">
+                                    <div class="form-control-icon">
+                                        <i data-feather="lock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="form-text text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
 
-              <div class="mb-3">
-                <button type="submit" class="btn btn-outline-info btn-sm">Log in</button>
-                <a class="reset_pass" onclick="return confirm('Please contact support@hng.com.vn to be help')">Lost your password?</a>
-              </div>
-            </form>
-            <div class="clearfix"></div>
-            <p class="text-danger" th:text="*{unauthorized.isEmpty()}? '' : *{unauthorized}">
-              <a href="/client/user-login">Back Home</a>
-            </p>
-            <div class="separator">
-              <div>
-                <p>©2016 All Rights Reserved - HaNguyen</p>
-              </div>
+                            <div class='form-check clearfix my-4'>
+                                <div class="checkbox float-start">
+                                    <input type="checkbox" id="checkbox1" class='form-check-input' >
+                                    <label for="checkbox1">Remember me</label>
+                                </div>
+                            </div>
+
+                            <div class="clearfix">
+                                <button class="btn btn-primary float-end" type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-          </section>
         </div>
-      </div>
     </div>
-  </body>
+
+</div>
+<script th:src="@{/js/feather.min.js}"></script>
+<script th:src="@{/js/app.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+
 </html>

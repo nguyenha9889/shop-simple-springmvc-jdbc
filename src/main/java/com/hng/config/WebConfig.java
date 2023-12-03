@@ -76,13 +76,13 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
     }
 
     /* **************************************************************** */
-    /*  Resource style (css, js, img....)                               */
+    /*  Resource style (css, js, images....)                               */
     /* **************************************************************** */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/css/**").addResourceLocations("classpath:static/css/");
         registry.addResourceHandler("/js/**").addResourceLocations("classpath:static/js/");
-        registry.addResourceHandler("/img/**").addResourceLocations("classpath:static/img/");
+        registry.addResourceHandler("/images/**").addResourceLocations("classpath:static/images/");
     }
 
     /* **************************************************************** */

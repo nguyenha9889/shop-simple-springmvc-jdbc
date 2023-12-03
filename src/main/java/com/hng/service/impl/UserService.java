@@ -14,26 +14,26 @@ public class UserService implements IUserService {
    private IUserDao userDao;
    @Override
    public List<User> findAll() {
-      return null;
+      return userDao.findAll();
    }
 
    @Override
    public User findById(Long id) {
-      return null;
+      return userDao.findById(id);
    }
 
    @Override
    public void save(User user) {
-
+      userDao.save(user);
    }
 
    @Override
    public void delete(Long id) {
-
+      userDao.delete(id);
    }
 
    @Override
-   public User findByUserName(String username) {
-      return null;
+   public User findByUsername(String username) {
+      return userDao.findByUsername(username);
    }
 }

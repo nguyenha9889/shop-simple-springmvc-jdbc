@@ -1,13 +1,13 @@
 {
   "type": "service_account",
   "project_id": "demoupload-512c4",
-  "private_key_id": "",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BA==\n-----END PRIVATE KEY-----\n",
-  "client_email": "",
-  "client_id": "",
+  "private_key_id": "36003079ff1da55959d0ea2a42ab12ec47706822",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCh/j/M4c2MsjzV\n6IcsJotY2cw1BEA0ruI7VmQua4R7eBzbRq3bG38Yf1RjkKP5Z01Qpagb6wH99MNy\nZ/j1KYJNZCBCGUyDn4yEbAgcyUzr8LBbKhTonRqs+3z8QUSbfA8VpOGZntx50ksU\nVJaeujPF1ik4k/0WHrAHS4PBPZL2ae/93UcdZ78mE4493WheZ/uSbcRFXuFuRIkS\n/Lzghp+IXMLbw8LZI3TxnCtK1gWYlhM8FXGWPcw+WICdFYCPx7OHOmkUdmE9ltYZ\nFxyYTcuGr3L/0m3GM+xsg2fcKfAx4MgyOXjKgOlXo/57L8mSWl/9PnESS55RvvZq\npMOXWubZAgMBAAECggEAJzR2UmqPqa51ZLu7Ayds8Br9/hLCSz3MCNpWsplY3dzq\n9vK7Ht0fvFkMnnAiDzk+D/eXoPIWcFTtfGHHceYS4BIMcJLY3r4dbusKZ5UcZbnB\npL6hgs6K5zSSQia1qP+0UuOtqdU1vNH1U71JGq8r2oSDQ2slhFX2+jz/bSQuzi3g\neUcfrgkKiEwNkrQW8LQqQfZaZUWtX3rLiGpAPfpKSVHGPsshZrvm8aYnYAfzDk6o\nCA5MDScI2xmyCNlHbLkIoyyQQKBgc0I1ivlA+Z8ACN3jMGfElCDMEQPLaeAah7sB\nS8aYvO701w1ji1EaxlKvpOVMBZ2/D25ZyqBxsgXqUQKBgQDddrpDwT7aR6UR2QdX\nVuVDo83gsCr4XfGDUJYNrnpjoCJRZKiFSGfU7PJ1sPrjssUpRMa7OMZMPIY0q/Xb\n/dKoDTpfeCARfIpaW1p7C9Az+BaM3pYO8adtpzuwZez222fdYXMFKQs+sOPJRCHs\nLjO2r1m9ANx1XfnIyHFB9uoWRQKBgQC7QVY6Cl2ZS39rSghhnuuZJpKl8wpzsIeG\nw8bJ64XIH57bybCZUx7sxa6l3H5jqjsktHcslb8QzIBd4YsRVsvAmUbSV/DeeMdC\n3C46CyjQIXE1kTekQEM3KNXTCOE+GQi1xCOe8UcndqpYKdMpTtKF3fphi2jat7z1\nlDhPmcPRhQKBgQDKK/zWpa9vLUBwDqQ5A0bAfOURXUGdAoXbztFtI/7uu90YWL/P\nDM5c/wJIlowzGZwLlJGnkKjWJ9qMcv87GXgZmhnT1aHQ1NSosATll182UiCj8P8k\nHU8vNx+yZRnyMVGcM74A0/tD+8+2iNA+/96Nw340oHihXG0O8o0SHwqL0QKBgQCJ\nFENzKbNrTQFyITgRfq0p6DrikRDNsCUGWrtjha7h2YQJkZReKaMx4WUAtnEvtKan\nMBUt5lGAkrRGBZ4wi0GNNKfLw+Tod7InF9gfVZwDAPhHJo99Bi4uaw5c9tstAlaF\n+Ze5+xcDpLL+519VlgY3SVDJp6ySsH77qA2w9/eJoQKBgQDVGl6Icm9C9AwPoDzc\nkU/WnpoyY9EP70IMl7XCMeN7/HY+S0MUIOMWgX7rJ4hTOGMAbpUILHvdfIxobzvT\nuQCoD2WObCX9v3dlyQS2MbFeDPDzKvEl4Y2T72sVPEVijwSX7en7bwaE/WT5tsRk\nAWvamP45KLwdXYj087xq1/B3fQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-b8t3b@demoupload-512c4.iam.gserviceaccount.com",
+  "client_id": "102314922850594319010",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
   "token_uri": "https://oauth2.googleapis.com/token",
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-b8t3b%40demoupload-512c4.iam.gserviceaccount.com",
   "universe_domain": "googleapis.com"
 }

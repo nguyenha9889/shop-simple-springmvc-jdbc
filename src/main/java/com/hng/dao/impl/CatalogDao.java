@@ -5,25 +5,36 @@ import com.hng.model.Catalog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementSetter;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 @Repository
 public class CatalogDao implements ICatalogDao {
 
    @Autowired
    private JdbcTemplate jdbcTemplate;
+
    @Override
-   public List<Catalog> findAll(int limit, int offset) {
-      String sql = "select * from catalog limit=? offset=?";
+   public List<Catalog> findAll() {
+      String sql = "select * from catalog order by id desc";
       return jdbcTemplate.query(
             sql,
-            new Object[]{limit, offset},
+            (rs, row) -> {
+               Catalog ca = new Catalog();
+               ca.setId(rs.getLong(1));
+               ca.setName(rs.getString(2));
+               ca.setDescription(rs.getString(3));
+               ca.setStatus(rs.getBoolean(4));
+               return ca;
+            });
+   }
+
+   @Override
+   public List<Catalog> findAll(int limit, int offset) {
+      String sql = "select * from catalog order by id desc limit "+limit+" offset "+offset+";";
+      return jdbcTemplate.query(
+            sql,
             (rs, row) -> {
                Catalog ca = new Catalog();
                ca.setId(rs.getLong(1));
@@ -36,36 +47,41 @@ public class CatalogDao implements ICatalogDao {
 
    @Override
    public List<Catalog> getListByName(String name) {
-      String sql = "select * from catalog where name like :name";
-      Map<String, Object> params = new HashMap<>();
-      params.put("name", name+"%");
-      MapSqlParameterSource param = new MapSqlParameterSource(params);
-
+      String sql = "select * from catalog where name like %?%";
       return jdbcTemplate.query(
             sql,
+            new Object[]{name},
             (rs, row) -> {
                Catalog ca = new Catalog();
-               ca.setId(rs.getLong(1));
-               ca.setName(rs.getString(2));
-               ca.setDescription(rs.getString(3));
-               ca.setStatus(rs.getBoolean(4));
+               ca.setId(rs.getLong("id"));
+               ca.setName(rs.getString("name"));
+               ca.setDescription(rs.getString("description"));
+               ca.setStatus(rs.getBoolean("status"));
                return ca;
-            },
-            param
-            );
+            });
    }
 
    @Override
    public Catalog findByName(String name) {
-      String sql = "select * from catalog where LOWER(name)=?";
-      return jdbcTemplate.queryForObject(sql, new Object[]{name.toLowerCase()}, new BeanPropertyRowMapper<>(Catalog.class));
+      String sql = "select * from catalog where name=?";
+      return jdbcTemplate.query(
+            sql,
+            new Object[]{name},
+            (rs) -> {
+               Catalog ca = null;
+               if (rs.next()) {
+                  ca = new Catalog();
+                  ca.setId(rs.getLong("id"));
+                  ca.setName(rs.getString("name"));
+                  ca.setDescription(rs.getString("description"));
+                  ca.setStatus(rs.getBoolean("status"));
+               }
+               return ca;
+            }
+      );
    }
 
-   @Override
-   public List<Catalog> findAll() {
-      String sql = "select * from catalog";
-      return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Catalog.class));
-   }
+
 
    @Override
    public Catalog findById(Long id) {

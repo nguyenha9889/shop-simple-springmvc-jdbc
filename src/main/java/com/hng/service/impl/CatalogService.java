@@ -5,16 +5,32 @@ import com.hng.model.Catalog;
 import com.hng.service.ICatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+
 
 @Service
 public class CatalogService implements ICatalogService {
+
    @Autowired
    private ICatalogDao catalogDao;
+
    @Override
-   public List<Catalog> findAll(int limit, int offset) {
-      return catalogDao.findAll(limit, offset);
+   public List<Catalog> findAll() {
+      return catalogDao.findAll();
+   }
+
+   @Override
+   public List<Catalog> findAll(int page, int size) {
+      return catalogDao.findAll(size, size*page);
+   }
+
+   @Override
+   public int getTotalPage(int size) {
+      int count  = catalogDao.findAll().size();
+      if (count%size==0){
+         return count/size;
+      }
+      return count/size+1;
    }
 
    @Override
@@ -26,11 +42,6 @@ public class CatalogService implements ICatalogService {
    public Catalog findByName(String name) {
       List<Catalog> list = catalogDao.findAll();
       return list.stream().filter(c -> c.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
-   }
-
-   @Override
-   public List<Catalog> findAll() {
-      return catalogDao.findAll();
    }
 
    @Override

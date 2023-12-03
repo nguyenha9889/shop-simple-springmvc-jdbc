@@ -5,6 +5,7 @@ import com.hng.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 @Component
@@ -20,9 +21,8 @@ public class FormProductValidate implements Validator {
    public void validate(Object target, Errors errors) {
       FormProduct formProduct = (FormProduct) target;
 
-      if (formProduct.getDescription().trim().isEmpty()) {
-         errors.rejectValue("field", "field.empty");
-      }
+      ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "field.empty");
+      ValidationUtils.rejectIfEmptyOrWhitespace(errors, "description", "field.empty");
 
       if (formProduct.getName().trim().length() < 6) {
          errors.rejectValue("field", "field.length");
@@ -32,6 +32,13 @@ public class FormProductValidate implements Validator {
 
       if (formProduct.getId() == null && formProduct.getImage().getSize() == 0) {
          errors.rejectValue("productImage", "product.image.empty");
+      }
+
+      if (formProduct.getUnitPrice() <= 0) {
+         errors.rejectValue("unitPrice", "product.price");
+      }
+      if (formProduct.getStock() < 0) {
+         errors.rejectValue("stock", "product.stock");
       }
    }
 }

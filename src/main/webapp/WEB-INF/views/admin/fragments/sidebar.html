@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sidebar</title>
+</head>
+<body>
+<div id="sidebar" class='active' th:fragment="sidebar(view)"><!--sidebar-->
+    <div class="sidebar-wrapper active">
+        <div class="sidebar-header">
+            <img th:src="@{/images/logo.svg}" alt="logo">
+        </div>
+        <div class="sidebar-menu">
+            <ul class="menu">
+                <li class='sidebar-title'>Main Menu</li>
+
+                <li th:class="|sidebar-item ${view == 'dashboard' ? 'active':''}|">
+                    <a th:href="@{/admin}" class='sidebar-link'>
+                        <i data-feather="home" width="20"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <li th:class="|sidebar-item ${view == 'catalog' ? 'active':''}|">
+                    <a th:href="@{/admin/catalog}" class='sidebar-link'>
+                        <i data-feather="grid" width="20"></i>
+                        <span>Catalog</span>
+                    </a>
+                </li>
+
+                <li th:class="|sidebar-item ${view == 'product' ? 'active':''}|">
+                    <a th:href="@{/admin/product}" class='sidebar-link'>
+                        <i data-feather="file-plus" width="20"></i>
+                        <span>Product</span>
+                    </a>
+                </li>
+
+                <li class='sidebar-title'>Users Management</li>
+                <li th:class="|sidebar-item ${view == 'user' ? 'active':''}|">
+                    <a th:href="@{/admin/user}" class='sidebar-link'>
+                        <i data-feather="user" width="20"></i>
+                        <span>User</span>
+                    </a>
+                    <ul class="submenu ">
+                        <li>
+                            <a href="#">Login</a>
+                        </li>
+                        <li>
+                            <a href="#">Register</a>
+                        </li>
+                        <li>
+                            <a href="#">Forgot Password</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+    </div>
+</div>
+</body>
+</html>

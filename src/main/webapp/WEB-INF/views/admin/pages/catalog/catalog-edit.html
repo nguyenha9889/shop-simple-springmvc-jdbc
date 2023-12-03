@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Catalog</title>
+</head>
+<body>
+<div class="main-content container-fluid" th:fragment="catalog-edit(formCatalog)">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Add New Catalog Form</h3>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class='breadcrumb-header'>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a th:href="@{/admin/catalog}">Catalog</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Form Update</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <section id="basic-vertical-layouts">
+        <div class="row match-height ms-3">
+            <div class="col-md-8 col-12">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form class="form form-vertical" th:action="@{/admin/catalog/update}" method="post" th:object="${formCatalog}">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-12 mb-3">
+                                            <div class="form-group">
+                                                <label>Catalog ID</label>
+                                                <input type="text" th:field="${formCatalog.id}" class="form-control" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mb-3">
+                                            <div class="form-group">
+                                                <label>Catalog Name</label>
+                                                <input type="text" th:field="${formCatalog.name}" class="form-control" placeholder="Catalog Name">
+                                            </div>
+                                            <p class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="${formCatalog.name}"></p>
+                                        </div>
+                                        <div class="col-12 mb-3">
+                                            <div class="form-group">
+                                                <label>Status</label>
+                                                <fieldset class="form-group">
+                                                    <select class="form-select" disabled="disabled" id="disabledSelect" th:value="${formCatalog.status}">
+                                                        <option th:text="|${formCatalog.status} ? 'selected':''|">Active</option>
+                                                        <option th:text="|${!formCatalog.status} ? 'selected':''|">InActive</option>
+                                                    </select>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mb-3">
+                                            <div class="card">
+                                                <div class="card-header">Description</div>
+                                                <div class="card-body">
+                                                    <div class="form-group with-title mb-3">
+                                                        <textarea class="form-control" th:field="${formCatalog.description}" rows="3"></textarea>
+                                                        <label>Viết mô tả cho danh mục</label>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <p class="form-text text-danger" th:if="${#fields.hasErrors('description')}" th:errors="${formCatalog.description}"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                            <button class="btn btn-light-secondary me-1 mb-1"
+                                            th:href="@{/admin/catalog}">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script th:src="@{/js/main.js}"></script>
+    <script th:src="@{/js/app.js}"></script>
+</div>>

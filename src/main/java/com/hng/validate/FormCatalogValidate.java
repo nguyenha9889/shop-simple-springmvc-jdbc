@@ -5,6 +5,7 @@ import com.hng.service.ICatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 
@@ -20,10 +21,14 @@ public class FormCatalogValidate implements Validator {
    @Override
    public void validate(Object target, Errors errors) {
       FormCatalog formCatalog = (FormCatalog) target;
-      if (formCatalog.getName().trim().isEmpty() || formCatalog.getDescription().trim().isEmpty()) {
-         errors.rejectValue("field", "field.empty");
-      } else if (catalogService.findByName(formCatalog.getName()) != null) {
-         errors.rejectValue("catalogName", "catalog.name.existed");
+
+      ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "field.empty");
+      ValidationUtils.rejectIfEmptyOrWhitespace(errors, "description", "field.empty");
+
+      if (!errors.hasFieldErrors()){
+         if (catalogService.findByName(formCatalog.getName()) != null) {
+            errors.rejectValue("name", "catalog.name.existed");
+         }
       }
    }
 }
