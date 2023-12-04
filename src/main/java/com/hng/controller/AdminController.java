@@ -78,7 +78,7 @@ public class AdminController {
       model.addAttribute("size",size);
       model.addAttribute("total_page",new int[catalogService.getTotalPage(size)]);
       model.addAttribute("view","catalog");
-      return "admin/index";
+      return "admin/pages/catalog/index";
    }
 
    @RequestMapping("/product")

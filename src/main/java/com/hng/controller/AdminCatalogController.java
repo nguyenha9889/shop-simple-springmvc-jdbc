@@ -35,9 +35,10 @@ public class AdminCatalogController {
       }
 
       model.addAttribute("formCatalog", new FormCatalog());
-      model.addAttribute("view","catalog_add");
-      return "admin/index";
+      model.addAttribute("view","catalog");
+      return "admin/pages/catalog/catalog-add";
    }
+
    @PostMapping(value = "/add")
    public String doAdd(HttpSession session, Model model,
                        @ModelAttribute("formCatalog") @Validated FormCatalog formCatalog,
@@ -49,9 +50,9 @@ public class AdminCatalogController {
 
       catalogValidate.validate(formCatalog, bindingResult);
       if (bindingResult.hasErrors()) {
-         model.addAttribute("view","catalog_add");
-         model.addAttribute("formAdd", formCatalog);
-         return "admin/index";
+         model.addAttribute("view","catalog");
+         model.addAttribute("formCatalog", formCatalog);
+         return "admin/pages/catalog/catalog-add";
       }
 
       Catalog ca = new Catalog();
@@ -60,6 +61,7 @@ public class AdminCatalogController {
       catalogService.save(ca);
       return "redirect:/admin/catalog";
    }
+
    @RequestMapping("/edit/{id}")
    public String catalogEdit(HttpSession session, @PathVariable Long id, Model model){
       if (getSessionUser(session) == null) {
@@ -69,9 +71,10 @@ public class AdminCatalogController {
       Catalog cat = catalogService.findById(id);
       FormCatalog formCatalog = new FormCatalog(id, cat.getName(), cat.getDescription(), cat.isStatus());
       model.addAttribute("formCatalog",formCatalog);
-      model.addAttribute("view","catalog_edit");
-      return "admin/index";
+      model.addAttribute("view","catalog");
+      return "admin/pages/catalog/catalog-edit";
    }
+
    @PostMapping(value = "/update")
    public String doUpdate(HttpSession session, Model model,
                           @ModelAttribute("formCatalog") @Validated FormCatalog formCatalog,
@@ -83,8 +86,8 @@ public class AdminCatalogController {
       catalogValidate.validate(formCatalog, bindingResult);
       if (bindingResult.hasErrors()) {
          model.addAttribute("formCatalog",formCatalog);
-         model.addAttribute("view","catalog_edit");
-         return "admin/index";
+         model.addAttribute("view","catalog");
+         return "admin/pages/catalog/catalog-edit";
       }
 
       Catalog ca = new Catalog();
@@ -97,7 +100,11 @@ public class AdminCatalogController {
       return "redirect:/admin/catalog";
    }
    @RequestMapping("/delete/{id}")
-   public String doDelete(@PathVariable Long id){
+   public String doDelete(HttpSession session, @PathVariable Long id){
+      if (getSessionUser(session) == null) {
+         return "admin/login";
+      }
+
       catalogService.delete(id);
       return "redirect:/admin/catalog";
    }

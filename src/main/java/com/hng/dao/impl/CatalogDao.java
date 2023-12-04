@@ -61,27 +61,6 @@ public class CatalogDao implements ICatalogDao {
             });
    }
 
-   @Override
-   public Catalog findByName(String name) {
-      String sql = "select * from catalog where name=?";
-      return jdbcTemplate.query(
-            sql,
-            new Object[]{name},
-            (rs) -> {
-               Catalog ca = null;
-               if (rs.next()) {
-                  ca = new Catalog();
-                  ca.setId(rs.getLong("id"));
-                  ca.setName(rs.getString("name"));
-                  ca.setDescription(rs.getString("description"));
-                  ca.setStatus(rs.getBoolean("status"));
-               }
-               return ca;
-            }
-      );
-   }
-
-
 
    @Override
    public Catalog findById(Long id) {

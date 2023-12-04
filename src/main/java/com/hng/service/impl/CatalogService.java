@@ -6,6 +6,7 @@ import com.hng.service.ICatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Objects;
 
 
 @Service
@@ -39,9 +40,13 @@ public class CatalogService implements ICatalogService {
    }
 
    @Override
-   public Catalog findByName(String name) {
-      List<Catalog> list = catalogDao.findAll();
-      return list.stream().filter(c -> c.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
+   public boolean checkNameExist(Long id, String name) {
+      for (Catalog c: catalogDao.findAll()) {
+         if (c.getName().equalsIgnoreCase(name)) {
+            return !Objects.equals(c.getId(), id);
+         }
+      }
+      return false;
    }
 
    @Override

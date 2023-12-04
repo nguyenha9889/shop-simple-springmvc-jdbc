@@ -1,69 +1,96 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Add Catalog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalog Add</title>
+    <link rel="stylesheet" th:href="@{/vendors/simple-datatables/style.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/perfect-scrollbar.css}">
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+    <link rel="shortcut icon" th:href="@{/images/favicon.svg}" type="image/x-icon">
 </head>
+
 <body>
-<div class="main-content container-fluid" th:fragment="catalog-add(formCatalog)">
-    <div class="page-title">
-        <div class="row">
-            <div class="col-12 col-md-6 order-md-1 order-last">
+<div id="app">
+    <div th:replace="admin/fragments/sidebar :: sidebar(${view})"></div>
+
+    <div id="main">
+        <div th:replace="admin/fragments/header :: header"></div>
+
+        <div class="main-content container-fluid">
+            <div class="page-title">
                 <h3>Add New Catalog Form</h3>
+                <p class="text-subtitle text-muted">Thêm mới danh mục sản phẩm</p>
             </div>
-            <div class="col-12 col-md-6 order-md-2 order-first">
-                <nav aria-label="breadcrumb" class='breadcrumb-header'>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a th:href="@{/admin/catalog}">Catalog</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Form Add</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-    </div>
-    <section id="basic-vertical-layouts">
-        <div class="row match-height ms-3">
-            <div class="col-md-8 col-12">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="card-body">
-                            <form class="form form-vertical" th:action="@{/admin/catalog/add}" method="post" th:object="${formCatalog}">
-                                <div class="form-body">
-                                    <div class="row">
-                                        <div class="col-12 mb-3">
-                                            <div class="form-group">
-                                                <label>Catalog Name</label>
-                                                <input type="text" th:field="${formCatalog.name}" class="form-control" placeholder="Catalog Name">
-                                            </div>
-                                            <p class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="${formCatalog.name}"></p>
-                                        </div>
-                                        <div class="col-12 mb-3">
-                                            <div class="card">
-                                                <div class="card-header">Description</div>
-                                                <div class="card-body">
-                                                    <div class="form-group with-title mb-3">
-                                                        <textarea class="form-control" th:field="${formCatalog.description}" rows="3"></textarea>
-                                                        <label>Viết mô tả cho danh mục</label>
+            <section class="section">
+                <div class="row mb-3">
+                    <div class="col-12 col-md-6 order-md-2 order-first">
+                        <nav aria-label="breadcrumb" class='breadcrumb-header'>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a th:href="@{/admin/catalog}">Catalog</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Form Add</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-md-10">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <form class="form form-vertical" th:action="@{/admin/catalog/add}" method="post" th:object="${formCatalog}">
+                                        <div class="form-body">
+                                            <div class="row">
+                                                <div class="col-12 mb-3">
+                                                    <div class="form-group">
+                                                        <label>Catalog Name</label>
+                                                        <input type="text" th:field="*{name}" class="form-control" placeholder="Catalog Name">
+                                                    </div>
+                                                    <p class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <div class="card">
+                                                        <div class="card-header">Description</div>
+                                                        <div class="card-body">
+                                                            <div class="form-group with-title mb-3">
+                                                                <textarea class="form-control" th:field="*{description}" rows="3"></textarea>
+                                                                <label>Viết mô tả cho danh mục</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-footer">
+                                                            <p class="form-text text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="card-footer">
-                                                    <p class="form-text text-danger" th:if="${#fields.hasErrors('description')}" th:errors="${formCatalog.description}"></p>
+                                                <div class="col-12 d-flex justify-content-end">
+                                                    <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                                    <a type="reset" class="btn btn-light-secondary me-1 mb-1"
+                                                            th:href="@{/admin/catalog}">Cancel</a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-12 d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                                            <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
+
         </div>
-    </section>
-    <script th:src="@{/js/main.js}"></script>
-    <script th:src="@{/js/app.js}"></script>
-</div>>
+
+        <div th:replace="admin/fragments/footer :: footer"></div>
+    </div>
+</div>
+<script th:src="@{/js/feather.min.js}"></script>
+<script th:src="@{/js/app.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+
+<script th:src="@{/js/Chart.min.js}"></script>
+<script th:src="@{/js/apexcharts.min.js}"></script>
+<script th:src="@{/js/dashboard.js}"></script>
+<script th:src="@{/js/perfect-scrollbar.min.js}"></script>
+</body>
+</html>

@@ -16,7 +16,7 @@ public class ProductDao implements IProductDao {
 
    @Override
    public List<Product> findAll() {
-      String sql = "select * from product";
+      String sql = "select * from product order by createdAt";
       return jdbcTemplate.query(
             sql,
             (rs, row) -> {
@@ -37,10 +37,9 @@ public class ProductDao implements IProductDao {
 
    @Override
    public List<Product> findAll(int limit, int offset) {
-      String sql = "select * from product limit=? offset=?";
+      String sql = "select * from product order by createdAt desc limit=? offset=?";
       return jdbcTemplate.query(
             sql,
-            new Object[]{limit, offset},
             (rs, row) -> {
                Product p = new Product();
                p.setId(rs.getLong(1));
