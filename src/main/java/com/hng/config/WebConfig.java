@@ -11,7 +11,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring5.SpringTemplateEngine;
@@ -113,5 +115,20 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
         messageSource.setBasename("application");
         messageSource.setDefaultEncoding("utf-8");
         return messageSource;
+    }
+
+    /* **************************************************************** */
+    /*  Bean Upload file config                                         */
+    /* **************************************************************** */
+    @Bean(name = "multipartResolver")
+    public CommonsMultipartResolver getResolver(){
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        resolver.setMaxUploadSizePerFile(100000);
+        return resolver;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new AuthInterceptor()).addPathPatterns("/admin/**");
     }
 }

@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface ICatalogDao extends IGenericDao<Catalog, Long>{
    List<Catalog> findAll(int limit, int offset);
-   List<Catalog> getListByName(String name);
+   List<Catalog> getListByName(String name, int limit, int offset);
 }

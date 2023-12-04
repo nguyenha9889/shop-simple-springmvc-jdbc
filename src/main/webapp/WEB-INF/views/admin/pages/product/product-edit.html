@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catalog Add</title>
+    <title>Product Add</title>
     <link rel="stylesheet" th:href="@{/vendors/simple-datatables/style.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
     <link rel="stylesheet" th:href="@{/css/perfect-scrollbar.css}">
@@ -21,15 +21,15 @@
 
         <div class="main-content container-fluid">
             <div class="page-title">
-                <h3>Add New Catalog Form</h3>
-                <p class="text-subtitle text-muted">Thêm mới danh mục sản phẩm</p>
+                <h3>Add New Product Form</h3>
+                <p class="text-subtitle text-muted">Thêm mới sản phẩm</p>
             </div>
             <section class="section">
                 <div class="row mb-3">
                     <div class="col-12 col-md-6 order-md-2 order-first">
                         <nav aria-label="breadcrumb" class='breadcrumb-header'>
                             <ol class="breadcrumb breadcrumb-right">
-                                <li class="breadcrumb-item"><a th:href="@{/admin/catalog}">Catalog</a></li>
+                                <li class="breadcrumb-item"><a th:href="@{/admin/product}">Product</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Form Add</li>
                             </ol>
                         </nav>
@@ -40,15 +40,51 @@
                         <div class="card">
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form class="form form-vertical" th:action="@{/admin/catalog/add}" method="post" th:object="${formCatalog}">
+                                    <form class="form form-vertical" th:action="@{/admin/product/add}" method="post" th:object="${formProduct}">
                                         <div class="form-body">
                                             <div class="row">
                                                 <div class="col-12 mb-3">
                                                     <div class="form-group">
-                                                        <label>Catalog Name</label>
+                                                        <label>Product Name</label>
                                                         <input type="text" th:field="*{name}" class="form-control" placeholder="Catalog Name">
                                                     </div>
                                                     <p class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <div class="form-group">
+                                                        <label>Select category</label>
+                                                        <fieldset class="form-group">
+                                                            <select class="form-select" id="catalogs" disabled="disabled" th:value="*{categoryId}">
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <div class="form-group">
+                                                        <label>Unit price</label>
+                                                        <input type="number" th:field="*{unitPrice}" class="form-control">
+                                                    </div>
+                                                    <p class="form-text text-danger" th:if="${#fields.hasErrors('unitPrice')}" th:errors="*{unitPrice}"></p>
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <div class="form-group">
+                                                        <label>Stock</label>
+                                                        <input type="number" th:field="*{stock}" class="form-control">
+                                                    </div>
+                                                    <p class="form-text text-danger" th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></p>
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <div class="form-group">
+                                                        <label>Upload Image</label>
+                                                        <fieldset class="form-group">
+                                                            <div class="form-file">
+                                                                <input type="file" class="form-file-input" id="customFile">
+                                                                <label class="form-file-label" for="customFile">
+                                                                    <span class="form-file-text">Choose file...</span>
+                                                                </label>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
                                                 </div>
                                                 <div class="col-12 mb-3">
                                                     <div class="card">
@@ -67,7 +103,7 @@
                                                 <div class="col-12 d-flex justify-content-end">
                                                     <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
                                                     <a type="reset" class="btn btn-light-secondary me-1 mb-1"
-                                                            th:href="@{/admin/catalog}">Cancel</a>
+                                                       th:href="@{/admin/product}">Cancel</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -84,6 +120,18 @@
         <div th:replace="admin/fragments/footer :: footer"></div>
     </div>
 </div>
+<script type="text/javascript" th:inline="javascript">
+    fetch("http://localhost:8080/api/v1/catalog/all")
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            const catalogs = document.getElementById("catalogs");
+            for (const c of data) {
+                catalogs.innerText = `<option th:value="${c.id}">c.name</option>`;
+            }
+
+        })
+</script>
 <script th:src="@{/js/feather.min.js}"></script>
 <script th:src="@{/js/app.js}"></script>
 <script th:src="@{/js/main.js}"></script>

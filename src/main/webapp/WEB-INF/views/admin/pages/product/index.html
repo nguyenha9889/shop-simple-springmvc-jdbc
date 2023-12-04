@@ -1,159 +1,112 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Catalog Management</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management</title>
+    <link rel="stylesheet" th:href="@{/vendors/simple-datatables/style.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/perfect-scrollbar.css}">
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+    <link rel="shortcut icon" th:href="@{/images/favicon.svg}" type="image/x-icon">
 </head>
+
 <body>
-<div class="main-content container-fluid" th:fragment="product">
-    <div class="page-title">
-        <h3>Catalog Management</h3>
-        <p class="text-subtitle text-muted">Trang quản lý danh mục sản phẩm</p>
-    </div>
-    <section class="section">
-        <div class="card">
-            <div class="card-header">
-                Simple Datatable
+<div id="app">
+    <div th:replace="admin/fragments/sidebar :: sidebar(${view})"></div>
+
+    <div id="main">
+        <div th:replace="admin/fragments/header :: header"></div>
+
+        <div class="main-content container-fluid">
+            <div class="page-title mb-3">
+                <h3>Product Management</h3>
+                <p class="text-subtitle text-muted">Help you to manager data and display your statistics</p>
             </div>
-            <div class="card-body">
-                <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
-                    <div class="dataTable-top">
-                        <div class="dataTable-dropdown"><select class="dataTable-selector form-select">
-                            <option value="5">5</option>
-                            <option value="10" selected="">10</option>
-                            <option value="15">15</option>
-                            <option value="20">20</option>
-                            <option value="25">25</option>
-                        </select><label>entries per page</label></div>
-                        <div class="dataTable-search"><input class="dataTable-input" placeholder="Search..."
-                                                             type="text"></div>
-                    </div>
-                    <div class="dataTable-container">
-                        <table class="table table-striped dataTable-table" id="table1">
-                            <thead>
-                            <tr>
-                                <th data-sortable="" style="width: 14.6488%;"><a href="#"
-                                                                                 class="dataTable-sorter">Name</a></th>
-                                <th data-sortable="" style="width: 37.4607%;"><a href="#"
-                                                                                 class="dataTable-sorter">Email</a></th>
-                                <th data-sortable="" style="width: 16.3261%;"><a href="#"
-                                                                                 class="dataTable-sorter">Phone</a></th>
-                                <th data-sortable="" style="width: 17.4444%;"><a href="#"
-                                                                                 class="dataTable-sorter">City</a></th>
-                                <th data-sortable="" style="width: 14.0897%;"><a href="#" class="dataTable-sorter">Status</a>
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>Graiden</td>
-                                <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                <td>076 4820 8838</td>
-                                <td>Offenburg</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Dale</td>
-                                <td>fringilla.euismod.enim@quam.ca</td>
-                                <td>0500 527693</td>
-                                <td>New Quay</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Nathaniel</td>
-                                <td>mi.Duis@diam.edu</td>
-                                <td>(012165) 76278</td>
-                                <td>Grumo Appula</td>
-                                <td>
-                                    <span class="badge bg-danger">Inactive</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Darius</td>
-                                <td>velit@nec.com</td>
-                                <td>0309 690 7871</td>
-                                <td>Ways</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Oleg</td>
-                                <td>rhoncus.id@Aliquamauctorvelit.net</td>
-                                <td>0500 441046</td>
-                                <td>Rossignol</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Kermit</td>
-                                <td>diam.Sed.diam@anteVivamusnon.org</td>
-                                <td>(01653) 27844</td>
-                                <td>Patna</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Jermaine</td>
-                                <td>sodales@nuncsit.org</td>
-                                <td>0800 528324</td>
-                                <td>Mold</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Ferdinand</td>
-                                <td>gravida.molestie@tinciduntadipiscing.org</td>
-                                <td>(016977) 4107</td>
-                                <td>Marlborough</td>
-                                <td>
-                                    <span class="badge bg-danger">Inactive</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Kuame</td>
-                                <td>Quisque.purus@mauris.org</td>
-                                <td>(0151) 561 8896</td>
-                                <td>Tresigallo</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Deacon</td>
-                                <td>Duis.a.mi@sociisnatoquepenatibus.com</td>
-                                <td>07740 599321</td>
-                                <td>Karapınar</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="dataTable-bottom">
-                        <div class="dataTable-info">Showing 1 to 10 of 26 entries</div>
-                        <ul class="pagination pagination-primary float-end dataTable-pagination">
-                            <li class="page-item pager"><a href="#" class="page-link" data-page="1">‹</a></li>
-                            <li class="page-item active"><a href="#" class="page-link" data-page="1">1</a></li>
-                            <li class="page-item"><a href="#" class="page-link" data-page="2">2</a></li>
-                            <li class="page-item"><a href="#" class="page-link" data-page="3">3</a></li>
-                            <li class="page-item pager"><a href="#" class="page-link" data-page="2">›</a></li>
-                        </ul>
+            <section class="section">
+
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center py-5">
+                                <a th:href="@{/admin/product/add}" class="btn btn-primary">Add new</a>
+                                <form class="d-flex" width="50%"
+                                      th:action="@{/admin/product}" method="post">
+                                    <input class="dataTable-input me-3" placeholder="Search product by name ..."
+                                           type="text" name="query" id="query">
+                                    <button class="btn btn-primary btn-sm" type="submit">Search</button>
+                                </form>
+                            </div>
+                            <div class="card-body px-0 pb-0">
+                                <div class="table-responsive">
+                                    <table class='table table-striped mb-0' id="table1">
+                                        <thead>
+                                        <tr>
+                                            <th style="width: 4%;">#</th>
+                                            <th style="width: 15%;">Product Name</th>
+                                            <th style="width: 10%;">Category</th>
+                                            <th>Image</th>
+                                            <th style="width: 10%;">Description</th>
+                                            <th style="width: 5%;">Unit Price</th>
+                                            <th style="width: 5%;">Stock</th>
+                                            <th style="width: 8%;">Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="p, loop : ${products}">
+                                            <td th:text="${loop.count}"></td>
+                                            <td th:text="${p.name}"></td>
+                                            <td th:text="${p.categoryId}"></td>
+                                            <td>
+                                                <img src="" th:alt="${p.name}" style="width: 200px; object-fit: fill">
+                                            </td>
+                                            <td th:text="${p.description}"></td>
+                                            <td th:text="${p.unitPrice}"></td>
+                                            <td th:text="${p.stock}"></td>
+                                            <td th:text="${p.status ? 'Active' : 'Inactive'}"></td>
+                                            <td>
+                                                <a class="btn icon icon-left btn-primary btn-sm"
+                                                   th:href="@{/admin/product/edit/{id}(id=${p.id})}">Edit</a>
+                                                <a class="btn icon icon-left btn-danger btn-sm"
+                                                   th:href="@{/admin/product/delete/{id}(id=${p.id})}"
+                                                   onclick="return confirm('Are you want to hide this?')">Hide</a>
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dataTable-bottom">
+                            <div class="dataTable-info" th:text="|Total have ${products.size()} entries|"></div>
+                            <ul class="pagination pagination-primary float-end dataTable-pagination">
+                                <li class="page-item pager"><a href="#" class="page-link">‹</a></li>
+
+                                <th:block th:each="p,loop : ${total_page}">
+                                    <li th:class="|page-item ${current_page == loop.index?'active':''}|">
+                                        <a class="page-link" th:href="@{|?page=${loop.index}&size=${size}|}"
+                                           th:text="${loop.index+1}"></a>
+                                    </li>
+                                </th:block>
+
+                                <li class="page-item pager"><a href="#" class="page-link">›</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
+
         </div>
 
-    </section>
-
+        <div th:replace="admin/fragments/footer :: footer"></div>
+    </div>
 </div>
+<script th:src="@{/js/feather.min.js}"></script>
+<script th:src="@{/js/app.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/perfect-scrollbar.min.js}"></script>
 </body>
 </html>

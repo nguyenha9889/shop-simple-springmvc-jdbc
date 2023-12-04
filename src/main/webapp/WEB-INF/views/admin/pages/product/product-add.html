@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Add</title>
+    <link rel="stylesheet" th:href="@{/vendors/simple-datatables/style.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/perfect-scrollbar.css}">
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+    <link rel="shortcut icon" th:href="@{/images/favicon.svg}" type="image/x-icon">
+
+</head>
+<body>
+<div id="app">
+    <div th:replace="admin/fragments/sidebar :: sidebar(${view})"></div>
+
+    <div id="main">
+        <div th:replace="admin/fragments/header :: header"></div>
+
+        <div class="main-content container-fluid">
+            <div class="page-title">
+                <h3>Add New Product Form</h3>
+                <p class="text-subtitle text-muted">Thêm mới sản phẩm</p>
+            </div>
+            <section class="section">
+                <div class="row mb-3">
+                    <div class="col-12 col-md-6 order-md-2 order-first">
+                        <nav aria-label="breadcrumb" class='breadcrumb-header'>
+                            <ol class="breadcrumb breadcrumb-right">
+                                <li class="breadcrumb-item"><a th:href="@{/admin/product}">Product</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Form Add</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-md-10">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <form class="form form-vertical" th:action="@{/admin/product/add}" method="post"
+                                          th:object="${formProduct}" enctype="multipart/form-data">
+                                        <div class="form-body">
+                                            <div class="row">
+                                                <div class="col-12 mb-3">
+                                                    <div class="form-group">
+                                                        <label>Product Name</label>
+                                                        <input type="text" th:field="*{name}" class="form-control"
+                                                               placeholder="Catalog Name">
+                                                    </div>
+                                                    <p class="form-text text-danger"
+                                                       th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <div class="form-group">
+                                                        <label>Select category</label>
+                                                        <fieldset class="form-group">
+                                                            <select class="form-select" id="catalogs" th:field="*{categoryId}">
+                                                                <option th:each="ca, loop : ${catalogs}" th:value="${ca.id}" th:text="${ca.name}"></option>
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <div class="form-group">
+                                                        <label>Unit price</label>
+                                                        <input type="number" th:field="*{unitPrice}"
+                                                               class="form-control">
+                                                    </div>
+                                                    <p class="form-text text-danger"
+                                                       th:if="${#fields.hasErrors('unitPrice')}"
+                                                       th:errors="*{unitPrice}"></p>
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <div class="form-group">
+                                                        <label>Stock</label>
+                                                        <input type="number" th:field="*{stock}" class="form-control">
+                                                    </div>
+                                                    <p class="form-text text-danger"
+                                                       th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></p>
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <div class="form-group">
+                                                        <fieldset class="form-group">
+                                                            <div class="form-file">
+                                                                <input type="file" class="form-file-input"
+                                                                       id="customFile" th:field="*{image}">
+                                                                <label class="form-file-label" for="customFile">
+                                                                    <span class="form-file-text">Choose image...</span>
+                                                                </label>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <div class="card">
+                                                        <div class="card-header">Description</div>
+                                                        <div class="card-body">
+                                                            <div class="form-group with-title mb-3">
+                                                                <textarea class="form-control" th:field="*{description}"
+                                                                          rows="3"></textarea>
+                                                                <label>Viết mô tả cho sản phẩm</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-footer">
+                                                            <p class="form-text text-danger"
+                                                               th:if="${#fields.hasErrors('description')}"
+                                                               th:errors="*{description}"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 d-flex justify-content-end">
+                                                    <button type="submit" class="btn btn-primary me-1 mb-1">Submit
+                                                    </button>
+                                                    <a type="reset" class="btn btn-light-secondary me-1 mb-1"
+                                                       th:href="@{/admin/product}">Cancel</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <div th:replace="admin/fragments/footer :: footer"></div>
+    </div>
+</div>
+
+<script th:src="@{/js/feather.min.js}"></script>
+<script th:src="@{/js/app.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/perfect-scrollbar.min.js}"></script>
+</body>
+</html>

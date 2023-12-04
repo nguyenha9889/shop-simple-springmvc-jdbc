@@ -94,4 +94,18 @@ public class Product {
    public void setStatus(boolean status) {
       this.status = status;
    }
+
+   public Product() {
+   }
+
+   public Product(Long id, String name, Long categoryId, String description, String imagePath, double unitPrice, int stock, boolean status) {
+      this.id = id;
+      this.name = name;
+      this.categoryId = categoryId;
+      this.description = description;
+      this.imagePath = imagePath;
+      this.unitPrice = unitPrice;
+      this.stock = stock;
+      this.status = status;
+   }
 }

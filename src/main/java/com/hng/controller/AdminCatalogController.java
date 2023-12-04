@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 @Controller
@@ -28,8 +29,27 @@ public class AdminCatalogController {
       return (User) session.getAttribute("adminLogin");
    }
 
+   @RequestMapping
+   public String catalog(HttpSession session,
+                         Model model,
+                         @RequestParam(name = "page", defaultValue = "0") int page,
+                         @RequestParam(name = "size", defaultValue = "5") int size){
+
+      if (getSessionUser(session) == null) {
+         return "admin/login";
+      }
+      List<Catalog> list = catalogService.findAll(page, size);
+      model.addAttribute("catalogs", list);
+      model.addAttribute("current_page",page);
+      model.addAttribute("size",size);
+      model.addAttribute("total_page",new int[catalogService.getTotalPage(list, size)]);
+      model.addAttribute("view","catalog");
+      return "admin/pages/catalog/index";
+   }
+
+
    @RequestMapping("/add")
-   public String catalogAdd(HttpSession session, Model model){
+   public String add(HttpSession session, Model model){
       if (getSessionUser(session) == null) {
          return "admin/login";
       }
@@ -39,7 +59,7 @@ public class AdminCatalogController {
       return "admin/pages/catalog/catalog-add";
    }
 
-   @PostMapping(value = "/add")
+   @PostMapping("/add")
    public String doAdd(HttpSession session, Model model,
                        @ModelAttribute("formCatalog") @Validated FormCatalog formCatalog,
                        BindingResult bindingResult){
@@ -63,7 +83,7 @@ public class AdminCatalogController {
    }
 
    @RequestMapping("/edit/{id}")
-   public String catalogEdit(HttpSession session, @PathVariable Long id, Model model){
+   public String edit(HttpSession session, @PathVariable Long id, Model model){
       if (getSessionUser(session) == null) {
          return "admin/login";
       }
@@ -99,6 +119,7 @@ public class AdminCatalogController {
 
       return "redirect:/admin/catalog";
    }
+
    @RequestMapping("/delete/{id}")
    public String doDelete(HttpSession session, @PathVariable Long id){
       if (getSessionUser(session) == null) {
@@ -107,5 +128,29 @@ public class AdminCatalogController {
 
       catalogService.delete(id);
       return "redirect:/admin/catalog";
+   }
+
+   // Search catalog by name
+   @PostMapping
+   public String search(HttpSession session,
+                         Model model,
+                         @RequestParam(name = "query") String query,
+                         @RequestParam(name = "page", defaultValue = "0") int page,
+                         @RequestParam(name = "size", defaultValue = "5") int size){
+
+      if (getSessionUser(session) == null) {
+         return "admin/login";
+      }
+      if (query.trim().isEmpty()){
+         return "redirect:/admin/catalog";
+      } else {
+         List<Catalog> list = catalogService.getListByName(query, page, size);
+         model.addAttribute("catalogs", list);
+         model.addAttribute("current_page",page);
+         model.addAttribute("size",size);
+         model.addAttribute("total_page",new int[catalogService.getTotalPage(list, size)]);
+         model.addAttribute("view","catalog");
+         return "admin/pages/catalog/index";
+      }
    }
 }

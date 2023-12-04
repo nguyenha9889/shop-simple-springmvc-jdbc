@@ -46,11 +46,11 @@ public class CatalogDao implements ICatalogDao {
    }
 
    @Override
-   public List<Catalog> getListByName(String name) {
-      String sql = "select * from catalog where name like %?%";
+   public List<Catalog> getListByName(String name, int limit, int offset) {
+      String nameQuery = "'%" +name.toLowerCase().trim() + "%'";
+      String sql = "select * from catalog where lower(name) like "+nameQuery+" limit "+limit+" offset "+offset+";";
       return jdbcTemplate.query(
             sql,
-            new Object[]{name},
             (rs, row) -> {
                Catalog ca = new Catalog();
                ca.setId(rs.getLong("id"));

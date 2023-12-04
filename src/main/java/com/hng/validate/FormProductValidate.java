@@ -24,10 +24,14 @@ public class FormProductValidate implements Validator {
       ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "field.empty");
       ValidationUtils.rejectIfEmptyOrWhitespace(errors, "description", "field.empty");
 
-      if (formProduct.getName().trim().length() < 6) {
-         errors.rejectValue("field", "field.length");
-      } else if (productService.checkExistByName(formProduct.getName())) {
-         errors.rejectValue("productName", "product.name.existed");
+      if (errors.hasFieldErrors()){
+         if (formProduct.getName().length() < 6) {
+            errors.rejectValue("field", "field.length");
+         } else
+            // check tên trùng lặp
+            if (productService.checkNameExist(formProduct.getId(), formProduct.getName())) {
+            errors.rejectValue("productName", "product.name.existed");
+         }
       }
 
       if (formProduct.getId() == null && formProduct.getImage().getSize() == 0) {

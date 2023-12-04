@@ -37,7 +37,7 @@ public class ProductDao implements IProductDao {
 
    @Override
    public List<Product> findAll(int limit, int offset) {
-      String sql = "select * from product order by createdAt desc limit=? offset=?";
+      String sql = "select * from product order by createdAt desc limit "+limit+" offset "+offset+";";
       return jdbcTemplate.query(
             sql,
             (rs, row) -> {
@@ -57,11 +57,11 @@ public class ProductDao implements IProductDao {
    }
 
    @Override
-   public List<Product> getListByName(String name) {
-      String sql = "select * from where name like %?%";
+   public List<Product> getListByName(String name, int limit, int offset) {
+      String nameQuery = "'%" +name.toLowerCase().trim() + "%'";
+      String sql = "select * from product where lower(name) like "+nameQuery+" limit "+limit+" offset "+offset+";";
       return jdbcTemplate.query(
             sql,
-            new Object[]{name},
             (rs, row) -> {
                Product p = new Product();
                p.setId(rs.getLong(1));
@@ -138,32 +138,5 @@ public class ProductDao implements IProductDao {
    public int delete(Long id) {
       String sql = "UPDATE product set status=0 where id=?";
       return jdbcTemplate.update(sql, id);
-   }
-
-
-   @Override
-   public Product findByName(String name) {
-      String sql = "select * from product where id=?";
-      return jdbcTemplate.queryForObject(
-            sql,
-            new Object[]{name},
-            (rs, row) -> {
-               Product p = null;
-               if (rs.next()) {
-                  p = new Product();
-                  p.setId(rs.getLong(1));
-                  p.setName(rs.getString(2));
-                  p.setCategoryId(rs.getLong(3));
-                  p.setDescription(rs.getString(4));
-                  p.setImagePath(rs.getString(5));
-                  p.setUnitPrice(rs.getDouble(6));
-                  p.setStock(rs.getInt(7));
-                  p.setStatus(rs.getBoolean(8));
-                  p.setCreatedAt(rs.getDate(9).toLocalDate());
-                  p.setUpdatedAt(rs.getDate(10).toLocalDate());
-               }
-               return p;
-            }
-      );
    }
 }

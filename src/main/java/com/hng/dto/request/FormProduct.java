@@ -10,6 +10,7 @@ public class FormProduct {
    private MultipartFile image;
    private double unitPrice;
    private int stock;
+   private boolean status;
 
    public Long getId() {
       return id;
@@ -65,5 +66,27 @@ public class FormProduct {
 
    public void setStock(int stock) {
       this.stock = stock;
+   }
+
+   public boolean isStatus() {
+      return status;
+   }
+
+   public void setStatus(boolean status) {
+      this.status = status;
+   }
+
+   public FormProduct() {
+   }
+
+   public FormProduct(Long id, String name, Long categoryId, String description, MultipartFile image, double unitPrice, int stock, boolean status) {
+      this.id = id;
+      this.name = name;
+      this.categoryId = categoryId;
+      this.description = description;
+      this.image = image;
+      this.unitPrice = unitPrice;
+      this.stock = stock;
+      this.status = status;
    }
 }

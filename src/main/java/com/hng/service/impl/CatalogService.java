@@ -26,8 +26,8 @@ public class CatalogService implements ICatalogService {
    }
 
    @Override
-   public int getTotalPage(int size) {
-      int count  = catalogDao.findAll().size();
+   public int getTotalPage(List<Catalog> list,int size) {
+      int count  = list.size();
       if (count%size==0){
          return count/size;
       }
@@ -35,8 +35,8 @@ public class CatalogService implements ICatalogService {
    }
 
    @Override
-   public List<Catalog> getListByName(String name) {
-      return catalogDao.getListByName(name);
+   public List<Catalog> getListByName(String name, int page, int size) {
+      return catalogDao.getListByName(name, size, size*page);
    }
 
    @Override
