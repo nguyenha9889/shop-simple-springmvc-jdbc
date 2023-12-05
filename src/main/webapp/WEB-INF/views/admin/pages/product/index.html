@@ -60,10 +60,10 @@
                                             <td th:text="${p.name}"></td>
                                             <td th:text="${p.categoryId}"></td>
                                             <td>
-                                                <img src="" th:alt="${p.name}" style="width: 200px; object-fit: fill">
+                                                <img th:src="${p.getImagePath()}" th:alt="${p.name}" style="width: 200px; object-fit: fill">
                                             </td>
                                             <td th:text="${p.description}"></td>
-                                            <td th:text="${p.unitPrice}"></td>
+                                            <td th:text="${#numbers.formatDecimal(${p.unitPrice}, 2, 0)}"></td>
                                             <td th:text="${p.status ? 'Active' : 'Inactive'}"></td>
                                             <td>
                                                 <a class="btn icon icon-left btn-primary btn-sm"

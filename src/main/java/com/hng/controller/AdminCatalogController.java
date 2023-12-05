@@ -53,6 +53,7 @@ public class AdminCatalogController {
 
       catalogValidate.validate(formCatalog, bindingResult);
       if (bindingResult.hasErrors()) {
+         model.addAttribute("formCatalog", formCatalog);
          model.addAttribute("view","catalog");
          return "admin/pages/catalog/catalog-add";
       }
@@ -79,6 +80,7 @@ public class AdminCatalogController {
 
       catalogValidate.validate(formCatalog, bindingResult);
       if (bindingResult.hasErrors()) {
+         model.addAttribute("formCatalog", formCatalog);
          model.addAttribute("view","catalog");
          return "admin/pages/catalog/catalog-edit";
       }

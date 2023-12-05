@@ -53,28 +53,15 @@ public class UserService implements IUserService {
    }
 
    @Override
-   public User login(FormLogin formLogin) {
-      User user = userDao.findByUsername(formLogin.getUsername());
-      if (user != null && BCrypt.checkpw(formLogin.getPassword(), user.getPassword())){
-         return user;
-      }
-      return null;
-   }
-
-   /**
-    * Convert FormRegister sang User
-    * @param formRegister Object
-    */
-   @Override
-   public void register(FormRegister formRegister) {
-      User user = new User(
+   public void save(FormRegister formRegister) {
+     User user = new User(
             formRegister.getFullName(),
             formRegister.getUsername(),
             formRegister.getPhone(),
             formRegister.getEmail(),
             BCrypt.hashpw(formRegister.getPassword(), BCrypt.gensalt(12))
       );
-      userDao.save(user);
+     userDao.save(user);
    }
    @Override
    public int delete(Long id) {

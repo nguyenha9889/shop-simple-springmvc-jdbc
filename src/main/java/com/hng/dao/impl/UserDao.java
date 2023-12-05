@@ -98,19 +98,21 @@ public class UserDao implements IUserDao {
    public int save(User user) {
       String sql = null;
       if (user.getId() == null) {
-         sql = "Insert Into users(fullname, username, email, password) values (?,?,?,?)";
+         sql = "Insert Into users(fullname, username, phone, email, password) values (?,?,?,?,?)";
          return jdbcTemplate.update(
                sql,
                user.getFullName(),
                user.getUsername().toLowerCase(),
+               user.getPhone(),
                user.getEmail().toLowerCase(),
                user.getPassword());
       } else {
-         sql = "UPDATE users set fullName=?, username=?, email=?, password=? where id=?";
+         sql = "UPDATE users set fullName=?, username=?, phone=?, email=?, password=? where id=?";
          return jdbcTemplate.update(
                sql,
                user.getFullName(),
                user.getUsername().toLowerCase(),
+               user.getPhone(),
                user.getEmail().toLowerCase(),
                user.getPassword(),
                user.getId()

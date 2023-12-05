@@ -9,6 +9,8 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import java.util.Objects;
+
 
 @Component
 public class FormRegisterValidate implements Validator {
@@ -29,12 +31,26 @@ public class FormRegisterValidate implements Validator {
       ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phone", "phone.empty");
       ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "password.empty");
 
-      User user = userService.findByUsername(formRegister.getUsername());
-      if (!errors.hasFieldErrors()) {
+      if (!errors.hasFieldErrors()){
+         if (!formRegister.getEmail().matches("^[a-zA-Z]+[a-zA-Z0-9]*@{1}[a-zA-Z]+mail.com$")){
+            errors.rejectValue("email", "register.email.invalid");
+         }
+
+         if (!formRegister.getPhone().matches("^(84|0[3|5|7|8|9])+([0-9]{8})$")){
+            errors.rejectValue("phone", "register.phone.invalid");
+         }
+
+         User user = userService.findByUsername(formRegister.getUsername());
          if (user != null){
             errors.rejectValue("username", "register.username.existed");
-         } else if (user.getEmail().equalsIgnoreCase(formRegister.getEmail())) {
+         }
+
+         if (user != null && user.getEmail().equalsIgnoreCase(formRegister.getEmail())) {
             errors.rejectValue("email", "register.email.existed");
+         }
+
+         if (!Objects.equals(formRegister.getPassword(), formRegister.getRePassword())) {
+            errors.rejectValue("rePassword", "register.rePassword");
          }
       }
    }

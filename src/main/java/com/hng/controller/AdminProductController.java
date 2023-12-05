@@ -58,6 +58,7 @@ public class AdminProductController {
 
       productValidate.validate(formProduct, bindingResult);
       if (bindingResult.hasErrors()) {
+         model.addAttribute("formProduct", formProduct);
          model.addAttribute("view", "product");
          return "admin/pages/product/product-add";
       }
@@ -95,6 +96,7 @@ public class AdminProductController {
 
       productValidate.validate(formProduct, bindingResult);
       if (bindingResult.hasErrors()) {
+         model.addAttribute("formProduct", formProduct);
          model.addAttribute("view", "product");
          return "admin/pages/product/product-edit";
       }

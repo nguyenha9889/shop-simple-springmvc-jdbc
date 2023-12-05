@@ -3,6 +3,7 @@ package com.hng.validate;
 import com.hng.dto.request.FormLogin;
 import com.hng.model.User;
 import com.hng.service.IUserService;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -27,17 +28,15 @@ public class FormLoginValidate implements Validator {
       ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "username.empty");
       ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "password.empty");
 
-      User user = userService.findByUsername(formLogin.getUsername());
       if (!errors.hasFieldErrors()) {
+         User user = userService.findByUsername(formLogin.getUsername());
          if (user == null){
             errors.rejectValue("username", "login.username.incorrect");
-         } else if (!user.isRole()) {
-            errors.rejectValue("username", "login.username.roles");
          }
-      }
 
-      if (user != null && !Objects.equals(user.getPassword(), formLogin.getPassword())) {
-         errors.rejectValue("password", "login.password.incorrect");
+         if (user != null && !BCrypt.checkpw(formLogin.getPassword(), user.getPassword())) {
+            errors.rejectValue("password", "login.password.incorrect");
+         }
       }
    }
 }

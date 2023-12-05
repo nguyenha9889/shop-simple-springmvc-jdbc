@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class AdminController {
 
-   @PostMapping
+   @RequestMapping
    public String dashboard(Model model){
       model.addAttribute("view", "dashboard");
       return "admin/dashboard";

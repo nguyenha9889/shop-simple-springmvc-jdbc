@@ -6,6 +6,7 @@ public class FormRegister {
    private String username;
    private String email;
    private String password;
+   private String rePassword;
    private String phone;
    private boolean role;
    private boolean status;
@@ -48,6 +49,14 @@ public class FormRegister {
 
    public void setPassword(String password) {
       this.password = password;
+   }
+
+   public String getRePassword() {
+      return rePassword;
+   }
+
+   public void setRePassword(String rePassword) {
+      this.rePassword = rePassword;
    }
 
    public String getPhone() {

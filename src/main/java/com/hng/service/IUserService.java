@@ -12,8 +12,7 @@ public interface IUserService extends IGenericService<User, Long> {
    List<User> findAll();
    User findById(Long id);
    User findByUsername(String username);
-   void register(FormRegister formRegister);
-   User login(FormLogin formLogin);
+   void save(FormRegister formRegister);
    boolean checkExistByEmail(String email);
    boolean checkExistByPhone(String phone);
    int delete(Long id);
