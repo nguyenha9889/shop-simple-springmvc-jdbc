@@ -1,8 +1,6 @@
-package com.hng.model;
+package com.hng.dto.request;
 
-import java.util.List;
-
-public class User {
+public class FormRegister {
    private Long id;
    private String fullName;
    private String username;
@@ -11,7 +9,6 @@ public class User {
    private String phone;
    private boolean role;
    private boolean status;
-   private List<OrderDetail> cart;
 
    public Long getId() {
       return id;
@@ -19,6 +16,14 @@ public class User {
 
    public void setId(Long id) {
       this.id = id;
+   }
+
+   public String getFullName() {
+      return fullName;
+   }
+
+   public void setFullName(String fullName) {
+      this.fullName = fullName;
    }
 
    public String getUsername() {
@@ -35,14 +40,6 @@ public class User {
 
    public void setEmail(String email) {
       this.email = email;
-   }
-
-   public String getFullName() {
-      return fullName;
-   }
-
-   public void setFullName(String fullName) {
-      this.fullName = fullName;
    }
 
    public String getPassword() {
@@ -77,22 +74,17 @@ public class User {
       this.status = status;
    }
 
-   public List<OrderDetail> getCart() {
-      return cart;
+   public FormRegister() {
    }
 
-   public void setCart(List<OrderDetail> cart) {
-      this.cart = cart;
-   }
-
-   public User() {
-   }
-
-   public User(String fullName, String username, String phone, String email, String password) {
+   public FormRegister(Long id, String fullName, String username, String email, String password, String phone, boolean role, boolean status) {
+      this.id = id;
       this.fullName = fullName;
       this.username = username;
-      this.phone = phone;
       this.email = email;
       this.password = password;
+      this.phone = phone;
+      this.role = role;
+      this.status = status;
    }
 }

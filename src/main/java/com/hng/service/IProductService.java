@@ -1,7 +1,6 @@
 package com.hng.service;
 
 import com.hng.dto.request.FormProduct;
-import com.hng.model.Catalog;
 import com.hng.model.Product;
 import java.util.List;
 

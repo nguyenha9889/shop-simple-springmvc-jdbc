@@ -41,8 +41,5 @@ public class FormProductValidate implements Validator {
       if (formProduct.getUnitPrice() <= 0) {
          errors.rejectValue("unitPrice", "product.price");
       }
-      if (formProduct.getStock() < 0) {
-         errors.rejectValue("stock", "product.stock");
-      }
    }
 }

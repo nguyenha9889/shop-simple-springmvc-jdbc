@@ -24,8 +24,8 @@ public class FormLoginValidate implements Validator {
    public void validate(Object target, Errors errors) {
       FormLogin formLogin = (FormLogin) target;
 
-      ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "login.username.empty");
-      ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "login.password.empty");
+      ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "username.empty");
+      ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "password.empty");
 
       User user = userService.findByUsername(formLogin.getUsername());
       if (!errors.hasFieldErrors()) {

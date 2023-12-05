@@ -37,4 +37,14 @@ public class Catalog {
    public void setStatus(boolean status) {
       this.status = status;
    }
+
+   public Catalog() {
+   }
+
+   public Catalog(Long id, String name, String description, boolean status) {
+      this.id = id;
+      this.name = name;
+      this.description = description;
+      this.status = status;
+   }
 }

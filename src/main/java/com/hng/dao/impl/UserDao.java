@@ -34,10 +34,9 @@ public class UserDao implements IUserDao {
 
    @Override
    public List<User> findAll(int limit, int offset) {
-      String sql = "select * from users limit =? offset=?";
+      String sql = "select * from user limit "+limit+" offset "+offset+";";
       return jdbcTemplate.query(
             sql,
-            new Object[]{limit, offset},
             (rs, row) -> {
                User user = new User();
                user.setId(rs.getLong("id"));

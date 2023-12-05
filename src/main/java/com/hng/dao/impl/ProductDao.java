@@ -21,16 +21,15 @@ public class ProductDao implements IProductDao {
             sql,
             (rs, row) -> {
                Product p = new Product();
-               p.setId(rs.getLong(1));
-               p.setName(rs.getString(2));
-               p.setCategoryId(rs.getLong(3));
-               p.setDescription(rs.getString(4));
-               p.setImagePath(rs.getString(5));
-               p.setUnitPrice(rs.getDouble(6));
-               p.setStock(rs.getInt(7));
-               p.setStatus(rs.getBoolean(8));
-               p.setCreatedAt(rs.getDate(9).toLocalDate());
-               p.setUpdatedAt(rs.getDate(10).toLocalDate());
+               p.setId(rs.getLong("id"));
+               p.setName(rs.getString("name"));
+               p.setCategoryId(rs.getLong("categoryId"));
+               p.setDescription(rs.getString("description"));
+               p.setImagePath(rs.getString("imagePath"));
+               p.setUnitPrice(rs.getDouble("unitPrice"));
+               p.setStatus(rs.getBoolean("status"));
+               p.setCreatedAt(rs.getDate("createdAt").toLocalDate());
+               p.setUpdatedAt(rs.getDate("updatedAt").toLocalDate());
                return p;
             });
    }
@@ -42,16 +41,15 @@ public class ProductDao implements IProductDao {
             sql,
             (rs, row) -> {
                Product p = new Product();
-               p.setId(rs.getLong(1));
-               p.setName(rs.getString(2));
-               p.setCategoryId(rs.getLong(3));
-               p.setDescription(rs.getString(4));
-               p.setImagePath(rs.getString(5));
-               p.setUnitPrice(rs.getDouble(6));
-               p.setStock(rs.getInt(7));
-               p.setStatus(rs.getBoolean(8));
-               p.setCreatedAt(rs.getDate(9).toLocalDate());
-               p.setUpdatedAt(rs.getDate(10).toLocalDate());
+               p.setId(rs.getLong("id"));
+               p.setName(rs.getString("name"));
+               p.setCategoryId(rs.getLong("categoryId"));
+               p.setDescription(rs.getString("description"));
+               p.setImagePath(rs.getString("imagePath"));
+               p.setUnitPrice(rs.getDouble("unitPrice"));
+               p.setStatus(rs.getBoolean("status"));
+               p.setCreatedAt(rs.getDate("createdAt").toLocalDate());
+               p.setUpdatedAt(rs.getDate("updatedAt").toLocalDate());
                return p;
             });
    }
@@ -64,16 +62,15 @@ public class ProductDao implements IProductDao {
             sql,
             (rs, row) -> {
                Product p = new Product();
-               p.setId(rs.getLong(1));
-               p.setName(rs.getString(2));
-               p.setCategoryId(rs.getLong(3));
-               p.setDescription(rs.getString(4));
-               p.setImagePath(rs.getString(5));
-               p.setUnitPrice(rs.getDouble(6));
-               p.setStock(rs.getInt(7));
-               p.setStatus(rs.getBoolean(8));
-               p.setCreatedAt(rs.getDate(9).toLocalDate());
-               p.setUpdatedAt(rs.getDate(10).toLocalDate());
+               p.setId(rs.getLong("id"));
+               p.setName(rs.getString("name"));
+               p.setCategoryId(rs.getLong("categoryId"));
+               p.setDescription(rs.getString("description"));
+               p.setImagePath(rs.getString("imagePath"));
+               p.setUnitPrice(rs.getDouble("unitPrice"));
+               p.setStatus(rs.getBoolean("status"));
+               p.setCreatedAt(rs.getDate("createdAt").toLocalDate());
+               p.setUpdatedAt(rs.getDate("updatedAt").toLocalDate());
                return p;
             });
    }
@@ -88,16 +85,15 @@ public class ProductDao implements IProductDao {
                Product p = null;
                if (rs.next()) {
                   p = new Product();
-                  p.setId(rs.getLong(1));
-                  p.setName(rs.getString(2));
-                  p.setCategoryId(rs.getLong(3));
-                  p.setDescription(rs.getString(4));
-                  p.setImagePath(rs.getString(5));
-                  p.setUnitPrice(rs.getDouble(6));
-                  p.setStock(rs.getInt(7));
-                  p.setStatus(rs.getBoolean(8));
-                  p.setCreatedAt(rs.getDate(9).toLocalDate());
-                  p.setUpdatedAt(rs.getDate(10).toLocalDate());
+                  p.setId(rs.getLong("id"));
+                  p.setName(rs.getString("name"));
+                  p.setCategoryId(rs.getLong("categoryId"));
+                  p.setDescription(rs.getString("description"));
+                  p.setImagePath(rs.getString("imagePath"));
+                  p.setUnitPrice(rs.getDouble("unitPrice"));
+                  p.setStatus(rs.getBoolean("status"));
+                  p.setCreatedAt(rs.getDate("createdAt").toLocalDate());
+                  p.setUpdatedAt(rs.getDate("updatedAt").toLocalDate());
                }
                return p;
             }
@@ -108,18 +104,17 @@ public class ProductDao implements IProductDao {
    public int save(Product product) {
       String sql = null;
       if (product.getId() == null) {
-         sql = "Insert into product (name, categoryId, description, imagePath, unitPrice, stock) values (?,?,?,?,?,?)";
+         sql = "Insert into product (name, categoryId, description, imagePath, unitPrice) values (?,?,?,?,?)";
          return jdbcTemplate.update(
                sql,
                product.getName(),
                product.getCategoryId(),
                product.getDescription(),
                product.getImagePath(),
-               product.getUnitPrice(),
-               product.getStock());
+               product.getUnitPrice());
       } else {
          // Edit - Ko cho phép sửa status
-         sql = "UPDATE product set name=?, categoryId=?, description=?, imagePath=?, unitPrice=?, stock=?, updatedAt=? where id=?";
+         sql = "UPDATE product set name=?, categoryId=?, description=?, imagePath=?, unitPrice=?, updatedAt=? where id=?";
          return jdbcTemplate.update(
                sql,
                product.getName(),
@@ -127,7 +122,6 @@ public class ProductDao implements IProductDao {
                product.getDescription(),
                product.getImagePath(),
                product.getUnitPrice(),
-               product.getStock(),
                product.getUpdatedAt(),
                product.getId());
       }

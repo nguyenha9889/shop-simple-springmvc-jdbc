@@ -8,8 +8,8 @@ public class FormProduct {
    private Long categoryId;
    private String description;
    private MultipartFile image;
+   private String imagePath;
    private double unitPrice;
-   private int stock;
    private boolean status;
 
    public Long getId() {
@@ -52,20 +52,20 @@ public class FormProduct {
       this.image = image;
    }
 
+   public String getImagePath() {
+      return imagePath;
+   }
+
+   public void setImagePath(String imagePath) {
+      this.imagePath = imagePath;
+   }
+
    public double getUnitPrice() {
       return unitPrice;
    }
 
    public void setUnitPrice(double unitPrice) {
       this.unitPrice = unitPrice;
-   }
-
-   public int getStock() {
-      return stock;
-   }
-
-   public void setStock(int stock) {
-      this.stock = stock;
    }
 
    public boolean isStatus() {
@@ -79,14 +79,22 @@ public class FormProduct {
    public FormProduct() {
    }
 
-   public FormProduct(Long id, String name, Long categoryId, String description, MultipartFile image, double unitPrice, int stock, boolean status) {
+   public FormProduct(Long id, String name, Long categoryId, String description, MultipartFile image, double unitPrice, boolean status) {
       this.id = id;
       this.name = name;
       this.categoryId = categoryId;
       this.description = description;
       this.image = image;
       this.unitPrice = unitPrice;
-      this.stock = stock;
+      this.status = status;
+   }
+   public FormProduct(Long id, String name, Long categoryId, String description, String imagePath, double unitPrice, boolean status) {
+      this.id = id;
+      this.name = name;
+      this.categoryId = categoryId;
+      this.description = description;
+      this.imagePath = imagePath;
+      this.unitPrice = unitPrice;
       this.status = status;
    }
 }

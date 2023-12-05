@@ -65,21 +65,12 @@
                                                 </div>
                                                 <div class="col-12 mb-3">
                                                     <div class="form-group">
-                                                        <label>Unit price</label>
-                                                        <input type="number" th:field="*{unitPrice}"
-                                                               class="form-control">
+                                                        <label for="unitPrice">Unit price</label>
+                                                        <input type="number" id="unitPrice" th:field="*{unitPrice}" class="form-control">
                                                     </div>
                                                     <p class="form-text text-danger"
                                                        th:if="${#fields.hasErrors('unitPrice')}"
                                                        th:errors="*{unitPrice}"></p>
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <div class="form-group">
-                                                        <label>Stock</label>
-                                                        <input type="number" th:field="*{stock}" class="form-control">
-                                                    </div>
-                                                    <p class="form-text text-danger"
-                                                       th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></p>
                                                 </div>
                                                 <div class="col-12 mb-3">
                                                     <div class="form-group">

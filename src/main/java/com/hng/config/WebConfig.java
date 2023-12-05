@@ -127,6 +127,9 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
         return resolver;
     }
 
+    /* **************************************************************** */
+    /*  Authorization config                                            */
+    /* **************************************************************** */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new AuthInterceptor()).addPathPatterns("/admin/**");

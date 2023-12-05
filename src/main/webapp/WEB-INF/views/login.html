@@ -23,7 +23,7 @@
                             <h3>Sign In</h3>
                             <p>Please sign in to continue going to Dashboard.</p>
                         </div>
-                        <form th:action="@{/admin}" th:object="${formLogin}" method="post">
+                        <form th:action="@{/auth/login}" th:object="${formLogin}" method="post">
                             <div class="form-group position-relative has-icon-left">
                                 <label for="username">Username</label>
                                 <div class="position-relative">

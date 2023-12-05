@@ -1,6 +1,7 @@
 package com.hng.service.impl;
 
 import com.hng.dao.ICatalogDao;
+import com.hng.dto.request.FormCatalog;
 import com.hng.model.Catalog;
 import com.hng.service.ICatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,16 @@ public class CatalogService implements ICatalogService {
    }
 
    @Override
+   public Catalog create(FormCatalog formCatalog) {
+      return new Catalog(
+            formCatalog.getId(),
+            formCatalog.getName(),
+            formCatalog.getDescription(),
+            formCatalog.isStatus()
+      );
+   }
+
+   @Override
    public boolean checkNameExist(Long id, String name) {
       for (Catalog c: catalogDao.findAll()) {
          if (c.getName().equalsIgnoreCase(name)) {
@@ -59,9 +70,10 @@ public class CatalogService implements ICatalogService {
       catalogDao.save(catalog);
    }
 
-   // Set status false
    @Override
-   public void delete(Long id) {
-      catalogDao.delete(id);
+   public int delete(Long id) {
+      return catalogDao.delete(id);
    }
 }
+
+

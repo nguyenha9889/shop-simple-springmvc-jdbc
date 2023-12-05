@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 public class AuthInterceptor implements HandlerInterceptor {
    @Override
    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-      User account = (User) request.getSession().getAttribute("user_login");
+      User account = (User) request.getSession().getAttribute("userLogin");
       if (account == null){
-         response.sendRedirect("/admin/login");
+         response.sendRedirect("/auth");
          return false;
       }
       if(account.isRole()){

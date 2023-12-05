@@ -6,5 +6,5 @@ public interface IGenericService<T, E> {
    List<T> findAll();
    T findById(E id);
    void save(T t);
-   void delete(E id);
+   int delete(E id);
 }

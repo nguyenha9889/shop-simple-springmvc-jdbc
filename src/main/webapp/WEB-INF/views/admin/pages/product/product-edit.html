@@ -21,8 +21,8 @@
 
         <div class="main-content container-fluid">
             <div class="page-title">
-                <h3>Add New Product Form</h3>
-                <p class="text-subtitle text-muted">Thêm mới sản phẩm</p>
+                <h3>Update Product Form</h3>
+                <p class="text-subtitle text-muted">Cập nhật sản phẩm</p>
             </div>
             <section class="section">
                 <div class="row mb-3">
@@ -30,7 +30,7 @@
                         <nav aria-label="breadcrumb" class='breadcrumb-header'>
                             <ol class="breadcrumb breadcrumb-right">
                                 <li class="breadcrumb-item"><a th:href="@{/admin/product}">Product</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Form Add</li>
+                                <li class="breadcrumb-item active" aria-current="page">Form Edit</li>
                             </ol>
                         </nav>
                     </div>
@@ -40,47 +40,52 @@
                         <div class="card">
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form class="form form-vertical" th:action="@{/admin/product/add}" method="post" th:object="${formProduct}">
+                                    <form class="form form-vertical" th:action="@{/admin/product/update}" method="post"
+                                          th:object="${formProduct}" enctype="multipart/form-data">
                                         <div class="form-body">
                                             <div class="row">
                                                 <div class="col-12 mb-3">
                                                     <div class="form-group">
-                                                        <label>Product Name</label>
-                                                        <input type="text" th:field="*{name}" class="form-control" placeholder="Catalog Name">
+                                                        <label>Product ID</label>
+                                                        <input type="text" th:field="*{id}" class="form-control" readonly>
                                                     </div>
-                                                    <p class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <div class="form-group">
+                                                        <label>Product Name</label>
+                                                        <input type="text" th:field="*{name}" class="form-control">
+                                                    </div>
+                                                    <p class="form-text text-danger"
+                                                       th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
                                                 </div>
                                                 <div class="col-12 mb-3">
                                                     <div class="form-group">
                                                         <label>Select category</label>
                                                         <fieldset class="form-group">
-                                                            <select class="form-select" id="catalogs" disabled="disabled" th:value="*{categoryId}">
+                                                            <select class="form-select" id="catalogs" th:field="*{categoryId}">
+                                                                <option th:each="ca, loop : ${catalogs}" th:value="${ca.id}" th:text="${ca.name}"></option>
                                                             </select>
                                                         </fieldset>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 mb-3">
                                                     <div class="form-group">
-                                                        <label>Unit price</label>
-                                                        <input type="number" th:field="*{unitPrice}" class="form-control">
+                                                        <label for="unitPrice">Unit price</label>
+                                                        <input type="number" id="unitPrice" th:field="*{unitPrice}" class="form-control">
                                                     </div>
-                                                    <p class="form-text text-danger" th:if="${#fields.hasErrors('unitPrice')}" th:errors="*{unitPrice}"></p>
+                                                    <p class="form-text text-danger"
+                                                       th:if="${#fields.hasErrors('unitPrice')}"
+                                                       th:errors="*{unitPrice}"></p>
                                                 </div>
                                                 <div class="col-12 mb-3">
                                                     <div class="form-group">
-                                                        <label>Stock</label>
-                                                        <input type="number" th:field="*{stock}" class="form-control">
-                                                    </div>
-                                                    <p class="form-text text-danger" th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></p>
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <div class="form-group">
-                                                        <label>Upload Image</label>
+                                                        <img th:src="@{*{imagePath}}" alt="img">
                                                         <fieldset class="form-group">
                                                             <div class="form-file">
-                                                                <input type="file" class="form-file-input" id="customFile">
+                                                                <input type="file" class="form-file-input"
+                                                                       id="customFile" th:field="*{image}">
                                                                 <label class="form-file-label" for="customFile">
-                                                                    <span class="form-file-text">Choose file...</span>
+                                                                    <span class="form-file-text">Choose image...</span>
                                                                 </label>
                                                             </div>
                                                         </fieldset>
@@ -91,17 +96,21 @@
                                                         <div class="card-header">Description</div>
                                                         <div class="card-body">
                                                             <div class="form-group with-title mb-3">
-                                                                <textarea class="form-control" th:field="*{description}" rows="3"></textarea>
-                                                                <label>Viết mô tả cho danh mục</label>
+                                                                <textarea class="form-control" th:field="*{description}"
+                                                                          rows="3"></textarea>
+                                                                <label>Viết mô tả cho sản phẩm</label>
                                                             </div>
                                                         </div>
                                                         <div class="card-footer">
-                                                            <p class="form-text text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
+                                                            <p class="form-text text-danger"
+                                                               th:if="${#fields.hasErrors('description')}"
+                                                               th:errors="*{description}"></p>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 d-flex justify-content-end">
-                                                    <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                                    <button type="submit" class="btn btn-primary me-1 mb-1">Submit
+                                                    </button>
                                                     <a type="reset" class="btn btn-light-secondary me-1 mb-1"
                                                        th:href="@{/admin/product}">Cancel</a>
                                                 </div>

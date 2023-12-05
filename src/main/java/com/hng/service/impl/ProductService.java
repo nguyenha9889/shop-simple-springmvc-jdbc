@@ -4,7 +4,7 @@ import com.hng.dao.IProductDao;
 import com.hng.dto.request.FormProduct;
 import com.hng.model.Product;
 import com.hng.service.IProductService;
-import com.hng.service.UploadService;
+import com.hng.service.FirebaseUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -16,7 +16,7 @@ public class ProductService implements IProductService {
    @Autowired
    private IProductDao productDao;
    @Autowired
-   private UploadService uploadService;
+   private FirebaseUploadService firebaseService;
    @Override
    public List<Product> findAll() {
       return productDao.findAll();
@@ -46,10 +46,10 @@ public class ProductService implements IProductService {
       productDao.save(product);
    }
 
-   // Set status false
+   // set status false
    @Override
-   public void delete(Long id) {
-      productDao.delete(id);
+   public int delete(Long id) {
+      return productDao.delete(id);
    }
 
    @Override
@@ -64,10 +64,7 @@ public class ProductService implements IProductService {
     */
    @Override
    public Product create(FormProduct formProduct) {
-      String pathImage = null;
-      if (!formProduct.getImage().isEmpty()){
-         pathImage = uploadService.uploadFile(formProduct.getImage());
-      }
+      String pathImage = firebaseService.uploadFileToFirebase(formProduct.getImage());
 
       return new Product(
             formProduct.getId(),
@@ -76,7 +73,6 @@ public class ProductService implements IProductService {
             formProduct.getDescription(),
             pathImage,
             formProduct.getUnitPrice(),
-            formProduct.getStock(),
             formProduct.isStatus()
       );
    }

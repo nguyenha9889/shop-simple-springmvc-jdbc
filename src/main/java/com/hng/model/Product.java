@@ -10,7 +10,6 @@ public class Product {
    private String description;
    private String imagePath;
    private double unitPrice;
-   private int stock;
    private LocalDate createdAt;
    private LocalDate updatedAt;
    private boolean status;
@@ -63,14 +62,6 @@ public class Product {
       this.unitPrice = unitPrice;
    }
 
-   public int getStock() {
-      return stock;
-   }
-
-   public void setStock(int stock) {
-      this.stock = stock;
-   }
-
    public LocalDate getCreatedAt() {
       return createdAt;
    }
@@ -98,14 +89,13 @@ public class Product {
    public Product() {
    }
 
-   public Product(Long id, String name, Long categoryId, String description, String imagePath, double unitPrice, int stock, boolean status) {
+   public Product(Long id, String name, Long categoryId, String description, String imagePath, double unitPrice, boolean status) {
       this.id = id;
       this.name = name;
       this.categoryId = categoryId;
       this.description = description;
       this.imagePath = imagePath;
       this.unitPrice = unitPrice;
-      this.stock = stock;
       this.status = status;
    }
 }
