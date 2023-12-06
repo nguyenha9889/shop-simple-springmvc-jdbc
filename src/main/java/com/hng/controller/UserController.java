@@ -66,6 +66,12 @@ public class UserController {
       return "redirect:/auth";
    }
 
+   @RequestMapping(value = "/auth/logout")
+   public String doLogOut(HttpSession session){
+      session.setAttribute("userLogin", null);
+      return "index";
+   }
+
    @RequestMapping("/error-403")
    public String err_403(){
       return "error-403";

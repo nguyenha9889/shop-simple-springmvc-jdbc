@@ -31,7 +31,7 @@
                         <div class="card">
                             <div class="card-header d-flex justify-content-between align-items-center py-5">
                                 <a th:href="@{/admin/catalog/add}" class="btn btn-primary">Add new</a>
-                                <form class="d-flex" width="50%"
+                                <form class="d-flex" style="width: 50%"
                                       th:action="@{/admin/catalog}" method="post">
                                     <input class="dataTable-input me-3" placeholder="Search catalog by name ..."
                                            type="text" name="query" id="query">
@@ -71,18 +71,21 @@
                             </div>
                         </div>
                         <div class="dataTable-bottom">
-                            <div class="dataTable-info" th:text="|Total have ${catalogs.size()} entries|"></div>
+                            <div class="dataTable-info" th:text="|Total have ${list.size()} entries|"></div>
                             <ul class="pagination pagination-primary float-end dataTable-pagination">
-                                <li class="page-item pager"><a href="#" class="page-link">‹</a></li>
+                                <li class="page-item pager">
+                                    <a th:href="@{|?page=${currentPage -1}&size=${size}|}" class="page-link">‹</a>
+                                </li>
 
-                                <th:block th:each="p,loop : ${total_page}">
-                                    <li th:class="|page-item ${current_page == loop.index?'active':''}|">
-                                        <a class="page-link" th:href="@{|?page=${loop.index}&size=${size}|}"
-                                           th:text="${loop.index+1}"></a>
+                                <th:block th:each="item, loop : ${totalPage}">
+                                    <li th:class="|page-item pager ${currentPage == loop.index ? 'active':''}|">
+                                        <a th:href="@{|?page=${loop.index}&size=${size}|}" class="page-link" th:text="${loop.count}"></a>
                                     </li>
                                 </th:block>
 
-                                <li class="page-item pager"><a href="#" class="page-link">›</a></li>
+                                <li class="page-item pager">
+                                    <a th:href="@{|?page=${currentPage+1}&size=${size}|}" class="page-link">›</a>
+                                </li>
                             </ul>
                         </div>
                     </div>

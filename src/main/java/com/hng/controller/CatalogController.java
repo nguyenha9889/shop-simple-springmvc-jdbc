@@ -28,12 +28,21 @@ public class CatalogController {
                          @RequestParam(name = "page", defaultValue = "0") int page,
                          @RequestParam(name = "size", defaultValue = "5") int size){
 
-      List<Catalog> list = catalogService.findAll(page, size);
-      model.addAttribute("catalogs", list);
-      model.addAttribute("current_page",page);
-      model.addAttribute("size",size);
-      model.addAttribute("total_page",new int[catalogService.getTotalPage(list, size)]);
-      model.addAttribute("view","catalog");
+      List<Catalog> listTotal = catalogService.findAll();
+      if (page < 0) {
+         page = 0;
+      }
+      if (page > catalogService.getTotalPage(listTotal, size)) {
+         page = catalogService.getTotalPage(listTotal, size) -1;
+      }
+
+      List<Catalog> listPerPage = catalogService.findAll(page, size);
+      model.addAttribute("list", listTotal);
+      model.addAttribute("catalogs", listPerPage);
+      model.addAttribute("currentPage", page);
+      model.addAttribute("size", size);
+      model.addAttribute("totalPage", new int[catalogService.getTotalPage(listTotal, size)]);
+      model.addAttribute("view", "product");
       return "admin/pages/catalog/index";
    }
 
@@ -108,12 +117,13 @@ public class CatalogController {
       if (query.trim().isEmpty()){
          return "redirect:/admin/catalog";
       } else {
+         model.addAttribute("query", query);
          List<Catalog> list = catalogService.getListByName(query, page, size);
          model.addAttribute("catalogs", list);
-         model.addAttribute("current_page",page);
-         model.addAttribute("size",size);
-         model.addAttribute("total_page",new int[catalogService.getTotalPage(list, size)]);
-         model.addAttribute("view","catalog");
+         model.addAttribute("currentPage", page);
+         model.addAttribute("size", size);
+         model.addAttribute("totalPage", new int[catalogService.getTotalPage(list, size)]);
+         model.addAttribute("view", "product");
          return "admin/pages/catalog/index";
       }
    }

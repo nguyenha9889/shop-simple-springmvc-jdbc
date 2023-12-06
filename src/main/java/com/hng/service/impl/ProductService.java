@@ -56,7 +56,7 @@ public class ProductService implements IProductService {
 
    @Override
    public List<Product> getListByName(String name, int page, int size) {
-      return productDao.getListByName(name, page, size);
+      return productDao.getListByName(name, size, size*page);
    }
 
    /**

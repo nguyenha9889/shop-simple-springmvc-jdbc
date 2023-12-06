@@ -32,11 +32,20 @@ public class ProductController {
                          @RequestParam(name = "page", defaultValue = "0") int page,
                          @RequestParam(name = "size", defaultValue = "5") int size) {
 
-      List<Product> list = productService.findAll(page, size);
-      model.addAttribute("products", list);
-      model.addAttribute("current_page", page);
+      List<Product> listTotal = productService.findAll();
+      if (page < 0) {
+         page = 0;
+      }
+      if (page > productService.getTotalPage(listTotal, size)) {
+         page = productService.getTotalPage(listTotal, size) -1;
+      }
+
+      List<Product> listPerPage = productService.findAll(page, size);
+      model.addAttribute("list", listTotal);
+      model.addAttribute("products", listPerPage);
+      model.addAttribute("currentPage", page);
       model.addAttribute("size", size);
-      model.addAttribute("total_page", new int[productService.getTotalPage(list, size)]);
+      model.addAttribute("totalPage", new int[productService.getTotalPage(listTotal, size)]);
       model.addAttribute("view", "product");
       return "admin/pages/product/index";
    }
@@ -129,9 +138,9 @@ public class ProductController {
       } else {
          List<Product> list = productService.getListByName(query, page, size);
          model.addAttribute("products", list);
-         model.addAttribute("current_page", page);
+         model.addAttribute("currentPage", page);
          model.addAttribute("size", size);
-         model.addAttribute("total_page", new int[productService.getTotalPage(list, size)]);
+         model.addAttribute("totalPage", new int[productService.getTotalPage(list, size)]);
          model.addAttribute("view", "product");
          return "admin/pages/product/index";
       }

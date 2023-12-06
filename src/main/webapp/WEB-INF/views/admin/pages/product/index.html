@@ -31,26 +31,26 @@
                         <div class="card">
                             <div class="card-header d-flex justify-content-between align-items-center py-5">
                                 <a th:href="@{/admin/product/add}" class="btn btn-primary">Add new</a>
-                                <form class="d-flex" width="50%"
+                                <form class="d-flex w-50"
                                       th:action="@{/admin/product}" method="post">
-                                    <input class="dataTable-input me-3" placeholder="Search product by name ..."
+                                    <input class="dataTable-input me-3 w-75" placeholder="Search product by name ..."
                                            type="text" name="query" id="query">
                                     <button class="btn btn-primary btn-sm" type="submit">Search</button>
                                 </form>
                             </div>
                             <div class="card-body px-0 pb-0">
                                 <div class="table-responsive">
-                                    <table class='table table-striped text-center mb-0' id="table1" >
+                                    <table class='table table-striped text-center mb-0' id="table1">
                                         <thead>
                                         <tr>
                                             <th style="width: 2%;">#</th>
-                                            <th style="width: 10%;">Product Name</th>
-                                            <th style="width: 8%;">Category</th>
+                                            <th style="width: 15%;">Product Name</th>
+                                            <th style="width: 5%;">Category</th>
                                             <th>Image</th>
                                             <th style="width: 20%;">Description</th>
                                             <th style="width: 5%;">Unit Price</th>
-                                            <th style="width: 8%;">Status</th>
-                                            <th>Actions</th>
+                                            <th style="width: 5%;">Status</th>
+                                            <th style="width: 20%;">Actions</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -59,7 +59,7 @@
                                             <td th:text="${p.name}"></td>
                                             <td th:text="${p.categoryId}"></td>
                                             <td>
-                                                <img th:src="${p.getImagePath()}" th:alt="${p.name}" style="width: 200px; object-fit: fill">
+                                                <img th:src="${p.getImagePath()}" th:alt="${p.name}" style="width: 150px; object-fit: fill">
                                             </td>
                                             <td th:text="${p.description}"></td>
                                             <td th:text="${p.getUnitPrice()}"></td>
@@ -79,18 +79,21 @@
                             </div>
                         </div>
                         <div class="dataTable-bottom">
-                            <div class="dataTable-info" th:text="|Total have ${products.size()} entries|"></div>
+                            <div class="dataTable-info" th:text="|Total have ${list.size()} entries|"></div>
                             <ul class="pagination pagination-primary float-end dataTable-pagination">
-                                <li class="page-item pager"><a href="#" class="page-link">‹</a></li>
+                                <li class="page-item pager">
+                                    <a th:href="@{|?page=${currentPage -1}&size=${size}|}" class="page-link">‹</a>
+                                </li>
 
-                                <th:block th:each="p,loop : ${total_page}">
-                                    <li th:class="|page-item ${current_page == loop.index?'active':''}|">
-                                        <a class="page-link" th:href="@{|?page=${loop.index}&size=${size}|}"
-                                           th:text="${loop.index+1}"></a>
+                                <th:block th:each="item, loop : ${totalPage}">
+                                    <li th:class="|page-item pager ${currentPage == loop.index ? 'active':''}|">
+                                        <a th:href="@{|?page=${loop.index}&size=${size}|}" class="page-link" th:text="${loop.count}"></a>
                                     </li>
                                 </th:block>
 
-                                <li class="page-item pager"><a href="#" class="page-link">›</a></li>
+                                <li class="page-item pager">
+                                    <a th:href="@{|?page=${currentPage+1}&size=${size}|}" class="page-link">›</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
