@@ -18,7 +18,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/product")
-public class AdminProductController {
+public class ProductController {
 
    @Autowired
    private IProductService productService;
@@ -59,6 +59,7 @@ public class AdminProductController {
       productValidate.validate(formProduct, bindingResult);
       if (bindingResult.hasErrors()) {
          model.addAttribute("formProduct", formProduct);
+         model.addAttribute("catalogs", catalogService.findAll());
          model.addAttribute("view", "product");
          return "admin/pages/product/product-add";
       }
@@ -83,6 +84,7 @@ public class AdminProductController {
             p.isStatus()
       );
 
+      model.addAttribute("cateId", p.getCategoryId());
       model.addAttribute("formProduct", formProduct);
       model.addAttribute("catalogs", catalogService.findAll());
       model.addAttribute("view", "product");
@@ -96,6 +98,7 @@ public class AdminProductController {
 
       productValidate.validate(formProduct, bindingResult);
       if (bindingResult.hasErrors()) {
+         model.addAttribute("catalogs", catalogService.findAll());
          model.addAttribute("formProduct", formProduct);
          model.addAttribute("view", "product");
          return "admin/pages/product/product-edit";

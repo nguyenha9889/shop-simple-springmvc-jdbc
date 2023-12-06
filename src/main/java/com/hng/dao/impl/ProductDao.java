@@ -3,8 +3,11 @@ package com.hng.dao.impl;
 import com.hng.dao.IProductDao;
 import com.hng.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -49,7 +52,7 @@ public class ProductDao implements IProductDao {
                p.setUnitPrice(rs.getDouble("unitPrice"));
                p.setStatus(rs.getBoolean("status"));
                p.setCreatedAt(rs.getDate("createdAt").toLocalDate());
-               p.setUpdatedAt(rs.getDate("updatedAt").toLocalDate());
+               p.setCreatedAt(rs.getDate("updatedAt").toLocalDate());
                return p;
             });
    }
@@ -81,22 +84,7 @@ public class ProductDao implements IProductDao {
       return jdbcTemplate.queryForObject(
             sql,
             new Object[]{id},
-            (rs, row) -> {
-               Product p = null;
-               if (rs.next()) {
-                  p = new Product();
-                  p.setId(rs.getLong("id"));
-                  p.setName(rs.getString("name"));
-                  p.setCategoryId(rs.getLong("categoryId"));
-                  p.setDescription(rs.getString("description"));
-                  p.setImagePath(rs.getString("imagePath"));
-                  p.setUnitPrice(rs.getDouble("unitPrice"));
-                  p.setStatus(rs.getBoolean("status"));
-                  p.setCreatedAt(rs.getDate("createdAt").toLocalDate());
-                  p.setUpdatedAt(rs.getDate("updatedAt").toLocalDate());
-               }
-               return p;
-            }
+            new BeanPropertyRowMapper<>(Product.class)
       );
    }
 
@@ -122,7 +110,7 @@ public class ProductDao implements IProductDao {
                product.getDescription(),
                product.getImagePath(),
                product.getUnitPrice(),
-               product.getUpdatedAt(),
+               LocalDate.now(),
                product.getId());
       }
    }

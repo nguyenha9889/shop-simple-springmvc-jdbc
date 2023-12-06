@@ -22,10 +22,10 @@ public class CatalogDao implements ICatalogDao {
             sql,
             (rs, row) -> {
                Catalog ca = new Catalog();
-               ca.setId(rs.getLong(1));
-               ca.setName(rs.getString(2));
-               ca.setDescription(rs.getString(3));
-               ca.setStatus(rs.getBoolean(4));
+               ca.setId(rs.getLong("id"));
+               ca.setName(rs.getString("name"));
+               ca.setDescription(rs.getString("description"));
+               ca.setStatus(rs.getBoolean("status"));
                return ca;
             });
    }
@@ -37,10 +37,10 @@ public class CatalogDao implements ICatalogDao {
             sql,
             (rs, row) -> {
                Catalog ca = new Catalog();
-               ca.setId(rs.getLong(1));
-               ca.setName(rs.getString(2));
-               ca.setDescription(rs.getString(3));
-               ca.setStatus(rs.getBoolean(4));
+               ca.setId(rs.getLong("id"));
+               ca.setName(rs.getString("name"));
+               ca.setDescription(rs.getString("description"));
+               ca.setStatus(rs.getBoolean("status"));
                return ca;
             });
    }

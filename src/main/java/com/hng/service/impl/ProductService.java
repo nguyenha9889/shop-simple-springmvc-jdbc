@@ -7,6 +7,8 @@ import com.hng.service.IProductService;
 import com.hng.service.FirebaseUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
@@ -64,14 +66,19 @@ public class ProductService implements IProductService {
     */
    @Override
    public Product create(FormProduct formProduct) {
-      String pathImage = firebaseService.uploadFileToFirebase(formProduct.getImage());
+      String imagePath = null;
+      if (formProduct.getId() != null && formProduct.getImage().getSize() == 0L) {
+         imagePath = formProduct.getImagePath();
+      } else {
+         imagePath = firebaseService.uploadFile(formProduct.getImage());
+      }
 
       return new Product(
             formProduct.getId(),
             formProduct.getName(),
             formProduct.getCategoryId(),
             formProduct.getDescription(),
-            pathImage,
+            imagePath,
             formProduct.getUnitPrice(),
             formProduct.isStatus()
       );
@@ -80,7 +87,7 @@ public class ProductService implements IProductService {
    @Override
    public boolean checkNameExist(Long id, String name) {
       for (Product p: productDao.findAll()) {
-         if (p.getName().equalsIgnoreCase(name)) {
+         if (p.getName().equalsIgnoreCase(name.trim())) {
             return !Objects.equals(p.getId(), id);
          }
       }

@@ -8,8 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 @Service
@@ -20,10 +19,9 @@ public class FirebaseUploadService {
    private Storage storage;
 
    // upload file lên firebase
-   public String uploadFileToFirebase(MultipartFile file) {
-
-      String fileName = generateFileName(file.getOriginalFilename());; // lấy ra tên file upload
-
+   public String uploadFile(MultipartFile file) {
+      String fileName = generateFileName(file.getOriginalFilename()); // lấy ra tên file upload
+      System.out.println(fileName);
       BlobId blobId = BlobId.of(bucketName, fileName); // tạo file trên storage bằng tên và bucket name chỉ đinh
 
       BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
@@ -42,7 +40,7 @@ public class FirebaseUploadService {
 
    private String generateFileName(String originalFileName) {
       DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
-      return dtf.format(LocalDateTime.now()) + getExtension(originalFileName);
+      return dtf.format(LocalDateTime.now())+ originalFileName +"."+ getExtension(originalFileName);
    }
 
    private String getExtension(String originalFileName) {

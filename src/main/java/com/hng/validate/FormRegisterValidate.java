@@ -49,7 +49,9 @@ public class FormRegisterValidate implements Validator {
             errors.rejectValue("email", "register.email.existed");
          }
 
-         if (!Objects.equals(formRegister.getPassword(), formRegister.getRePassword())) {
+         if (formRegister.getPassword().length() < 8 || formRegister.getPassword().length() >20) {
+            errors.rejectValue("rePassword", "register.password.length");
+         } else if (!Objects.equals(formRegister.getPassword(), formRegister.getRePassword())) {
             errors.rejectValue("rePassword", "register.rePassword");
          }
       }

@@ -15,7 +15,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/catalog")
-public class AdminCatalogController {
+public class CatalogController {
 
    @Autowired
    private ICatalogService catalogService;

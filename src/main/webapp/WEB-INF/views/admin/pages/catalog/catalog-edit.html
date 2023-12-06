@@ -60,9 +60,8 @@
                                                     <div class="form-group">
                                                         <label>Status</label>
                                                         <fieldset class="form-group">
-                                                            <select class="form-select" disabled="disabled" id="disabledSelect" th:value="*{status}">
-                                                                <option th:class="|*{status} ? 'selected':''|">Active</option>
-                                                                <option th:class="|*{!status} ? 'selected':''|">Inactive</option>
+                                                            <select class="form-select" disabled="disabled" id="disabledSelect" th:field="*{status}">
+                                                                <option th:value="*{status}" th:selected="*{status}" th:text="*{status} ? 'Active':'Inactive'"></option>
                                                             </select>
                                                         </fieldset>
                                                     </div>

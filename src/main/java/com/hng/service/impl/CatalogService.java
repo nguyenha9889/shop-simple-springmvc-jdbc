@@ -53,7 +53,7 @@ public class CatalogService implements ICatalogService {
    @Override
    public boolean checkNameExist(Long id, String name) {
       for (Catalog c: catalogDao.findAll()) {
-         if (c.getName().equalsIgnoreCase(name)) {
+         if (c.getName().equalsIgnoreCase(name.trim())) {
             return !Objects.equals(c.getId(), id);
          }
       }

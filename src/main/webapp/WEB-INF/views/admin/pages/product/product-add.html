@@ -57,7 +57,7 @@
                                                     <div class="form-group">
                                                         <label>Select category</label>
                                                         <fieldset class="form-group">
-                                                            <select class="form-select" id="catalogs" th:field="*{categoryId}">
+                                                            <select class="form-select" th:field="*{categoryId}">
                                                                 <option th:each="ca, loop : ${catalogs}" th:value="${ca.id}" th:text="${ca.name}"></option>
                                                             </select>
                                                         </fieldset>
@@ -73,17 +73,18 @@
                                                        th:errors="*{unitPrice}"></p>
                                                 </div>
                                                 <div class="col-12 mb-3">
-                                                    <div class="form-group">
-                                                        <fieldset class="form-group">
-                                                            <div class="form-file">
-                                                                <input type="file" class="form-file-input"
-                                                                       id="customFile" th:field="*{image}">
-                                                                <label class="form-file-label" for="customFile">
-                                                                    <span class="form-file-text">Choose image...</span>
-                                                                </label>
-                                                            </div>
-                                                        </fieldset>
-                                                    </div>
+                                                    <fieldset class="form-group">
+                                                        <div class="form-file">
+                                                            <input type="file" class="form-file-input"
+                                                                   id="customFile" th:field="*{image}">
+                                                            <label class="form-file-label" for="customFile">
+                                                                <span class="form-file-text">Choose image...</span>
+                                                            </label>
+                                                        </div>
+                                                    </fieldset>
+                                                    <p class="form-text text-danger"
+                                                       th:if="${#fields.hasErrors('image')}"
+                                                       th:errors="*{image}"></p>
                                                 </div>
                                                 <div class="col-12 mb-3">
                                                     <div class="card">

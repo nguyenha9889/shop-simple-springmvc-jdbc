@@ -23,23 +23,25 @@ public class FormProductValidate implements Validator {
 
       ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "field.empty");
       ValidationUtils.rejectIfEmptyOrWhitespace(errors, "description", "field.empty");
+      ValidationUtils.rejectIfEmptyOrWhitespace(errors, "unitPrice", "field.empty");
 
-      if (errors.hasFieldErrors()){
-         if (formProduct.getName().length() < 6) {
-            errors.rejectValue("field", "field.length");
-         } else
-            // check tên trùng lặp
-            if (productService.checkNameExist(formProduct.getId(), formProduct.getName())) {
-            errors.rejectValue("productName", "product.name.existed");
+      if (!errors.hasFieldErrors()){
+
+         if (productService.checkNameExist(formProduct.getId(), formProduct.getName())) {
+            errors.rejectValue("name", "product.name.existed");
          }
-      }
 
-      if (formProduct.getId() == null && formProduct.getImage().getSize() == 0) {
-         errors.rejectValue("productImage", "product.image.empty");
-      }
+         if (formProduct.getName().length() < 6) {
+            errors.rejectValue("name", "field.length");
+         }
 
-      if (formProduct.getUnitPrice() <= 0) {
-         errors.rejectValue("unitPrice", "product.price");
+         if (formProduct.getId() == null && formProduct.getImage().getSize() == 0) {
+            errors.rejectValue("image", "product.image.empty");
+         }
+
+         if (formProduct.getUnitPrice() <= 0L) {
+            errors.rejectValue("unitPrice", "product.price");
+         }
       }
    }
 }
