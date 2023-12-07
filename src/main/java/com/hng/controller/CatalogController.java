@@ -42,7 +42,7 @@ public class CatalogController {
       model.addAttribute("currentPage", page);
       model.addAttribute("size", size);
       model.addAttribute("totalPage", new int[catalogService.getTotalPage(listTotal, size)]);
-      model.addAttribute("view", "product");
+      model.addAttribute("view", "catalog");
       return "admin/pages/catalog/index";
    }
 
@@ -123,7 +123,7 @@ public class CatalogController {
          model.addAttribute("currentPage", page);
          model.addAttribute("size", size);
          model.addAttribute("totalPage", new int[catalogService.getTotalPage(list, size)]);
-         model.addAttribute("view", "product");
+         model.addAttribute("view", "catalog");
          return "admin/pages/catalog/index";
       }
    }

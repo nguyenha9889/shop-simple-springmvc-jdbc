@@ -2,6 +2,8 @@ package com.hng.dto.request;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
+
 public class FormProduct {
    private Long id;
    private String name;
@@ -11,6 +13,8 @@ public class FormProduct {
    private String imagePath;
    private double unitPrice;
    private boolean status;
+   private LocalDate createdAt;
+   private LocalDate updatedAt;
 
    public Long getId() {
       return id;
@@ -76,17 +80,23 @@ public class FormProduct {
       this.status = status;
    }
 
-   public FormProduct() {
+   public LocalDate getCreatedAt() {
+      return createdAt;
    }
 
-   public FormProduct(Long id, String name, Long categoryId, String description, MultipartFile image, double unitPrice, boolean status) {
-      this.id = id;
-      this.name = name;
-      this.categoryId = categoryId;
-      this.description = description;
-      this.image = image;
-      this.unitPrice = unitPrice;
-      this.status = status;
+   public void setCreatedAt(LocalDate createdAt) {
+      this.createdAt = createdAt;
+   }
+
+   public LocalDate getUpdatedAt() {
+      return updatedAt;
+   }
+
+   public void setUpdatedAt(LocalDate updatedAt) {
+      this.updatedAt = updatedAt;
+   }
+
+   public FormProduct() {
    }
    public FormProduct(Long id, String name, Long categoryId, String description, String imagePath, double unitPrice, boolean status) {
       this.id = id;

@@ -2,6 +2,7 @@ package com.hng.controller;
 
 
 import com.hng.dto.request.FormProduct;
+import com.hng.model.Catalog;
 import com.hng.model.Product;
 import com.hng.service.ICatalogService;
 import com.hng.service.IProductService;
@@ -40,6 +41,8 @@ public class ProductController {
          page = productService.getTotalPage(listTotal, size) -1;
       }
 
+      List<Catalog> catalogs = catalogService.findAll();
+      model.addAttribute("catalogs", catalogs);
       List<Product> listPerPage = productService.findAll(page, size);
       model.addAttribute("list", listTotal);
       model.addAttribute("products", listPerPage);
@@ -136,6 +139,9 @@ public class ProductController {
       if (query.trim().isEmpty()) {
          return "redirect:/admin/product";
       } else {
+         //model.addAttribute("query", query);
+         List<Catalog> catalogs = catalogService.findAll();
+         model.addAttribute("catalogs", catalogs);
          List<Product> list = productService.getListByName(query, page, size);
          model.addAttribute("products", list);
          model.addAttribute("currentPage", page);

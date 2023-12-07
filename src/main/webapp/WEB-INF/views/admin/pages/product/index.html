@@ -34,8 +34,10 @@
                                 <form class="d-flex w-50"
                                       th:action="@{/admin/product}" method="post">
                                     <input class="dataTable-input me-3 w-75" placeholder="Search product by name ..."
-                                           type="text" name="query" id="query">
-                                    <button class="btn btn-primary btn-sm" type="submit">Search</button>
+                                           type="text" id="query" name="query"/>
+                                    <button class="btn rounded-3 btn-outline-secondary btn-sm" type="submit">
+                                        <img th:src="@{/images/search.svg}" style="width: 24px" alt="search-icon">
+                                    </button>
                                 </form>
                             </div>
                             <div class="card-body px-0 pb-0">
@@ -50,6 +52,7 @@
                                             <th style="width: 20%;">Description</th>
                                             <th style="width: 5%;">Unit Price</th>
                                             <th style="width: 5%;">Status</th>
+                                            <th style="width: 5%;">Updated At</th>
                                             <th style="width: 20%;">Actions</th>
                                         </tr>
                                         </thead>
@@ -57,13 +60,14 @@
                                         <tr th:each="p, loop : ${products}">
                                             <td th:text="${loop.count}"></td>
                                             <td th:text="${p.name}"></td>
-                                            <td th:text="${p.categoryId}"></td>
+                                            <td th:each="c: ${catalogs}" th:if="${c.id} == ${p.categoryId}" th:text="${c.name}"></td>
                                             <td>
                                                 <img th:src="${p.getImagePath()}" th:alt="${p.name}" style="width: 150px; object-fit: fill">
                                             </td>
                                             <td th:text="${p.description}"></td>
                                             <td th:text="${p.getUnitPrice()}"></td>
-                                            <td th:text="${p.status ? 'Active' : 'Inactive'}"></td>
+                                            <td th:text="${p.status} ? 'Active' : 'Inactive'"></td>
+                                            <td th:text="${p.updatedAt}"></td>
                                             <td>
                                                 <a class="btn icon icon-left btn-primary btn-sm"
                                                    th:href="@{/admin/product/edit/{id}(id=${p.id})}">Edit</a>

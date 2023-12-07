@@ -16,21 +16,21 @@
 
                 <li th:class="|sidebar-item ${view == 'dashboard' ? 'active':''}|">
                     <a th:href="@{/admin}" class='sidebar-link'>
-                        <i data-feather="home" width="20"></i>
+                        <i data-feather="home" style="width: 20px"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
                 <li th:class="|sidebar-item ${view == 'catalog' ? 'active':''}|">
                     <a th:href="@{/admin/catalog}" class='sidebar-link'>
-                        <i data-feather="grid" width="20"></i>
+                        <i data-feather="grid" style="width: 20px"></i>
                         <span>Catalog</span>
                     </a>
                 </li>
 
                 <li th:class="|sidebar-item ${view == 'product' ? 'active':''}|">
                     <a th:href="@{/admin/product}" class='sidebar-link'>
-                        <i data-feather="file-plus" width="20"></i>
+                        <i data-feather="file-plus" style="width: 20px"></i>
                         <span>Product</span>
                     </a>
                 </li>
@@ -38,7 +38,7 @@
                 <li class='sidebar-title'>Users Management</li>
                 <li th:class="|sidebar-item ${view == 'user' ? 'active':''}|">
                     <a th:href="@{/admin/user}" class='sidebar-link'>
-                        <i data-feather="user" width="20"></i>
+                        <i data-feather="user" style="width: 20px"></i>
                         <span>User</span>
                     </a>
                     <ul class="submenu ">

@@ -19,7 +19,7 @@ public class ProductDao implements IProductDao {
 
    @Override
    public List<Product> findAll() {
-      String sql = "select * from product order by createdAt";
+      String sql = "select * from product order by createdAt desc";
       return jdbcTemplate.query(
             sql,
             (rs, row) -> {
@@ -39,7 +39,7 @@ public class ProductDao implements IProductDao {
 
    @Override
    public List<Product> findAll(int limit, int offset) {
-      String sql = "select * from product order by createdAt desc limit "+limit+" offset "+offset+";";
+      String sql = "select * from product order by updatedAt desc limit "+limit+" offset "+offset+";";
       return jdbcTemplate.query(
             sql,
             (rs, row) -> {
@@ -52,7 +52,7 @@ public class ProductDao implements IProductDao {
                p.setUnitPrice(rs.getDouble("unitPrice"));
                p.setStatus(rs.getBoolean("status"));
                p.setCreatedAt(rs.getDate("createdAt").toLocalDate());
-               p.setCreatedAt(rs.getDate("updatedAt").toLocalDate());
+               p.setUpdatedAt(rs.getDate("updatedAt").toLocalDate());
                return p;
             });
    }

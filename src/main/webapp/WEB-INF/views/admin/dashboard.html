@@ -17,7 +17,7 @@
     <div th:replace="admin/fragments/sidebar :: sidebar(${view})"></div>
 
     <div id="main">
-        <div th:replace="admin/fragments/header :: header"></div>
+        <div th:replace="admin/fragments/header :: header(${userLogin})"></div>
 
         <div class="main-content container-fluid">
             <div class="page-title">

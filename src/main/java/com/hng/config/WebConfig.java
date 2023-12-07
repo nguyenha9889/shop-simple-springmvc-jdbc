@@ -86,6 +86,7 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
         registry.addResourceHandler("/js/**").addResourceLocations("classpath:static/js/");
         registry.addResourceHandler("/images/**").addResourceLocations("classpath:static/images/");
         registry.addResourceHandler("/vendors/**").addResourceLocations("classpath:static/vendors/");
+        registry.addResourceHandler("/frontend/**").addResourceLocations("classpath:static/frontend/");
     }
 
     /* **************************************************************** */

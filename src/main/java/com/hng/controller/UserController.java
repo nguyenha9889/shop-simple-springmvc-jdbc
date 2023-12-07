@@ -34,6 +34,7 @@ public class UserController {
    // Xử lý login
    @RequestMapping(value = "/auth/login", method = RequestMethod.POST)
    public String doLogin(HttpSession session,
+                         Model model,
                          @ModelAttribute("formLogin") FormLogin formLogin,
                          BindingResult bindingResult){
       loginValidate.validate(formLogin, bindingResult);
@@ -42,6 +43,7 @@ public class UserController {
       }
       User userLogin = userService.findByUsername(formLogin.getUsername());
       session.setAttribute("userLogin", userLogin);
+      model.addAttribute("userLogin", userLogin.getUsername());
       if (userLogin.isRole()) {
          return "admin/dashboard";
       }
