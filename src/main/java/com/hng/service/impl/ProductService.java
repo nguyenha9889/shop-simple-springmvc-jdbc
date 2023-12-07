@@ -1,20 +1,26 @@
 package com.hng.service.impl;
 
+import com.hng.dao.ICatalogDao;
 import com.hng.dao.IProductDao;
 import com.hng.dto.request.FormProduct;
 import com.hng.model.Product;
+import com.hng.service.ICatalogService;
 import com.hng.service.IProductService;
 import com.hng.service.FirebaseUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 @Service
 public class ProductService implements IProductService {
+   @Autowired
+   private ICatalogDao catalogDao;
    @Autowired
    private IProductDao productDao;
    @Autowired
@@ -36,6 +42,16 @@ public class ProductService implements IProductService {
          return count/size;
       }
       return count/size+1;
+   }
+
+   @Override
+   public List<Product> getListByCateId(Long categoryId, int page, int size) {
+      return productDao.getListByCateId(categoryId, size, size*page);
+   }
+
+   @Override
+   public List<Product> getListByCateIdWithoutPaging(Long categoryId) {
+      return productDao.findAll().stream().filter(p -> p.getCategoryId().equals(categoryId)).collect(Collectors.toList());
    }
 
    @Override

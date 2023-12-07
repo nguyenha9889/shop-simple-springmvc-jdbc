@@ -43,7 +43,7 @@ public class UserController {
       }
       User userLogin = userService.findByUsername(formLogin.getUsername());
       session.setAttribute("userLogin", userLogin);
-      model.addAttribute("userLogin", userLogin.getUsername());
+
       if (userLogin.isRole()) {
          return "admin/dashboard";
       }

@@ -10,4 +10,6 @@ public interface IProductService extends IGenericService<Product, Long>{
    Product create(FormProduct formProduct);
    boolean checkNameExist(Long id, String name);
    int getTotalPage(List<Product> list, int size);
+   List<Product> getListByCateId(Long categoryId, int page, int size);
+   List<Product> getListByCateIdWithoutPaging(Long categoryId);
 }

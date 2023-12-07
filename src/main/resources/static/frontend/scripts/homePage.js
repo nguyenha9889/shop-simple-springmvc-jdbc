@@ -86,7 +86,6 @@ function showData() {
     anchorTag.innerText = `${imagesArr[i].p2}`;
     mainDiv.append(h5, h1, p, anchorTag);
     slidingDiv.append(mainDiv);
-    console.log(i);
 
     i++;
     if (i === 2) {

@@ -79,6 +79,27 @@ public class ProductDao implements IProductDao {
    }
 
    @Override
+   public List<Product> getListByCateId(Long cateId, int limit, int offset) {
+
+      String sql = "select p.* from product p join catalog c on p.categoryId = c.id where c.id="+ cateId+" limit " + limit+ " offset "+offset+";";
+      return jdbcTemplate.query(
+            sql,
+            (rs, row) -> {
+               Product p = new Product();
+               p.setId(rs.getLong("id"));
+               p.setName(rs.getString("name"));
+               p.setCategoryId(rs.getLong("categoryId"));
+               p.setDescription(rs.getString("description"));
+               p.setImagePath(rs.getString("imagePath"));
+               p.setUnitPrice(rs.getDouble("unitPrice"));
+               p.setStatus(rs.getBoolean("status"));
+               p.setCreatedAt(rs.getDate("createdAt").toLocalDate());
+               p.setUpdatedAt(rs.getDate("updatedAt").toLocalDate());
+               return p;
+            });
+   }
+
+   @Override
    public Product findById(Long id) {
       String sql = "select * from product where id=?";
       return jdbcTemplate.queryForObject(

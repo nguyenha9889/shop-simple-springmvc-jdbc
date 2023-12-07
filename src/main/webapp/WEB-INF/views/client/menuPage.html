@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KDK:Menu</title>
     <script src="https://kit.fontawesome.com/2a66bc2625.js" crossorigin="anonymous" ;></script>
-
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
     <link rel="icon" type="image/x-icon" th:href="@{/frontend/img/webLogo3.png}">
     <link rel="stylesheet" th:href="@{/frontend/css/homePage.css}"/>
     <link rel="stylesheet" th:href="@{/frontend/css/menuPage.css}">
@@ -74,9 +74,9 @@
                         <h1>KDK® MENU</h1>
                     </div>
 
-                    <h3><a href="#1">Featured</a></h3>
+                    <h3><a>Menu List</a></h3>
                     <th:block th:each="ca : ${catalogs}">
-                        <a href="#" th:text="${ca.name}"></a>
+                        <a th:href="@{|?id=${ca.id}&page=${currentPage}&size=${size}|}" th:text="${ca.name}"></a>
                     </th:block>
                 </div>
 
@@ -94,12 +94,11 @@
                     </select>
                 </div>
                 <div id="featured_products" class="featured_cards">
-                    <th:block th:each="p : ${products}">
+                    <th:block th:each="p : ${listProPaging}">
                         <div id="main_card">
-                            <div><img th:src="@{${p.imagePath}}"></div>
+                            <div><img th:src="@{${p.imagePath}}" th:alt="${p.name}"></div>
                             <p th:text="${p.name}"></p>
-                            <p>calories : 840-1120</p>
-                            <p th:text="${p.unitPrice}" ></p>
+                            <p th:text="${p.unitPrice}"></p>
                             <div id="cart_show_div">
                                 <div class="showDiv">
                                 <span class="show_eyes">
@@ -116,46 +115,6 @@
                         </div>
                     </th:block>
                 </div>
-            </div>
-            <div id="2" class="food_cards">
-                <h1>BUCKETS</h1>
-                <div id="bucket_items" class="featured_cards"></div>
-            </div>
-            <div id="3" class="food_cards">
-                <h1>TENDERS</h1>
-                <div id="tender_items" class="featured_cards"></div>
-            </div>
-            <div id="4" class="food_cards">
-                <h1>SANDWICHES</h1>
-                <div id="sandwiches_items" class="featured_cards"></div>
-            </div>
-            <div id="5" class="food_cards">
-                <h1>FRIED CHICKEN</h1>
-                <div id="fried_chicken_items" class="featured_cards"></div>
-            </div>
-            <div id="6" class="food_cards">
-                <h1>POT PIES & BOWLS</h1>
-                <div id="pot_pies_bowls_items" class="featured_cards"></div>
-            </div>
-            <div id="7" class="food_cards">
-                <h1>A LA CARTE</h1>
-                <div id="a_la_carte_items" class="featured_cards"></div>
-            </div>
-            <div id="8" class="food_cards">
-                <h1>SIDES</h1>
-                <div id="sides_items" class="featured_cards"></div>
-            </div>
-            <div id="9" class="food_cards">
-                <h1>SAUCES</h1>
-                <div id="sauces_items" class="featured_cards"></div>
-            </div>
-            <div id="10" class="food_cards">
-                <h1>DESSERTS</h1>
-                <div id="deserts_items" class="featured_cards"></div>
-            </div>
-            <div id="11" class="food_cards">
-                <h1>BEVERAGES</h1>
-                <div id="beverages_items" class="featured_cards"></div>
             </div>
         </div>
     </div>

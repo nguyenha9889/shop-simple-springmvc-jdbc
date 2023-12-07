@@ -8,6 +8,7 @@
     <title>H-KFC Clone</title>
     <link rel="stylesheet" th:href="@{/frontend/css/homePage.css}"/>
     <link rel="stylesheet" th:href="@{/frontend/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
     <link rel="icon" type="image/x-icon" th:href="@{/frontend/img/webLogo3.png}">
     <script src="https://kit.fontawesome.com/2a66bc2625.js" crossorigin="anonymous" ;></script>
 </head>
@@ -104,18 +105,6 @@
 <div id="featured_items">
     <div>
         <h1>FEATURED ITEMS</h1>
-    </div>
-    <div id="featured_cards">
-        <div th:each="p : ${products}">
-            <div class="cards">
-                <div>
-                    <img th:src="@{${p.imagePath}}">
-                </div>
-                <p th:text="${p.name}"></p>
-                <p>calories : 840-1120</p>
-                <p th:text="${p.unitPrice}" ></p>
-            </div>
-        </div>
     </div>
 </div>
 
