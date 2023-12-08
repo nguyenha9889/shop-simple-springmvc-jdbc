@@ -1,6 +1,7 @@
 package com.hng.dao.impl;
 
 import com.hng.dao.IProductDao;
+import com.hng.dto.request.ProductFilter;
 import com.hng.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -57,10 +58,16 @@ public class ProductDao implements IProductDao {
             });
    }
 
+   /**
+    * Query tìm kiếm tương đối sản phẩm theo tên cho Admin dashboard có phân trang
+    * @param name Tên sản phẩm cần tìm
+    * @return List sản phẩm
+    */
    @Override
    public List<Product> getListByName(String name, int limit, int offset) {
       String nameQuery = "'%" +name.toLowerCase().trim() + "%'";
       String sql = "select * from product where lower(name) like "+nameQuery+" limit "+limit+" offset "+offset+";";
+      jdbcTemplate.queryForList(sql, name);
       return jdbcTemplate.query(
             sql,
             (rs, row) -> {
@@ -79,9 +86,49 @@ public class ProductDao implements IProductDao {
    }
 
    @Override
-   public List<Product> getListByCateId(Long cateId, int limit, int offset) {
+   public List<Product> getListByCateIdPaging(ProductFilter filter, int limit, int offset) {
 
-      String sql = "select p.* from product p join catalog c on p.categoryId = c.id where c.id="+ cateId+" limit " + limit+ " offset "+offset+";";
+      StringBuilder builder = new StringBuilder("select p.* from product p join catalog c on p.categoryId = c.id where c.id = ");
+      builder.append(filter.getCategoryId());
+      if (filter.getProductName() != null){
+         builder.append(" and lower(p.name) like '%").append(filter.getProductName().toLowerCase()).append("%'");
+      }
+
+      builder.append(" order by p.unitPrice ");
+      builder.append(filter.getSortByPrice());
+      builder.append(" limit ").append(limit).append(" offset ").append(offset);
+      String sql = builder.toString();
+
+      return jdbcTemplate.query(
+            sql,
+            (rs, row) -> {
+               Product p = new Product();
+               p.setId(rs.getLong("id"));
+               p.setName(rs.getString("name"));
+               p.setCategoryId(rs.getLong("categoryId"));
+               p.setDescription(rs.getString("description"));
+               p.setImagePath(rs.getString("imagePath"));
+               p.setUnitPrice(rs.getDouble("unitPrice"));
+               p.setStatus(rs.getBoolean("status"));
+               p.setCreatedAt(rs.getDate("createdAt").toLocalDate());
+               p.setUpdatedAt(rs.getDate("updatedAt").toLocalDate());
+               return p;
+            });
+   }
+
+   @Override
+   public List<Product> getListByCateId(ProductFilter filter) {
+      StringBuilder builder = new StringBuilder("select p.* from product p join catalog c on p.categoryId = c.id where c.id = ");
+      builder.append(filter.getCategoryId());
+
+      if (filter.getProductName() != null){
+         builder.append(" and lower(p.name) like '%").append(filter.getProductName().toLowerCase()).append("%'");
+      }
+
+      builder.append(" order by p.unitPrice ");
+      builder.append(filter.getSortByPrice());
+      String sql = builder.toString();
+
       return jdbcTemplate.query(
             sql,
             (rs, row) -> {

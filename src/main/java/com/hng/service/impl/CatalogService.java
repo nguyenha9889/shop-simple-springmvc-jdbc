@@ -40,6 +40,15 @@ public class CatalogService implements ICatalogService {
       return catalogDao.getListByName(name, size, size*page);
    }
 
+   /**
+    * Lấy danh sách category có sản phẩm
+    * @return CatalogList
+    */
+   @Override
+   public List<Catalog> getListHaveProduct() {
+      return catalogDao.getListHaveProduct();
+   }
+
    @Override
    public Catalog create(FormCatalog formCatalog) {
       return new Catalog(

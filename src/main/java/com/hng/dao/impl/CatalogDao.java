@@ -61,6 +61,21 @@ public class CatalogDao implements ICatalogDao {
             });
    }
 
+   @Override
+   public List<Catalog> getListHaveProduct() {
+      String sql = "select c.* from catalog c join kfcdb.product p on c.id = p.categoryId group by c.id";
+      return jdbcTemplate.query(
+            sql,
+            (rs, row) -> {
+               Catalog ca = new Catalog();
+               ca.setId(rs.getLong("id"));
+               ca.setName(rs.getString("name"));
+               ca.setDescription(rs.getString("description"));
+               ca.setStatus(rs.getBoolean("status"));
+               return ca;
+            });
+   }
+
 
    @Override
    public Catalog findById(Long id) {

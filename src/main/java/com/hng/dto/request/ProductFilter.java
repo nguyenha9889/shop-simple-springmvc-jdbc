@@ -1,12 +1,39 @@
 package com.hng.dto.request;
 
-import java.time.LocalDate;
 
 public class ProductFilter {
    private Long categoryId;
-   private String category;
-   private double unitPrice;
-   private LocalDate updatedAt;
+   private String productName;
+
+   public String getProductName() {
+      return productName;
+   }
+
+   public void setProductName(String productName) {
+      this.productName = productName;
+   }
+
+   // filter sắp xếp theo giá
+   private String sortByPrice;
+
+   // Filter sắp xếp theo category
+   private String cateName;
+
+   public String getSortByPrice() {
+      return sortByPrice;
+   }
+
+   public void setSortByPrice(String sortByPrice) {
+      this.sortByPrice = sortByPrice;
+   }
+
+   public String getCateName() {
+      return cateName;
+   }
+
+   public void setCateName(String cateName) {
+      this.cateName = cateName;
+   }
 
    public Long getCategoryId() {
       return categoryId;
@@ -16,37 +43,12 @@ public class ProductFilter {
       this.categoryId = categoryId;
    }
 
-   public String getCategory() {
-      return category;
-   }
-
-   public void setCategory(String category) {
-      this.category = category;
-   }
-
-   public double getUnitPrice() {
-      return unitPrice;
-   }
-
-   public void setUnitPrice(double unitPrice) {
-      this.unitPrice = unitPrice;
-   }
-
-   public LocalDate getUpdatedAt() {
-      return updatedAt;
-   }
-
-   public void setUpdatedAt(LocalDate updatedAt) {
-      this.updatedAt = updatedAt;
-   }
-
    public ProductFilter() {
    }
 
-   public ProductFilter(Long categoryId, String category, double unitPrice, LocalDate updatedAt) {
+   public ProductFilter(String productName, Long categoryId, String cateName) {
+      this.productName = productName;
       this.categoryId = categoryId;
-      this.category = category;
-      this.unitPrice = unitPrice;
-      this.updatedAt = updatedAt;
+      this.cateName = cateName;
    }
 }

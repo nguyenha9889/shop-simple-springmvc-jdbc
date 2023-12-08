@@ -1,5 +1,6 @@
 package com.hng.controller;
 
+import com.hng.dto.request.ProductFilter;
 import com.hng.model.Catalog;
 import com.hng.model.Product;
 import com.hng.service.ICatalogService;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -30,19 +32,23 @@ public class HomeController {
    @RequestMapping("/menu")
    public String menu(Model model,
                       @RequestParam(name = "id", defaultValue = "1") long cateId,
+                      @RequestParam(name = "sort", defaultValue = "") String sortByPrice,
                       @RequestParam(name = "page", defaultValue = "0") int page,
                       @RequestParam(name = "size", defaultValue = "5") int size){
 
-      List<Product> listProPaging = productService.getListByCateId(cateId, page, size);
-      List<Product> listProTotal = productService.getListByCateIdWithoutPaging(cateId);
-      if (page < 0) {
-         page = 0;
-      }
-      if (page > productService.getTotalPage(listProTotal, size)) {
-         page = productService.getTotalPage(listProTotal, size) -1;
+      // Chỉ lấy category có sản phẩm
+      List<Catalog> catalogs = catalogService.getListHaveProduct();
+      if (cateId == 1) {
+         cateId = catalogs.get(0).getId();
       }
 
-      List<Catalog> catalogs = catalogService.findAll();
+      ProductFilter productFilter = new ProductFilter();
+      productFilter.setCategoryId(cateId); // Lọc theo cateId
+      productFilter.setSortByPrice(sortByPrice); // Sắp xếp theo giá
+
+      List<Product> listProPaging = productService.getListByCateIdPaging(productFilter, page, size);
+      List<Product> listProTotal = productService.getListByCateId(productFilter);
+
       model.addAttribute("catalogs", catalogs);
       model.addAttribute("listProTotal", listProTotal);
       model.addAttribute("listProPaging", listProPaging);
