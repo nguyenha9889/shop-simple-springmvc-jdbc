@@ -11,7 +11,6 @@ public class Order {
    private String address;
    private double total;
    private String status;
-   List<OrderDetail> orderDetails;
    private LocalDate orderAt;
    private LocalDate deliverAt;
 
@@ -61,14 +60,6 @@ public class Order {
 
    public void setTotal(double total) {
       this.total = total;
-   }
-
-   public List<OrderDetail> getOrderDetails() {
-      return orderDetails;
-   }
-
-   public void setOrderDetails(List<OrderDetail> orderDetails) {
-      this.orderDetails = orderDetails;
    }
 
    public LocalDate getOrderAt() {

@@ -1,7 +1,5 @@
 /* side menu bar */
 
-
-
 *{
     margin: 0;
     padding: 0;
@@ -47,16 +45,11 @@
 
 }
 
-
 #side_menu_bar>div{
     display: flex;
     flex-direction: column;
     gap: 15px;
-
-
     position: fixed;
-
-
 }
 #menu_bar_red_lines{
     width: 25%;
@@ -65,12 +58,10 @@
     justify-content: space-between;
     height: 45px;
     /* margin: auto; */
-
 }
 
 #menu_bar_red_lines>span{
     width: 25%;
-
     background-color: #e02525;
     /* border: 1px solid black; */
 }
@@ -83,7 +74,6 @@
     /* margin-left: 20%; */
     flex: 3;
 }
-
 
 /* featured_items_ */
 
@@ -148,15 +138,11 @@
     transform: scale(1.05);
 }
 
-
-
 .food_cards>h1{
     font-family: Haettenschweiler, 'Arial Narrow Regular', sans-serif;
     font-size:3rem;
     letter-spacing: 3px;
     font-weight:lighter;
-
-
 }
 .featured_cards{
     display: grid;
@@ -167,7 +153,6 @@
     /* padding: 8% 0; */
     /* justify-content: center; */
     /* border: 2px solid palevioletred; */
-
 }
 
 #main_card{
@@ -191,11 +176,49 @@
     width: 250px;
     background-color: #f8f7f5;
     transition: 0.5s all ease-in-out;
-
 }
 .featured_cards p{
     font-size: 14px;
     font-family: "Helvetica Neue", sans-serif;
+}
+
+/* pagination */
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+}
+.pagination a.disable {
+    color: black;
+    pointer-events: none;
+    opacity: 0.5;
+    text-decoration: none;
+}
+
+.pagination a.active {
+    background-color: #005792;
+    color: white !important;
+    border: 1px solid #005792;
+}
+
+.pagination a.active:hover {background-color: #ddd;}
+
+.pagination a:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.pagination a:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 /* cart and show icons */
@@ -262,9 +285,6 @@
 }
 @media screen and (max-width:1200px){
 
-
-
-
     #menu_page_main_div>div{
         flex-direction: column;
     }
@@ -300,8 +320,6 @@
     #side_menu_bar a,h3{
         /* background-color: pink; */
         min-width:120px;
-
-
     }
     .featured_cards{
         grid-template-columns: repeat(2,1fr);

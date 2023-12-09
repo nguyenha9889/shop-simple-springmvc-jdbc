@@ -2,14 +2,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
 }
 
 /* pre loader */
 
 #pre_loader{
     background:#8b8a85 url('/static/frontend/img/loader.gif') no-repeat center;
-
     background-size: 20%;
     height: 100vh;
     width: 100%;
@@ -191,7 +189,7 @@ nav{
     align-items: center;
     height: 90px;
     /* border: 1px solid black; */
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0;
 }
 #delivery{
     /* border: 2px solid brown; */
@@ -327,7 +325,7 @@ nav{
 #extra{
     /* margin-top: 40px; */
     /* border: 1px solid black; */
-    padding: 25px 115.2px;
+    padding: 25px 115px;
     background-color: #005792;
     max-width: 100vw;
 }

@@ -9,7 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
     <link rel="stylesheet" th:href="@{/css/perfect-scrollbar.css}">
     <link rel="stylesheet" th:href="@{/css/app.css}">
-    <link rel="shortcut icon" th:href="@{/images/favicon.svg}" type="image/x-icon">
+    <link rel="shortcut icon" th:href="@{/images/icons/favicon.svg}" type="image/x-icon">
 </head>
 
 <body>
@@ -36,7 +36,7 @@
                                     <input class="dataTable-input w-75 me-3" placeholder="Search catalog by name ..."
                                            type="text" id="query" name="query">
                                     <button class="btn rounded-3 btn-outline-secondary btn-sm" type="submit">
-                                        <img th:src="@{/images/search.svg}" alt="search-icon">
+                                        <img th:src="@{/images/icons/search.svg}" alt="search-icon">
                                     </button>
                                 </form>
                             </div>
@@ -75,18 +75,18 @@
                         <div class="dataTable-bottom">
                             <div class="dataTable-info" th:text="|Total have ${list.size()} entries|"></div>
                             <ul class="pagination pagination-primary float-end dataTable-pagination">
-                                <li class="page-item pager">
+                                <li class="page-item pager" th:if="${currentPage == 1}" th:classappend="disabled">
                                     <a th:href="@{|?page=${currentPage -1}&size=${size}|}" class="page-link">‹</a>
                                 </li>
 
                                 <th:block th:each="item, loop : ${totalPage}">
-                                    <li th:class="|page-item pager ${currentPage == loop.index ? 'active':''}|">
-                                        <a th:href="@{|?page=${loop.index}&size=${size}|}" class="page-link" th:text="${loop.count}"></a>
+                                    <li th:class="|page-item pager ${currentPage == loop.count ? 'active':''}|">
+                                        <a th:href="@{|?page=${loop.count}&size=${size}|}" class="page-link" th:text="${loop.count}"></a>
                                     </li>
                                 </th:block>
 
-                                <li class="page-item pager">
-                                    <a th:href="@{|?page=${currentPage+1}&size=${size}|}" class="page-link">›</a>
+                                <li class="page-item pager" th:if="${currentPage == totalPage.length}" th:classappend="disabled">
+                                    <a th:href="@{|?page=${currentPage}&size=${size}|}" class="page-link">›</a>
                                 </li>
                             </ul>
                         </div>

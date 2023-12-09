@@ -2,7 +2,6 @@ package com.hng.service.impl;
 
 
 import com.hng.dao.IUserDao;
-import com.hng.dto.request.FormLogin;
 import com.hng.dto.request.FormRegister;
 import com.hng.model.User;
 import com.hng.service.IUserService;
@@ -10,6 +9,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+
 
 
 @Service
@@ -44,7 +44,7 @@ public class UserService implements IUserService {
 
    @Override
    public boolean checkExistByPhone(String phone) {
-      return findAll().stream().anyMatch(u -> u.getPhone().equalsIgnoreCase(phone));
+      return findAll().stream().anyMatch(u -> u.getPhone().equals(phone));
    }
 
    @Override

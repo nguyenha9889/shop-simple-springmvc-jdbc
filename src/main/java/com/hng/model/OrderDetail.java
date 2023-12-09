@@ -2,11 +2,20 @@ package com.hng.model;
 
 
 public class OrderDetail {
+   private Long id;
    private Long productId;
    private Long orderId;
    private String productName;
    private double unitPrice;
    private int quantity;
+
+   public Long getId() {
+      return id;
+   }
+
+   public void setId(Long id) {
+      this.id = id;
+   }
 
    public Long getProductId() {
       return productId;

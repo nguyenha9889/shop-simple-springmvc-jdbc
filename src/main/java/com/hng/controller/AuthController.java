@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 
 
 @Controller
-public class UserController {
+public class AuthController {
    @Autowired
    private IUserService userService;
    @Autowired

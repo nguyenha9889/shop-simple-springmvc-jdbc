@@ -8,6 +8,7 @@ import com.hng.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -33,7 +34,7 @@ public class HomeController {
    public String menu(Model model,
                       @RequestParam(name = "id", defaultValue = "1") long cateId,
                       @RequestParam(name = "sort", defaultValue = "") String sortByPrice,
-                      @RequestParam(name = "page", defaultValue = "0") int page,
+                      @RequestParam(name = "page", defaultValue = "1") int page,
                       @RequestParam(name = "size", defaultValue = "5") int size){
 
       // Chỉ lấy category có sản phẩm
@@ -46,19 +47,29 @@ public class HomeController {
       productFilter.setCategoryId(cateId); // Lọc theo cateId
       productFilter.setSortByPrice(sortByPrice); // Sắp xếp theo giá
 
-      List<Product> listProPaging = productService.getListByCateIdPaging(productFilter, page, size);
+      List<Product> listProPaging = productService.getListByCateIdPaging(productFilter, page-1, size);
+      if (listProPaging.isEmpty()) {
+         page=1;
+         listProPaging = productService.getListByCateIdPaging(productFilter, 0, size);
+      }
       List<Product> listProTotal = productService.getListByCateId(productFilter);
+      int[] totalPages = new int[productService.getTotalPage(listProTotal, size)];
 
+      model.addAttribute("cateId", cateId);
       model.addAttribute("catalogs", catalogs);
       model.addAttribute("listProTotal", listProTotal);
       model.addAttribute("listProPaging", listProPaging);
       model.addAttribute("currentPage", page);
       model.addAttribute("size", size);
-      model.addAttribute("numberPage", new int[productService.getTotalPage(listProTotal, size)]);
+      model.addAttribute("totalPages", totalPages);
       return "client/menuPage";
    }
-   @RequestMapping("/403")
-   public String _403(){
-      return "error-403";
+
+   @RequestMapping("/product")
+   public String product(Model model,
+                         @RequestParam(name = "id") long id){
+      Product product = productService.findById(id);
+      model.addAttribute("product", product);
+      return "client/productPage";
    }
 }

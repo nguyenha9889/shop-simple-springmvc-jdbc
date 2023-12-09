@@ -6,58 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KDK:Menu</title>
-    <script src="https://kit.fontawesome.com/2a66bc2625.js" crossorigin="anonymous" ;></script>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
-    <link rel="icon" type="image/x-icon" th:href="@{/frontend/img/webLogo3.png}">
     <link rel="stylesheet" th:href="@{/frontend/css/homePage.css}"/>
     <link rel="stylesheet" th:href="@{/frontend/css/menuPage.css}">
     <link rel="stylesheet" th:href="@{/frontend/css/navbar.css}">
+    <link rel="icon" type="image/x-icon" th:href="@{/frontend/img/webLogo3.png}">
+    <script src="https://kit.fontawesome.com/2a66bc2625.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
 <!--<div id="pre_loader"></div>-->
 
 <!-- navbar -->
-<nav>
-
-    <div id="child-nav">
-        <div class="hamburger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
-        <div id="logo">
-            <img id="lines" th:src="@{/frontend/img/red_lines.jpg}" alt=""/>
-            <img id="logoImg" th:src="@{/frontend/img/webLogo3.png}" alt=""/>
-            <h2>
-                <a class="webName" th:href="@{'/'}">H-KFC</a>
-            </h2>
-        </div>
-        <div class="nav-menu">
-            <a class="nav-item" th:href="@{/menu}">Menu</a>
-            <button id="nav_button"><a th:href="@{/menu}">Start Order</a></button>
-            <div class="show_div" id="login_icon">
-                <a class="nav-item" th:href="@{/auth}"><i class="fa-sharp fa-solid fa-user"></i></a>
-                <p class="show_text">Login</p>
-            </div>
-            <div class="show_div">
-                <a class="nav-item" href="#"><i class="fa-solid fa-suitcase"></i></a>
-                <p class="show_text">My Cart</p>
-            </div>
-        </div>
-        <h3 id="user_name_div" style="display: none;">Welcome <span style="color: teal;" id="user_name"></span></h3>
-        <div id="logout_icon" class="show_div" style="display: none;">
-            <h2><i class="fa-solid fa-right-from-bracket"></i></h2>
-            <p class="show_text">Logout</p>
-        </div>
-
-    </div>
-    <div id="delivery">
-        <a href=""><i class="fa-sharp fa-solid fa-location-dot"></i>
-            <p>Start an Order for Pickup or Delivery</p>
-        </a>
-    </div>
-</nav>
+<nav th:replace="client/fragments/navbar :: navbar"></nav>
 <!--  KFC MENU-->
 
 <div id="menu_page_main_div">
@@ -102,18 +62,36 @@
                             <div id="cart_show_div">
                                 <div class="showDiv">
                                 <span class="show_eyes">
-                                    <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                                    <a th:href="@{/product(id=${p.id})}">
+                                        <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                                    </a>
                                 </span>
                                     <span class="showText">View</span>
                                 </div>
                                 <div class="showDiv">
-                                    <span><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i></span>
+                                    <a th:href="@{/cart}">
+                                        <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                                    </a>
                                     <span class="showText">Please Login to add products in cart!</span>
                                     <span id="cartCount"></span>
                                 </div>
                             </div>
                         </div>
                     </th:block>
+                </div>
+                <div class="pagination">
+                    <th:block >
+                        <a th:class="${currentPage == 1} ? 'disable'"
+                           th:href="@{|?id=${cateId}&page=${currentPage -1}&size=${size}|}">&laquo;</a>
+                        <th:block th:each="i, loop : ${totalPages}" >
+                            <a th:href="@{|?id=${cateId}&page=${loop.count}&size=${size}|}"
+                               th:class="${currentPage == loop.count} ? 'active'"
+                               th:text="${loop.count}" ></a>
+                        </th:block>
+                        <a th:class="${currentPage == totalPages.length} ? 'disable'"
+                           th:href="@{|?id=${cateId}&page=${currentPage +1}&size=${size}|}">&raquo;</a>
+                    </th:block>
+
                 </div>
             </div>
         </div>

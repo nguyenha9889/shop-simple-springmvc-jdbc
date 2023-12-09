@@ -45,7 +45,11 @@ public class FormRegisterValidate implements Validator {
             errors.rejectValue("username", "register.username.existed");
          }
 
-         if (user != null && user.getEmail().equalsIgnoreCase(formRegister.getEmail())) {
+         if (userService.checkExistByPhone(formRegister.getPhone())) {
+            errors.rejectValue("phone", "register.phone.existed");
+         }
+
+         if (userService.checkExistByEmail(formRegister.getEmail())) {
             errors.rejectValue("email", "register.email.existed");
          }
 

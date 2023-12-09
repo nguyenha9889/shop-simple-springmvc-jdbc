@@ -25,6 +25,7 @@ public class UserDao implements IUserDao {
                user.setFullName(rs.getString("fullName"));
                user.setUsername(rs.getString("username"));
                user.setEmail(rs.getString("email"));
+               user.setPhone(rs.getString("phone"));
                user.setPassword(rs.getString("password"));
                user.setRole(rs.getBoolean("roles"));
                user.setStatus(rs.getBoolean("status"));
@@ -43,6 +44,7 @@ public class UserDao implements IUserDao {
                user.setFullName(rs.getString("fullName"));
                user.setUsername(rs.getString("username"));
                user.setEmail(rs.getString("email"));
+               user.setPhone(rs.getString("phone"));
                user.setPassword(rs.getString("password"));
                user.setRole(rs.getBoolean("roles"));
                user.setStatus(rs.getBoolean("status"));
@@ -64,6 +66,7 @@ public class UserDao implements IUserDao {
                   user.setFullName(rs.getString("fullName"));
                   user.setUsername(rs.getString("username"));
                   user.setEmail(rs.getString("email"));
+                  user.setPhone(rs.getString("phone"));
                   user.setPassword(rs.getString("password"));
                   user.setRole(rs.getBoolean("roles"));
                   user.setStatus(rs.getBoolean("status"));
@@ -86,6 +89,7 @@ public class UserDao implements IUserDao {
                   user.setFullName(rs.getString("fullName"));
                   user.setUsername(rs.getString("username"));
                   user.setEmail(rs.getString("email"));
+                  user.setPhone(rs.getString("phone"));
                   user.setPassword(rs.getString("password"));
                   user.setRole(rs.getBoolean("roles"));
                   user.setStatus(rs.getBoolean("status"));

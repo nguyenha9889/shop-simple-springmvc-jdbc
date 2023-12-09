@@ -1,4 +1,4 @@
-package com.hng.controller;
+package com.hng.controller.admin;
 
 
 import com.hng.dto.request.FormProduct;
@@ -30,20 +30,13 @@ public class ProductController {
 
    @RequestMapping
    public String product(Model model,
-                         @RequestParam(name = "page", defaultValue = "0") int page,
+                         @RequestParam(name = "page", defaultValue = "1") int page,
                          @RequestParam(name = "size", defaultValue = "5") int size) {
 
       List<Product> listTotal = productService.findAll();
-      if (page < 0) {
-         page = 0;
-      }
-      if (page > productService.getTotalPage(listTotal, size)) {
-         page = productService.getTotalPage(listTotal, size) -1;
-      }
-
       List<Catalog> catalogs = catalogService.findAll();
       model.addAttribute("catalogs", catalogs);
-      List<Product> listPerPage = productService.findAll(page, size);
+      List<Product> listPerPage = productService.findAll(page-1, size);
       model.addAttribute("list", listTotal);
       model.addAttribute("products", listPerPage);
       model.addAttribute("currentPage", page);
@@ -133,7 +126,7 @@ public class ProductController {
    @PostMapping
    public String search(Model model,
                         @RequestParam(name = "query") String query,
-                        @RequestParam(name = "page", defaultValue = "0") int page,
+                        @RequestParam(name = "page", defaultValue = "1") int page,
                         @RequestParam(name = "size", defaultValue = "5") int size) {
 
       if (query.trim().isEmpty()) {
@@ -142,7 +135,7 @@ public class ProductController {
          //model.addAttribute("query", query);
          List<Catalog> catalogs = catalogService.findAll();
          model.addAttribute("catalogs", catalogs);
-         List<Product> list = productService.getListByName(query, page, size);
+         List<Product> list = productService.getListByName(query, page-1, size);
          model.addAttribute("products", list);
          model.addAttribute("currentPage", page);
          model.addAttribute("size", size);

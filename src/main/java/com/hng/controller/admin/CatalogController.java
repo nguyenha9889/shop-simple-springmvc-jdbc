@@ -1,4 +1,4 @@
-package com.hng.controller;
+package com.hng.controller.admin;
 
 import com.hng.dto.request.FormCatalog;
 import com.hng.model.Catalog;
@@ -25,18 +25,11 @@ public class CatalogController {
 
    @RequestMapping
    public String catalog(Model model,
-                         @RequestParam(name = "page", defaultValue = "0") int page,
+                         @RequestParam(name = "page", defaultValue = "1") int page,
                          @RequestParam(name = "size", defaultValue = "5") int size){
 
       List<Catalog> listTotal = catalogService.findAll();
-      if (page < 0) {
-         page = 0;
-      }
-      if (page > catalogService.getTotalPage(listTotal, size)) {
-         page = catalogService.getTotalPage(listTotal, size) -1;
-      }
-
-      List<Catalog> listPerPage = catalogService.findAll(page, size);
+      List<Catalog> listPerPage = catalogService.findAll(page-1, size);
       model.addAttribute("list", listTotal);
       model.addAttribute("catalogs", listPerPage);
       model.addAttribute("currentPage", page);
@@ -111,14 +104,14 @@ public class CatalogController {
    @PostMapping
    public String search(Model model,
                         @RequestParam(name = "query") String query,
-                        @RequestParam(name = "page", defaultValue = "0") int page,
+                        @RequestParam(name = "page", defaultValue = "1") int page,
                         @RequestParam(name = "size", defaultValue = "5") int size){
 
       if (query.trim().isEmpty()){
          return "redirect:/admin/catalog";
       } else {
          model.addAttribute("query", query);
-         List<Catalog> list = catalogService.getListByName(query, page, size);
+         List<Catalog> list = catalogService.getListByName(query, page-1, size);
          model.addAttribute("catalogs", list);
          model.addAttribute("currentPage", page);
          model.addAttribute("size", size);

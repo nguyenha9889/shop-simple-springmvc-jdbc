@@ -5,8 +5,8 @@ import com.hng.service.ICatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/v1")
@@ -22,7 +22,7 @@ public class ApiController {
 
    @GetMapping(value = "/catalog/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
    @ResponseBody
-   public Catalog findById(@PathVariable Long id) {
+   public Catalog findCatalogById(@PathVariable Long id) {
       return catalogService.findById(id);
    }
 }

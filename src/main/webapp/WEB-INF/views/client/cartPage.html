@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KDK:Cart</title>
+  <link rel="stylesheet" th:href="@{/frontend/css/cartPage.css}">
+  <link rel="stylesheet" th:href="@{/frontend/css/navbar.css}">
+  <link rel="icon" type="image/x-icon" th:href="@{/frontend/img/webLogo3.png}">
+  <script src="https://kit.fontawesome.com/2a66bc2625.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<!-- navbar -->
+<nav>
+  <div id="cart_page_navbar">
+    <div>
+      <a th:href="@{/menu}"><button id="cart_button" >Back To Menu</button></a>
+      <h2><a class="webName" th:href="@{'/'}">H-KFC</a>
+      </h2>
+
+      <div class="show_div" id="login_icon">
+        <a id="show_icon" class="nav-item" th:href="@{/auth}"><i class="fa-sharp fa-solid fa-user"></i></a>
+        <p class="show_text">Login</p>
+      </div>
+      <div id="logout_icon" class="show_div" style="display: none;">
+        <h2><i class="fa-solid fa-right-from-bracket"></i></h2>
+        <a th:href="@{/auth/logout}" class="show_text">Logout</a>
+      </div>
+    </div>
+  </div>
+  <div id="delivery">
+    <a href=""><i class="fa-sharp fa-solid fa-location-dot"></i>
+      <p>Start an Order for Pickup or Delivery</p>
+    </a>
+  </div>
+</nav>
+<div style="display: none;" id="cart_items_div">
+  <p>You have <span style="color: #e86615;" id="total_qty"></span>in your order.</p>
+  <table>
+    <thead>
+    <tr>
+
+      <th>NAME</th>
+      <th>IMAGE</th>
+      <th>PRICE</th>
+      <th>QTY.</th>
+      <th>TOTAL</th>
+      <th>REMOVE</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+
+  </table>
+  <div id="table_footer">
+    <h2>SUBTOTAL - <span id="subtotal"></span></h2>
+    <div >
+      <a href="menuPage.html"><button>CONTINUE ORDERING</button></a>
+      <a href="checkoutPage.html"><button>CHECKOUT</button></a>
+    </div>
+  </div>
+</div>
+<div id="cart_bag_empty">
+  <div>
+    <div id="text_button_div">
+      <h1>YOUR BAG IS EMPTY. LET’S START AN ORDER!</h1>
+      <button><a href="menuPage.html">Start Order</a></button>
+    </div>
+    <div id="image_div">
+      <img src="https://www.kfc.com/_next/static/images/empty-bucket-835c4f452fae1420a288523f2c1ead2b.png" alt="">
+    </div>
+  </div>
+</div>
+
+<!-- footer -->
+<footer th:replace="client/fragments/footer :: footer"></footer>
+</body>
+</html>
