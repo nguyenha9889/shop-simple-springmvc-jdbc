@@ -56,4 +56,5 @@ public class OrderDetail {
    public void setQuantity(int quantity) {
       this.quantity = quantity;
    }
+
 }

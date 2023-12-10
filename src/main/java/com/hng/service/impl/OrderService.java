@@ -1,13 +1,14 @@
 package com.hng.service.impl;
 
 import com.hng.dao.IOrderDao;
+import com.hng.dto.request.FormOrder;
 import com.hng.model.Order;
 import com.hng.model.User;
 import com.hng.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+
 
 @Service
 public class OrderService implements IOrderService {
@@ -34,10 +35,18 @@ public class OrderService implements IOrderService {
    }
 
    @Override
-   public Order create(User user) {
+   public Order create(User user, FormOrder formOrder) {
       Order order = new Order();
-      order.setReceivedName(user.getFullName());
-
+      if (formOrder != null) {
+         order.setReceivedName(formOrder.getReceivedName());
+         order.setAddress(formOrder.getAddress());
+         order.setPhone(formOrder.getPhone());
+      } else {
+         order.setReceivedName(user.getFullName());
+         order.setPhone(user.getPhone());
+      }
+      order.setUserId(user.getId());
       return order;
    }
+
 }

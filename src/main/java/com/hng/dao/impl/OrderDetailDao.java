@@ -33,7 +33,7 @@ public class OrderDetailDao implements IOrderDetailDao {
                orderDetail.getUnitPrice(),
                orderDetail.getQuantity());
       } else {
-         // Edit - Ko cho phép sửa status
+
          sql = "UPDATE order_detail set orderId=?, productId=?, unitPrice=?, quantity=? where id=?";
          return jdbcTemplate.update(
                sql,
@@ -50,5 +50,16 @@ public class OrderDetailDao implements IOrderDetailDao {
    public int delete(Long id) {
       String sql ="delete from order_detail where id=" + id;
       return jdbcTemplate.update(sql, id);
+   }
+
+   /**
+    * Tìm list orderDetail theo userId
+    * @param userId Id của user
+    * @return List OrderDetail
+    */
+   @Override
+   public List<OrderDetail> findOrderDetailByUserId(Long userId) {
+      String sql = "select * from order_detail ";
+      return null;
    }
 }

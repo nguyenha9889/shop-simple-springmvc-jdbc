@@ -33,7 +33,7 @@ public class CartDao implements ICartDao {
                cart.getTotal()
          );
       } else {
-         // Edit - Ko cho phép sửa status
+
          sql = "UPDATE cart set total=? where id=?";
          return jdbcTemplate.update(
                sql,

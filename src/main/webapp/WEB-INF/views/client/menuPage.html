@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KDK:Menu</title>
-    <link rel="stylesheet" th:href="@{/frontend/css/homePage.css}"/>
     <link rel="stylesheet" th:href="@{/frontend/css/menuPage.css}">
     <link rel="stylesheet" th:href="@{/frontend/css/navbar.css}">
     <link rel="icon" type="image/x-icon" th:href="@{/frontend/img/webLogo3.png}">
@@ -14,8 +13,6 @@
 </head>
 
 <body>
-<!--<div id="pre_loader"></div>-->
-
 <!-- navbar -->
 <nav th:replace="client/fragments/navbar :: navbar"></nav>
 <!--  KFC MENU-->
@@ -99,6 +96,5 @@
 </div>
 <!-- footer -->
 <footer th:replace="client/fragments/footer :: footer"></footer>
-<script th:src="@{/frontend/scripts/navbar.js}"></script>
 </body>
 </html>

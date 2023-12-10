@@ -1,5 +1,6 @@
 package com.hng.controller;
 
+import com.hng.dto.request.FormOrderDetail;
 import com.hng.dto.request.ProductFilter;
 import com.hng.model.Catalog;
 import com.hng.model.Product;
@@ -67,9 +68,16 @@ public class HomeController {
 
    @RequestMapping("/product")
    public String product(Model model,
-                         @RequestParam(name = "id") long id){
+                         @RequestParam(name = "id") long id) {
+
       Product product = productService.findById(id);
-      model.addAttribute("product", product);
+      FormOrderDetail formOrderDetail = new FormOrderDetail(
+            product.getId(),
+            product.getName(),
+            product.getUnitPrice(),
+            product.getImagePath(),
+            product.getDescription());
+      model.addAttribute("formOrderDetail", formOrderDetail);
       return "client/productPage";
    }
 }

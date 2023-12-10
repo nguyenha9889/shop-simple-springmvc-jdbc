@@ -44,7 +44,7 @@ public class OrderDao implements IOrderDao {
                "WAITING"
                );
       } else {
-         // Edit - Ko cho phép sửa status
+
          sql = "UPDATE orders set receivedName=?, address=?, phone=?, total=?, status=?, orderAt=? where id=?";
          return jdbcTemplate.update(
                sql,
