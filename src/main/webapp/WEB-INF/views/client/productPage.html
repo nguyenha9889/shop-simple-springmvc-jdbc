@@ -17,40 +17,79 @@
 <!-- navbar -->
 <nav th:replace="client/fragments/navbar :: navbar"></nav>
 <!-- main content -->
-<div class="main-content container-fluid">
+<div class="main-content container">
     <div class="page-title">
         <h3>Detail</h3>
         <p class="text-subtitle text-muted">Chi tiết sản phẩm</p>
     </div>
-    <section class="section">
-        <div class="row mb-4">
-            <div class="col-xl-4 col-sm-6 col-12">
-                <div class="card bg-primary bg-lighten-1">
-                    <form class="card-content" th:action="@{/cart}" method="post" th:object="${formOrderDetail}">
-                        <div class="row no-gutters">
-                            <div class="col-lg-4 col-md-12 d-flex align-items-center justify-content-center p-1">
-                                <img th:src="@{*{productImage}}" class="card-img img-fluid" th:alt="*{productName}">
+    <section class="section mt-5">
+        <form th:object="${formOrderDetail}" th:action="@{/cart}" method="post">
+            <div class="row match-height py-5" >
+                <div class="col-md-6 col-6">
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-12">
+                                <img th:src="@{${formOrderDetail.imagePath}}" alt="">
                             </div>
-                            <div class="col-lg-8 col-md-12">
-                                <input type="text" hidden="hidden" th:field="*{productId}" />
-                                <div class="card-body text-center">
-                                    <h4 class="card-title white" th:text="*{productName}"></h4>
-                                    <p class="card-text white" th:text="*{description}"></p>
-                                    <div class="form-group">
-                                        <label for="quantity">Quantity</label>
-                                        <input type="number" id="quantity" th:field="*{quantity}" class="form-control" placeholder="0">
-                                        <p class="form-text text-danger" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></p>
-                                    </div>
-                                    <button class="btn btn-secondary" type="submit"
-                                    th:if="${session.userLogin} == null"
-                                            th:onclick="return confirm('Please sign in before order')">Add To Cart</button>
+                            <div class="col-12">
+                                <div class="form-group" hidden="hidden">
+                                    <label for="image"></label>
+                                    <input type="text" id="image" class="form-control" th:field="*{imagePath}">
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    </div>
+                </div>
+                <div class="col-md-6 col-6">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <form class="form form-vertical">
+                                    <div class="form-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="id" class="h4 text-center"></label>
+                                                    <input type="text" id="id" class="form-control" th:field="*{productId}" hidden="hidden">
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="first-name-vertical" class="h4 text-center" th:text="${formOrderDetail.productName}"></label>
+                                                    <input type="text" id="first-name-vertical" class="form-control" th:field="*{productName}" hidden="hidden">
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <textarea class="form-control bg-transparent border-0" th:field="*{description}" readonly></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="quantity">Quantity</label>
+                                                    <input type="number" id="quantity" class="form-control bg-light-1" th:field="*{quantity}" placeholder="0.0">
+                                                </div>
+                                                <p class="form-text text-danger" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></p>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="unitPrice" class="text-center">UnitPrice</label>
+                                                    <input type="number" id="unitPrice" class="form-control bg-transparent border-0" th:field="*{unitPrice}" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 d-flex justify-content-end">
+                                                <button type="submit" class="btn btn-primary text-white me-1 mb-1">Add To Cart</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
+
     </section>
 </div>
 <!-- footer -->

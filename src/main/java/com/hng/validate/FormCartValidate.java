@@ -15,7 +15,7 @@ public class FormCartValidate implements Validator {
    @Override
    public void validate(Object target, Errors errors) {
       FormOrderDetail formOrderDetail = (FormOrderDetail) target;
-      if (formOrderDetail.getQuantity() <= 0) {
+      if (formOrderDetail.getQuantity() <=0) {
          errors.rejectValue("quantity", "orderDetail.quantity");
       }
    }

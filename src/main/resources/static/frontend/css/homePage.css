@@ -4,18 +4,6 @@
     box-sizing: border-box;
 }
 
-/* pre loader */
-
-#pre_loader{
-    background:#8b8a85 url('/static/frontend/img/loader.gif') no-repeat center;
-    background-size: 20%;
-    height: 100vh;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    z-index: 1000;
-}
-
 
 /* isAuth username div on navbar */
 
@@ -67,105 +55,8 @@ body{
     font-family: Arial, Helvetica, sans-serif;
 } */
 
-
-/* hamburger */
-
-
-
-/* .hamburger{
-    cursor: pointer;
-    display: none;
-}
-.bar{
-    display: block;
-    width: 25px;
-    height: 3px;
-    margin: 5px auto;
-    -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-    background-color: black;
-
-} */
-
-/* onclick hamburger div */
-
-/* #hamburger_click{
-    margin-top: 150px;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    max-width: 100vw;
-    display: none;
-} */
-
-/* .show_hamburger_item{
-    display: block;
-}
-.hide_hamburger_item{
-    display: none;
-} */
-/* .signin_signup{
-  background-color: #f8f7f5;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  padding: 30px;
-  margin-left: 18px;
-  width: 90%;
-
-
-} */
-/* .hamburger_item{
-    background-color: #f8f7f5;
-    display: flex;
-    justify-content: space-between;
-
-    margin: 30px 10px 10px;
-    padding: 0px 0px 0px 30px;
-    align-items:center;
-    height: 180px;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    letter-spacing: -2px;
-    font-size: 12px;
-    width: 90%;
-    margin-left: 18px;
-
-
-} */
-
-/* .hamburger_item img{
-    width: 350px;
-   margin-bottom: 50px;
-
-} */
-/* #hamburger_click button{
-    background-color: black;
-  border-radius: 100px;
-  width: 80%;
-
-  color: white;
-  cursor: pointer;
-  display: inline-block;
-  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
-  padding: 10px 25px;
-  text-align: center;
-  text-decoration: none;
-  border: 0;
-  font-size: 16px;
-  font-weight: 600;
-  margin-left: 55px;
-
-} */
-
-
-/* header.... */
-
-
-
-
 .webName{
     font-family:brush script mt,cursive;
-
     text-decoration: none;
     color: #354050;
     font-size: 45px;
@@ -277,7 +168,6 @@ nav{
     color: white;
 }
 
-
 /* banner-1 sliding images */
 
 #slidingImages{
@@ -342,7 +232,6 @@ nav{
     max-width: 100vw;
     padding: 0 10%;
     /* min-width: 100vw; */
-
 }
 
 #featured_items h1{
@@ -531,10 +420,8 @@ nav{
 }
 
 #div-1 button{
-
     background-color: #005792;
     border-radius: 100px;
-
     color: white;
     cursor: pointer;
     display: inline-block;
@@ -588,19 +475,15 @@ nav{
     height: 100%;
     padding: 8%;
     background-color: #c72c2c;
-
-
 }
 
 /* Footer */
-
 footer{
     color: white;
     background-color: #005792;
     padding: 40px 70px;
     margin-top: 20px;
     max-width: 100vw;
-
 }
 footer p{
     font-size: 12px;
@@ -611,7 +494,6 @@ footer p{
     display: flex;
     flex-direction: column;
     gap: 30px;
-
 }
 
 #calorie_statement{

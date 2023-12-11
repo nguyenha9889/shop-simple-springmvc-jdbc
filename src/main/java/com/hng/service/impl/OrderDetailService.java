@@ -15,7 +15,7 @@ public class OrderDetailService implements IOrderDetailService {
    private IOrderDetailDao orderDetailDao;
    @Override
    public List<OrderDetail> findAll() {
-      return null;
+      return orderDetailDao.findAll();
    }
 
    @Override
@@ -45,5 +45,10 @@ public class OrderDetailService implements IOrderDetailService {
       orderDetail.setUnitPrice(formOrderDetail.getUnitPrice());
       orderDetail.setQuantity(formOrderDetail.getQuantity());
       return orderDetail;
+   }
+
+   @Override
+   public OrderDetail findOrderDetailByProductId(Long productId) {
+      return orderDetailDao.findOrderDetailByProductId(productId);
    }
 }

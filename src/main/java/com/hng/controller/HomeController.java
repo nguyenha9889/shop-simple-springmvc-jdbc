@@ -76,7 +76,8 @@ public class HomeController {
             product.getName(),
             product.getUnitPrice(),
             product.getImagePath(),
-            product.getDescription());
+            product.getDescription()
+      );
       model.addAttribute("formOrderDetail", formOrderDetail);
       return "client/productPage";
    }

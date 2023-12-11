@@ -4,10 +4,10 @@ public class FormOrderDetail {
    private Long id;
    private Long productId;
    private String productName;
-   private String productImage;
-   private String description;
    private double unitPrice;
    private int quantity;
+   private String imagePath;
+   private String description;
 
    public Long getId() {
       return id;
@@ -23,14 +23,6 @@ public class FormOrderDetail {
 
    public void setProductId(Long productId) {
       this.productId = productId;
-   }
-
-   public int getQuantity() {
-      return quantity;
-   }
-
-   public void setQuantity(int quantity) {
-      this.quantity = quantity;
    }
 
    public String getProductName() {
@@ -49,12 +41,20 @@ public class FormOrderDetail {
       this.unitPrice = unitPrice;
    }
 
-   public String getProductImage() {
-      return productImage;
+   public int getQuantity() {
+      return quantity;
    }
 
-   public void setProductImage(String productImage) {
-      this.productImage = productImage;
+   public void setQuantity(int quantity) {
+      this.quantity = quantity;
+   }
+
+   public String getImagePath() {
+      return imagePath;
+   }
+
+   public void setImagePath(String imagePath) {
+      this.imagePath = imagePath;
    }
 
    public String getDescription() {
@@ -68,11 +68,11 @@ public class FormOrderDetail {
    public FormOrderDetail() {
    }
 
-   public FormOrderDetail(Long productId, String productName, double unitPrice, String productImage, String description) {
+   public FormOrderDetail(Long productId,String productName, double unitPrice, String imagePath, String description) {
       this.productId = productId;
       this.productName = productName;
       this.unitPrice = unitPrice;
-      this.productImage = productImage;
+      this.imagePath = imagePath;
       this.description = description;
    }
 }

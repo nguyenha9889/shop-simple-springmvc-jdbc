@@ -5,4 +5,5 @@ import com.hng.model.OrderDetail;
 
 public interface IOrderDetailService extends IGenericService<OrderDetail, Long>{
    OrderDetail create(Long cartId, FormOrderDetail formOrderDetail);
+   OrderDetail findOrderDetailByProductId(Long productId);
 }

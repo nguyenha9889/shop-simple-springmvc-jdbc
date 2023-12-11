@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KDK:Menu</title>
+    <link rel="stylesheet" th:href="@{/frontend/css/homePage.css}">
     <link rel="stylesheet" th:href="@{/frontend/css/menuPage.css}">
     <link rel="stylesheet" th:href="@{/frontend/css/navbar.css}">
     <link rel="icon" type="image/x-icon" th:href="@{/frontend/img/webLogo3.png}">
@@ -55,7 +56,7 @@
                         <div id="main_card">
                             <div><img th:src="@{${p.imagePath}}" th:alt="${p.name}"></div>
                             <p th:text="${p.name}"></p>
-                            <p th:text="${p.unitPrice}"></p>
+                            <p th:text="|${#numbers.formatDecimal(p.unitPrice, 0, 'COMMA', 0, 'POINT')}đ|"></p>
                             <div id="cart_show_div">
                                 <div class="showDiv">
                                 <span class="show_eyes">
