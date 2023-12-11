@@ -35,15 +35,7 @@ public class CartService implements ICartService {
    }
 
    @Override
-   public Cart create(Long userId, List<OrderDetail> orderDetails) {
-      Cart cart =  new Cart();
-      cart.setUserId(userId);
-      double total = 0.0;
-      for (OrderDetail or: orderDetails) {
-         double result = or.getUnitPrice() * or.getQuantity();
-         total += result;
-      }
-      cart.setTotal(total);
-      return cart;
+   public Cart findCartByUserId(Long userId) {
+      return cartDao.findCartByUserId(userId);
    }
 }

@@ -4,7 +4,7 @@ package com.hng.model;
 public class OrderDetail {
    private Long id;
    private Long productId;
-   private Long orderId;
+   private Long cartId;
    private String productName;
    private double unitPrice;
    private int quantity;
@@ -25,12 +25,12 @@ public class OrderDetail {
       this.productId = productId;
    }
 
-   public Long getOrderId() {
-      return orderId;
+   public Long getCartId() {
+      return cartId;
    }
 
-   public void setOrderId(Long orderId) {
-      this.orderId = orderId;
+   public void setCartId(Long cartId) {
+      this.cartId = cartId;
    }
 
    public String getProductName() {

@@ -43,18 +43,19 @@ public class CartController {
    public String add(HttpSession session, Model model,
                      @ModelAttribute("formOrderDetail") FormOrderDetail formOrderDetail) {
 
-      OrderDetail orderDetail = orderDetailService.create(formOrderDetail);
+      User user = (User) session.getAttribute("userLogin");
+      Cart cartNoneOrder = new Cart(user.getId(), 0);
+      cartService.save(cartNoneOrder);
+
+      Cart cartOrder = cartService.findCartByUserId(user.getId());
+      OrderDetail orderDetail = orderDetailService.create(cartOrder.getId(), formOrderDetail);
       orderDetailService.save(orderDetail);
 
-      User user = (User) session.getAttribute("userLogin");
-      List<OrderDetail> orderDetails = orderDetailService.findAll();
-      Cart cart = cartService.create(user.getId(), orderDetails);
-      cartService.save(cart);
 
-      Order order = orderService.create(user, null);
-      orderService.save(order);
 
-      model.addAttribute("sizeCart", orderDetails.size());
+
+
+
       return "redirect:/client/cartPage";
    }
 }

@@ -35,7 +35,7 @@ public class OrderService implements IOrderService {
    }
 
    @Override
-   public Order create(User user, FormOrder formOrder) {
+   public Order create(User user, FormOrder formOrder, Double total) {
       Order order = new Order();
       if (formOrder != null) {
          order.setReceivedName(formOrder.getReceivedName());
@@ -45,6 +45,10 @@ public class OrderService implements IOrderService {
          order.setReceivedName(user.getFullName());
          order.setPhone(user.getPhone());
       }
+      if (total != null) {
+         order.setTotal(total);
+      }
+
       order.setUserId(user.getId());
       return order;
    }

@@ -3,6 +3,7 @@ package com.hng.dao.impl;
 import com.hng.dao.ICartDao;
 import com.hng.model.Cart;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -33,8 +34,7 @@ public class CartDao implements ICartDao {
                cart.getTotal()
          );
       } else {
-
-         sql = "UPDATE cart set total=? where id=?";
+         sql = "UPDATE cart set total=? where userId=?";
          return jdbcTemplate.update(
                sql,
                cart.getTotal());
@@ -42,8 +42,18 @@ public class CartDao implements ICartDao {
    }
 
    @Override
-   public int delete(Long id) {
-      String sql = "delete from cart where id=" + id;
-      return jdbcTemplate.update(sql, id);
+   public int delete(Long userId) {
+      String sql = "delete from cart where userId=" + userId;
+      return jdbcTemplate.update(sql, userId);
+   }
+
+   @Override
+   public Cart findCartByUserId(Long userId) {
+      String sql = "select * from cart c where c.userId=" + userId;
+
+      return jdbcTemplate.queryForObject(
+            sql,
+            new BeanPropertyRowMapper<>(Cart.class)
+      );
    }
 }

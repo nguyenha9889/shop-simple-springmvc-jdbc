@@ -7,5 +7,5 @@ import com.hng.model.User;
 
 
 public interface IOrderService extends IGenericDao<Order, Long> {
-   Order create(User user, FormOrder formOrder);
+   Order create(User user, FormOrder formOrder, Double total);
 }

@@ -8,5 +8,5 @@ import java.util.List;
 
 
 public interface ICartService extends IGenericService<Cart, Long> {
-   Cart create(Long userId, List<OrderDetail> orderDetails);
+   Cart findCartByUserId(Long userId);
 }

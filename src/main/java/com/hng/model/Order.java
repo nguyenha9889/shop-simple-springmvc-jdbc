@@ -11,6 +11,7 @@ public class Order {
    private String address;
    private double total;
    private String status;
+   private String description;
    private LocalDate orderAt;
    private LocalDate deliverAt;
 
@@ -84,5 +85,13 @@ public class Order {
 
    public void setStatus(String status) {
       this.status = status;
+   }
+
+   public String getDescription() {
+      return description;
+   }
+
+   public void setDescription(String description) {
+      this.description = description;
    }
 }

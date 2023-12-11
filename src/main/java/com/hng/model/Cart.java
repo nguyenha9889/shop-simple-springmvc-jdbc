@@ -3,7 +3,7 @@ package com.hng.model;
 public class Cart {
    private Long id;
    private Long userId;
-   private double total;
+   private int total;
 
    public Long getId() {
       return id;
@@ -21,19 +21,18 @@ public class Cart {
       this.userId = userId;
    }
 
-   public double getTotal() {
+   public int getTotal() {
       return total;
    }
 
-   public void setTotal(double total) {
+   public void setTotal(int total) {
       this.total = total;
    }
 
    public Cart() {
    }
 
-   public Cart(Long id, Long userId, double total) {
-      this.id = id;
+   public Cart(Long userId, int total) {
       this.userId = userId;
       this.total = total;
    }

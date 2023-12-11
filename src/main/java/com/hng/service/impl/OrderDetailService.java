@@ -6,8 +6,8 @@ import com.hng.model.OrderDetail;
 import com.hng.service.IOrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+
 
 @Service
 public class OrderDetailService implements IOrderDetailService {
@@ -37,8 +37,9 @@ public class OrderDetailService implements IOrderDetailService {
     * Convert Form OrderDetail sang OrderDetail object
     */
    @Override
-   public OrderDetail create(FormOrderDetail formOrderDetail) {
+   public OrderDetail create(Long cartId ,FormOrderDetail formOrderDetail) {
       OrderDetail orderDetail = new OrderDetail();
+      orderDetail.setCartId(cartId);
       orderDetail.setProductId(formOrderDetail.getProductId());
       orderDetail.setProductName(formOrderDetail.getProductName());
       orderDetail.setUnitPrice(formOrderDetail.getUnitPrice());
