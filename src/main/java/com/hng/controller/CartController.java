@@ -43,16 +43,9 @@ public class CartController {
          return "redirect:/auth";
       }
 
-      Cart cart = null;
-      List<OrderDetail> orderDetails = orderDetailService.findAll();
-      if (orderDetails.isEmpty()) {
-         cart = new Cart(userLogin.getId(), 0);
-         cartService.save(cart);
-      } else {
-         cart = cartService.findCartByUserId(userLogin.getId());
-      }
+      Cart cart = cartService.findCartByUserId(userLogin.getId());
 
-      model.addAttribute("cartSize", cart.getTotal());
+      model.addAttribute("cart", cart);
       return "client/cartPage";
    }
 
@@ -67,8 +60,13 @@ public class CartController {
          return "client/productPage";
       }
 
-      User user = (User) session.getAttribute("userLogin");
-      Cart cart = cartService.findCartByUserId(user.getId());
+      User userLogin = (User) session.getAttribute("userLogin");
+      if (userLogin == null) {
+         model.addAttribute("user_login", "Please sign in before add product");
+         return "client/productPage";
+      }
+
+      Cart cart = cartService.findCartByUserId(userLogin.getId());
 
       OrderDetail orderDetail = null;
       if (orderDetailService.findOrderDetailByProductId(formOrderDetail.getProductId()) == null) {
@@ -80,8 +78,7 @@ public class CartController {
       }
       orderDetailService.save(orderDetail);
 
-      cart.setTotal(orderDetailService.findAll().size());
-      model.addAttribute("cartSize", cart.getTotal());
-      return "redirect:/client/cartPage";
+      model.addAttribute("cart", cart);
+      return "client/productPage";
    }
 }

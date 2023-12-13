@@ -2,7 +2,9 @@ package com.hng.controller;
 
 import com.hng.dto.request.FormLogin;
 import com.hng.dto.request.FormRegister;
+import com.hng.model.Cart;
 import com.hng.model.User;
+import com.hng.service.ICartService;
 import com.hng.service.IUserService;
 import com.hng.validate.FormLoginValidate;
 import com.hng.validate.FormRegisterValidate;
@@ -24,6 +26,8 @@ public class AuthController {
    private FormLoginValidate loginValidate;
    @Autowired
    private FormRegisterValidate registerValidate;
+   @Autowired
+   private ICartService cartService;
 
    @RequestMapping("/auth")
    public String login(Model model){
@@ -47,6 +51,13 @@ public class AuthController {
       if (userLogin.isRole()) {
          return "admin/dashboard";
       }
+
+      Cart cart = cartService.findCartByUserId(userLogin.getId());
+      if (cart == null) {
+         cart = new Cart(userLogin.getId(), 0);
+         cartService.save(cart);
+      }
+      model.addAttribute("cart", cart);
       return "index";
    }
 

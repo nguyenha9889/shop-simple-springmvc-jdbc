@@ -10,6 +10,8 @@ public class Product {
    private String description;
    private String imagePath;
    private double unitPrice;
+   private boolean featured;
+   private int sold;
    private LocalDate createdAt;
    private LocalDate updatedAt;
    private boolean status;
@@ -84,6 +86,22 @@ public class Product {
 
    public void setStatus(boolean status) {
       this.status = status;
+   }
+
+   public boolean isFeatured() {
+      return featured;
+   }
+
+   public void setFeatured(boolean featured) {
+      this.featured = featured;
+   }
+
+   public int getSold() {
+      return sold;
+   }
+
+   public void setSold(int sold) {
+      this.sold = sold;
    }
 
    public Product() {

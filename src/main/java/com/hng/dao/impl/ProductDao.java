@@ -32,6 +32,8 @@ public class ProductDao implements IProductDao {
                p.setImagePath(rs.getString("imagePath"));
                p.setUnitPrice(rs.getDouble("unitPrice"));
                p.setStatus(rs.getBoolean("status"));
+               p.setSold(rs.getInt("sold"));
+               p.setFeatured(rs.getBoolean("featured"));
                p.setCreatedAt(rs.getDate("createdAt").toLocalDate());
                p.setUpdatedAt(rs.getDate("updatedAt").toLocalDate());
                return p;
@@ -52,6 +54,8 @@ public class ProductDao implements IProductDao {
                p.setImagePath(rs.getString("imagePath"));
                p.setUnitPrice(rs.getDouble("unitPrice"));
                p.setStatus(rs.getBoolean("status"));
+               p.setSold(rs.getInt("sold"));
+               p.setFeatured(rs.getBoolean("featured"));
                p.setCreatedAt(rs.getDate("createdAt").toLocalDate());
                p.setUpdatedAt(rs.getDate("updatedAt").toLocalDate());
                return p;
@@ -79,6 +83,8 @@ public class ProductDao implements IProductDao {
                p.setImagePath(rs.getString("imagePath"));
                p.setUnitPrice(rs.getDouble("unitPrice"));
                p.setStatus(rs.getBoolean("status"));
+               p.setSold(rs.getInt("sold"));
+               p.setFeatured(rs.getBoolean("featured"));
                p.setCreatedAt(rs.getDate("createdAt").toLocalDate());
                p.setUpdatedAt(rs.getDate("updatedAt").toLocalDate());
                return p;
@@ -89,13 +95,16 @@ public class ProductDao implements IProductDao {
    public List<Product> getListByCateIdPaging(ProductFilter filter, int limit, int offset) {
 
       StringBuilder builder = new StringBuilder("select p.* from product p join catalog c on p.categoryId = c.id where c.id = ");
+
       builder.append(filter.getCategoryId());
       if (filter.getProductName() != null){
          builder.append(" and lower(p.name) like '%").append(filter.getProductName().toLowerCase()).append("%'");
       }
 
-      builder.append(" order by p.unitPrice ");
-      builder.append(filter.getSortByPrice());
+      if (filter.getSortByPrice() != null) {
+         builder.append(" order by p.unitPrice ").append(filter.getSortByPrice());
+      }
+
       builder.append(" limit ").append(limit).append(" offset ").append(offset);
       String sql = builder.toString();
 
@@ -109,6 +118,8 @@ public class ProductDao implements IProductDao {
                p.setDescription(rs.getString("description"));
                p.setImagePath(rs.getString("imagePath"));
                p.setUnitPrice(rs.getDouble("unitPrice"));
+               p.setSold(rs.getInt("sold"));
+               p.setFeatured(rs.getBoolean("featured"));
                p.setStatus(rs.getBoolean("status"));
                p.setCreatedAt(rs.getDate("createdAt").toLocalDate());
                p.setUpdatedAt(rs.getDate("updatedAt").toLocalDate());
@@ -124,9 +135,10 @@ public class ProductDao implements IProductDao {
       if (filter.getProductName() != null){
          builder.append(" and lower(p.name) like '%").append(filter.getProductName().toLowerCase()).append("%'");
       }
+      if (filter.getSortByPrice() != null) {
+         builder.append(" order by p.unitPrice ").append(filter.getSortByPrice());
+      }
 
-      builder.append(" order by p.unitPrice ");
-      builder.append(filter.getSortByPrice());
       String sql = builder.toString();
 
       return jdbcTemplate.query(
@@ -140,6 +152,8 @@ public class ProductDao implements IProductDao {
                p.setImagePath(rs.getString("imagePath"));
                p.setUnitPrice(rs.getDouble("unitPrice"));
                p.setStatus(rs.getBoolean("status"));
+               p.setSold(rs.getInt("sold"));
+               p.setFeatured(rs.getBoolean("featured"));
                p.setCreatedAt(rs.getDate("createdAt").toLocalDate());
                p.setUpdatedAt(rs.getDate("updatedAt").toLocalDate());
                return p;

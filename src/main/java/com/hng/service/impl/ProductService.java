@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
-
+import java.util.stream.Collectors;
 
 
 @Service
@@ -56,6 +56,11 @@ public class ProductService implements IProductService {
    @Override
    public List<Product> getListByCateId(ProductFilter filter) {
       return productDao.getListByCateId(filter);
+   }
+
+   @Override
+   public List<Product> getListFeatured() {
+      return findAll().stream().filter(Product::isFeatured).collect(Collectors.toList());
    }
 
    @Override
