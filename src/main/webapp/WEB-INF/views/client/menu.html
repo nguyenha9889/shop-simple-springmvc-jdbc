@@ -2,25 +2,22 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="food kfc" content="" />
-    <meta name="description" content="" />
-    <meta name="HaNguyen" content="H-KFC Food Ecommerce" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="food kfc" content=""/>
+    <meta name="description" content=""/>
+    <meta name="HaNguyen" content="H-KFC Food Ecommerce"/>
     <link rel="shortcut icon" th:href="@{/images/icons/favicon.svg}" type="image/x-icon">
-    <title>H-KFC Food Ecommerce</title>
-    <link rel="stylesheet" type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
-    <!-- nice select  -->
+    <title>H-KFC Food Menu</title>
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css"
           integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ=="
           crossorigin="anonymous"/>
-    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" />
-    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" />
-    <link th:href="@{/css/style.css}" rel="stylesheet" />
-    <link th:href="@{/css/responsive.css}" rel="stylesheet" />
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/responsive.css}" rel="stylesheet"/>
 
 </head>
 
@@ -38,7 +35,7 @@
 <!-- food section -->
 
 <section class="food_section layout_padding">
-    <div class="container" th:fragment="menu(view, menuItem, cateId, listPerPage, currentPage, size, totalPages)">
+    <div class="container">
         <div class="heading_container heading_center">
             <h2>
                 Our Menu
@@ -46,194 +43,69 @@
         </div>
 
         <ul class="filters_menu">
-            <li class="active">
-                <a th:href="@{|?id=0}">All</a>
-            </li>
-            <th:block th:each="c, loop : ${menuItem}">
-                <li th:text="${c.name}">
-                    <a th:if="${view} == 'menuHome'" th:classappend="d-none"
-                       th:href="@{|?id=${c.id}&page=${currentPage}&size=${size}|}"></a>
+            <th:block th:each="c, loop : ${menuList}">
+                <li th:class="${cateId == c.id} ? active">
+                    <a th:href="@{|?id=${c.id}&page=${currentPage}&size=${size}|}" th:text="${c.name}" ></a>
                 </li>
             </th:block>
         </ul>
 
         <div class="filters-content">
-            <div class="row grid" th:each="p, loop : ${listPerPage}">
-                <div class="col-sm-6 col-lg-4 all pizza">
-                    <div class="box">
-                        <div>
-                            <div class="img-box">
-                                <img th:src="@{p.imagePath}" th:alt="${p.name}">
-                            </div>
-                            <div class="detail-box">
-                                <h5 th:text="${p.name}"></h5>
-                                <p th:text="${p.description}" ></p>
-                                <div class="options">
-                                    <h6 th:text="|${#numbers.formatDecimal(p.unitPrice, 0, 'COMMA', 0, 'POINT')}đ|"></h6>
-                                    <a href="">
-                                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-                                             x="0px" y="0px"
-                                             viewBox="0 0 456.029 456.029"
-                                             style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
-                        <g>
-                          <g>
-                            <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
-                         c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z"/>
-                          </g>
-                        </g>
-                                            <g>
-                          <g>
-                            <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
-                         C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
-                         c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
-                         C457.728,97.71,450.56,86.958,439.296,84.91z"/>
-                          </g>
-                        </g>
-                                            <g>
-                          <g>
-                            <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
-                         c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z"/>
-                          </g>
-                        </g>
-                                            <g>
-                        </g>
-                                            <g>
-                        </g>
-                                            <g>
-                        </g>
-                                            <g>
-                        </g>
-                                            <g>
-                        </g>
-                                            <g>
-                        </g>
-                                            <g>
-                        </g>
-                                            <g>
-                        </g>
-                                            <g>
-                        </g>
-                                            <g>
-                        </g>
-                                            <g>
-                        </g>
-                                            <g>
-                        </g>
-                                            <g>
-                        </g>
-                                            <g>
-                        </g>
-                                            <g>
-                        </g>
-                      </svg>
-                                    </a>
+            <div class="row grid">
+                <th:block th:each="p, loop : ${menuItem}">
+                    <div class="col-sm-6 col-lg-4 all">
+                        <div class="box">
+                            <div>
+                                <div class="img-box">
+                                    <img th:src="@{${p.imagePath}}" th:alt="${p.name}">
+                                </div>
+                                <div class="detail-box">
+                                    <h4 th:text="${p.name}"></h4>
+                                    <p th:text="${p.description}"></p>
+                                    <div class="options">
+                                        <h5 class="text-warning"
+                                            th:text="|${#numbers.formatDecimal(p.unitPrice, 0, 'COMMA', 0, 'POINT')}đ|"></h5>
+                                        <a th:href="@{/product(id=${p.id})}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="18" viewBox="0 0 576 512">
+                                                <path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/>
+                                            </svg>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
+                </th:block>
             </div>
         </div>
-        <div class="pagination" th:if="${view} == 'menuHome'" th:classappend="d-none">
-            <th:block >
-                <a th:class="${currentPage == 1} ? 'disable'"
-                   th:href="@{|?id=${cateId}&page=${currentPage -1}&size=${size}|}">&laquo;</a>
-                <th:block th:each="i, loop : ${totalPages}" >
-                    <a th:href="@{|?id=${cateId}&page=${loop.count}&size=${size}|}"
-                       th:class="${currentPage == loop.count} ? 'active'"
-                       th:text="${loop.count}" ></a>
+        <nav class="mt-5">
+            <ul class="pagination justify-content-center">
+
+                <li class="page-item" th:classappend="${currentPage == 1}? disabled">
+                    <a class="page-link"
+                       th:href="@{|?id=${cateId}&page=${currentPage -1}&size=${size}|}">&laquo;</a>
+                </li>
+
+                <th:block th:each="i, loop : ${totalPages}">
+                    <li class="page-item" th:classappend="${currentPage == loop.count} ? active">
+                        <a class="page-link" th:href="@{|?id=${cateId}&page=${loop.count}&size=${size}|}"
+                           th:text="${loop.count}"></a>
+                    </li>
                 </th:block>
-                <a th:class="${currentPage == totalPages.length} ? 'disable'"
-                   th:href="@{|?id=${cateId}&page=${currentPage +1}&size=${size}|}">&raquo;</a>
-            </th:block>
-        </div>
+
+                <li class="page-item" th:classappend="${currentPage == totalPages.length} ? disabled">
+                    <a class="page-link"
+                       th:href="@{|?id=${cateId}&page=${currentPage +1}&size=${size}|}">&raquo;</a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </section>
 
 <!-- end food section -->
 
 <!-- footer section -->
-<footer class="footer_section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 footer-col">
-                <div class="footer_contact">
-                    <h4>
-                        Contact Us
-                    </h4>
-                    <div class="contact_link_box">
-                        <a href="">
-                            <i class="fa fa-map-marker" aria-hidden="true"></i>
-                            <span>
-                  Location
-                </span>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-phone" aria-hidden="true"></i>
-                            <span>
-                  Call +01 1234567890
-                </span>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                            <span>
-                  demo@gmail.com
-                </span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 footer-col">
-                <div class="footer_detail">
-                    <a href="" class="footer-logo">
-                        Feane
-                    </a>
-                    <p>
-                        Necessary, making this the first true generator on the Internet. It uses a dictionary of over
-                        200 Latin words, combined with
-                    </p>
-                    <div class="footer_social">
-                        <a href="">
-                            <i class="fa fa-facebook" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-twitter" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-linkedin" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-instagram" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-pinterest" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 footer-col">
-                <h4>
-                    Opening Hours
-                </h4>
-                <p>
-                    Everyday
-                </p>
-                <p>
-                    10.00 Am -10.00 Pm
-                </p>
-            </div>
-        </div>
-        <div class="footer-info">
-            <p>
-                &copy; <span id="displayYear"></span> All Rights Reserved By
-                <a href="https://html.design/">Free Html Templates</a><br><br>
-                &copy; <span id="displayYear1"></span> Distributed By
-                <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
-            </p>
-        </div>
-    </div>
-</footer>
+<footer th:replace="client/fragments/footer :: footer"></footer>
 <!-- footer section -->
 
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
@@ -242,14 +114,8 @@
 <script th:src="@{/frontend/scripts/jquery-3.4.1.min.js}"></script>
 <script th:src="@{/frontend/scripts/bootstrap.js}"></script>
 <script th:src="@{/frontend/scripts/custom.js}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
-</script>
 <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
-</script>
-<!-- End Google Map -->
 
 </body>
 

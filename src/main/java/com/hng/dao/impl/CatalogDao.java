@@ -25,6 +25,7 @@ public class CatalogDao implements ICatalogDao {
                ca.setId(rs.getLong("id"));
                ca.setName(rs.getString("name"));
                ca.setDescription(rs.getString("description"));
+               ca.setImagePath(rs.getString("imagePath"));
                ca.setStatus(rs.getBoolean("status"));
                return ca;
             });
@@ -40,6 +41,7 @@ public class CatalogDao implements ICatalogDao {
                ca.setId(rs.getLong("id"));
                ca.setName(rs.getString("name"));
                ca.setDescription(rs.getString("description"));
+               ca.setImagePath(rs.getString("imagePath"));
                ca.setStatus(rs.getBoolean("status"));
                return ca;
             });
@@ -56,6 +58,7 @@ public class CatalogDao implements ICatalogDao {
                ca.setId(rs.getLong("id"));
                ca.setName(rs.getString("name"));
                ca.setDescription(rs.getString("description"));
+               ca.setImagePath(rs.getString("imagePath"));
                ca.setStatus(rs.getBoolean("status"));
                return ca;
             });
@@ -71,6 +74,7 @@ public class CatalogDao implements ICatalogDao {
                ca.setId(rs.getLong("id"));
                ca.setName(rs.getString("name"));
                ca.setDescription(rs.getString("description"));
+               ca.setImagePath(rs.getString("imagePath"));
                ca.setStatus(rs.getBoolean("status"));
                return ca;
             });

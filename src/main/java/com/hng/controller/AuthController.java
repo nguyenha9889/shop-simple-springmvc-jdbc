@@ -52,12 +52,13 @@ public class AuthController {
          return "admin/dashboard";
       }
 
+      // Khoi tao cart cho moi user register thanh cong
       Cart cart = cartService.findCartByUserId(userLogin.getId());
       if (cart == null) {
-         cart = new Cart(userLogin.getId(), 0);
+         cart = new Cart(userLogin.getId());
          cartService.save(cart);
       }
-      model.addAttribute("cart", cart);
+
       return "index";
    }
 

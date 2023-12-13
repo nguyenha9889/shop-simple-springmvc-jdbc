@@ -17,11 +17,14 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
 @Controller
+@RequestMapping("/cart")
 public class CartController {
 
    @Autowired
@@ -36,8 +39,10 @@ public class CartController {
    @Autowired
    private FormCartValidate cartValidate;
 
-   @RequestMapping("/cart")
-   public String cart(HttpSession session, Model model){
+   @RequestMapping
+   public String cart(HttpSession session,
+                      Model model,
+                      @RequestParam(name = "id") Long id){
       User userLogin = (User) session.getAttribute("userLogin");
       if (userLogin == null) {
          return "redirect:/auth";
@@ -46,10 +51,10 @@ public class CartController {
       Cart cart = cartService.findCartByUserId(userLogin.getId());
 
       model.addAttribute("cart", cart);
-      return "client/cartPage";
+      return "client/book";
    }
 
-   @PostMapping("/cart")
+   @PostMapping
    public String add(HttpSession session,
                      Model model,
                      @ModelAttribute("formOrderDetail") @Validated FormOrderDetail formOrderDetail,
@@ -57,13 +62,13 @@ public class CartController {
 
       cartValidate.validate(formOrderDetail, bindingResult);
       if (bindingResult.hasFieldErrors()) {
-         return "client/productPage";
+         return "client/product";
       }
 
       User userLogin = (User) session.getAttribute("userLogin");
       if (userLogin == null) {
          model.addAttribute("user_login", "Please sign in before add product");
-         return "client/productPage";
+         return "client/product";
       }
 
       Cart cart = cartService.findCartByUserId(userLogin.getId());
@@ -79,6 +84,6 @@ public class CartController {
       orderDetailService.save(orderDetail);
 
       model.addAttribute("cart", cart);
-      return "client/productPage";
+      return "client/product";
    }
 }

@@ -4,6 +4,7 @@ public class Catalog {
    private Long id;
    private String name;
    private String description;
+   private String imagePath;
    private boolean status;
 
    public Long getId() {
@@ -36,6 +37,14 @@ public class Catalog {
 
    public void setStatus(boolean status) {
       this.status = status;
+   }
+
+   public String getImagePath() {
+      return imagePath;
+   }
+
+   public void setImagePath(String imagePath) {
+      this.imagePath = imagePath;
    }
 
    public Catalog() {

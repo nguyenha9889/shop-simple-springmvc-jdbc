@@ -11,47 +11,50 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Controller
+@RequestMapping("/menu")
 public class MenuController {
    @Autowired
    private ICatalogService catalogService;
    @Autowired
    private IProductService productService;
 
-   @RequestMapping("/menu")
+   @RequestMapping
    public String menu(Model model,
-                      @RequestParam(name = "id", defaultValue = "1") long cateId,
+                      @RequestParam(name = "id", defaultValue = "0") long cateId,
                       @RequestParam(name = "sort", defaultValue = "") String sortByPrice,
                       @RequestParam(name = "page", defaultValue = "1") int page,
                       @RequestParam(name = "size", defaultValue = "5") int size){
 
       // Chỉ lấy category có sản phẩm
       List<Catalog> catalogs = catalogService.getListHaveProduct();
-      if (cateId == 1) {
-         cateId = catalogs.get(0).getId();
-      }
+      model.addAttribute("menuList", catalogs);
 
       ProductFilter productFilter = new ProductFilter();
+      if (cateId == 0) {
+         cateId = catalogs.get(0).getId();
+      }
       productFilter.setCategoryId(cateId); // Lọc theo cateId
       productFilter.setSortByPrice(sortByPrice); // Sắp xếp theo giá
 
-      List<Product> listProPaging = productService.getListByCateIdPaging(productFilter, page-1, size);
-      if (listProPaging.isEmpty()) {
+      List<Product> menuItem = productService.getListByCateIdPaging(productFilter, page-1, size);
+
+      if (menuItem.isEmpty()) {
          page=1;
-         listProPaging = productService.getListByCateIdPaging(productFilter, 0, size);
+         menuItem = productService.getListByCateIdPaging(productFilter, 0, size);
       }
+
       List<Product> listProTotal = productService.getListByCateId(productFilter);
       int[] totalPages = new int[productService.getTotalPage(listProTotal, size)];
 
       model.addAttribute("cateId", cateId);
-      model.addAttribute("catalogs", catalogs);
-      model.addAttribute("listProTotal", listProTotal);
-      model.addAttribute("listProPaging", listProPaging);
+      model.addAttribute("menuItem", menuItem);
       model.addAttribute("currentPage", page);
       model.addAttribute("size", size);
       model.addAttribute("totalPages", totalPages);
-      return "client/menuPage";
+      return "client/menu";
    }
 }

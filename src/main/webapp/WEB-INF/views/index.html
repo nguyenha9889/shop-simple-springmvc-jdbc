@@ -117,14 +117,14 @@
     <div class="offer_container">
       <div class="container">
         <div class="row">
-          <div class="col-md-6" th:each="item, loop : ${offerList}">
+          <div class="col-md-6" th:each="p, loop : ${offer}">
             <div class="box">
               <div class="img-box">
-                <img th:src="@{${item.imagePath}}" th:alt="${item.name}">
+                <img th:src="@{${p.imagePath}}" th:alt="${p.name}">
               </div>
               <div class="detail-box">
-                <h5 th:text="${item.name}" th:classappend="text-white" ></h5>
-                <h6><span>20%</span> Off</h6>
+                <h5 th:text="${p.name}" class="text-white" ></h5>
+                <h6 class="text-white"><span>5%</span> Off</h6>
                 <a href="">
                   Order Now
                   <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
@@ -163,9 +163,32 @@
 
   <!-- food section -->
   <section class="food_section layout_padding-bottom">
-    <div class="container"
-         th:replace="client/menu :: menu(${view},${menuItem}, ${cateId}, ${listPerPage}, ${currentPage}, ${size}, ${totalPages})" >
-
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+          Our Menu
+        </h2>
+      </div>
+      <div class="row grid" >
+        <th:block th:each="c, loop : ${menu}">
+          <div class="col-sm-6 col-lg-4 all">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img th:src="${c.imagePath}" th:alt="${c.name}">
+                </div>
+                <div class="detail-box">
+                  <h5 th:text="${c.name}" class="text-white" ></h5>
+                  <p th:text="${c.description}" class="text-light" ></p>
+                  <a class="btn btn-outline-warning" th:href="@{/menu(id=${c.id})}">
+                    View more
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </th:block>
+      </div>
     </div>
   </section>
   <!-- end food section -->
@@ -263,11 +286,11 @@
           integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
           crossorigin="anonymous">
   </script>
+  <script th:src="@{/frontend/scripts/custom.js}"></script>
   <script th:src="@{/frontend/scripts/bootstrap.js}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
   <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
-  <script th:src="@{/frontend/scripts/custom.js}"></script>
 </body>
 
 </html>

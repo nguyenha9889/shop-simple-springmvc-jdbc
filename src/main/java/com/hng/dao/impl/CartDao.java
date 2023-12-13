@@ -25,20 +25,11 @@ public class CartDao implements ICartDao {
 
    @Override
    public int save(Cart cart) {
-      String sql = null;
-      if (cart.getId() == null) {
-         sql = "Insert into cart (userId, total) values (?,?)";
-         return jdbcTemplate.update(
-               sql,
-               cart.getUserId(),
-               cart.getTotal()
-         );
-      } else {
-         sql = "UPDATE cart set total=? where userId=?";
-         return jdbcTemplate.update(
-               sql,
-               cart.getTotal());
-      }
+      String sql = "Insert into cart (userId) values (?)";
+      return jdbcTemplate.update(
+            sql,
+            cart.getUserId()
+      );
    }
 
    @Override
