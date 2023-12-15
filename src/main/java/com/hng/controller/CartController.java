@@ -3,6 +3,7 @@ package com.hng.controller;
 
 import com.hng.dto.request.FormOrderDetail;
 import com.hng.model.Cart;
+import com.hng.model.CartItem;
 import com.hng.model.OrderDetail;
 import com.hng.model.User;
 import com.hng.service.ICartService;
@@ -18,9 +19,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import javax.servlet.http.HttpSession;
-import java.util.List;
+
 
 
 @Controller
@@ -45,7 +45,8 @@ public class CartController {
                       @RequestParam(name = "id") Long id){
       User userLogin = (User) session.getAttribute("userLogin");
       if (userLogin == null) {
-         return "redirect:/auth";
+         model.addAttribute("loginNull", "Please sign in before add to cart");
+         return "client/product";
       }
 
       Cart cart = cartService.findCartByUserId(userLogin.getId());
@@ -57,10 +58,10 @@ public class CartController {
    @PostMapping
    public String add(HttpSession session,
                      Model model,
-                     @ModelAttribute("formOrderDetail") @Validated FormOrderDetail formOrderDetail,
+                     @ModelAttribute("formOrderDetail") @Validated FormOrderDetail form,
                      BindingResult bindingResult) {
 
-      cartValidate.validate(formOrderDetail, bindingResult);
+      cartValidate.validate(form, bindingResult);
       if (bindingResult.hasFieldErrors()) {
          return "client/product";
       }
@@ -73,15 +74,7 @@ public class CartController {
 
       Cart cart = cartService.findCartByUserId(userLogin.getId());
 
-      OrderDetail orderDetail = null;
-      if (orderDetailService.findOrderDetailByProductId(formOrderDetail.getProductId()) == null) {
-         orderDetail = orderDetailService.create(cart.getId(), formOrderDetail);
-      } else {
-         orderDetail = orderDetailService.findOrderDetailByProductId(formOrderDetail.getProductId());
-         int newQuantity = orderDetail.getQuantity() + formOrderDetail.getQuantity();
-         orderDetail.setQuantity(newQuantity);
-      }
-      orderDetailService.save(orderDetail);
+      CartItem cartItem = new CartItem();
 
       model.addAttribute("cart", cart);
       return "client/product";

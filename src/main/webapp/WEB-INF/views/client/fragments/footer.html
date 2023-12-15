@@ -5,84 +5,88 @@
     <title>Footer</title>
 </head>
 <body>
-<footer class="footer_section" th:fragment="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 footer-col">
-                <div class="footer_contact">
-                    <h4>
-                        Contact Us
-                    </h4>
-                    <div class="contact_link_box">
-                        <a href="">
-                            <i class="fa fa-map-marker" aria-hidden="true"></i>
-                            <span>
-                  Location
-                </span>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-phone" aria-hidden="true"></i>
-                            <span>
-                  Call +01 1234567890
-                </span>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                            <span>
-                  demo@gmail.com
-                </span>
-                        </a>
+<th:block th:fragment="footer">
+    <!-- footer -->
+    <div class="footer-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-box about-widget">
+                        <h2 class="widget-title">About us</h2>
+                        <p>Ut enim ad minim veniam perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-box get-in-touch">
+                        <h2 class="widget-title">Get in Touch</h2>
+                        <ul>
+                            <li>34/8, East Hukupara, Gifirtok, Sadan.</li>
+                            <li>support@fruitkha.com</li>
+                            <li>+00 111 222 3333</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-box pages">
+                        <h2 class="widget-title">Pages</h2>
+                        <ul>
+                            <li><a th:href="@{'/'}">Home</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Shop</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 footer-col">
-                <div class="footer_detail">
-                    <a href="" class="footer-logo">
-                        Feane
-                    </a>
-                    <p>
-                        Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with
-                    </p>
-                    <div class="footer_social">
-                        <a href="">
-                            <i class="fa fa-facebook" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-twitter" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-linkedin" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-instagram" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-pinterest" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 footer-col">
-                <h4>
-                    Opening Hours
-                </h4>
-                <p>
-                    Everyday
-                </p>
-                <p>
-                    10.00 Am -10.00 Pm
-                </p>
-            </div>
-        </div>
-        <div class="footer-info">
-            <p>
-                &copy; <span id="displayYear"></span> All Rights Reserved By
-                <a href="https://html.design/">Free Html Templates</a><br><br>
-                &copy; <span id="displayYear1"></span> Distributed By
-                <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
-            </p>
         </div>
     </div>
-</footer>
+    <!-- end footer -->
+
+    <!-- copyright -->
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <p>Copyrights &copy; 2019 - <a href="https://imransdesign.com/">Imran Hossain</a>,  All Rights Reserved.<br>
+                        Distributed By - <a href="https://themewagon.com/">Themewagon</a>
+                    </p>
+                </div>
+                <div class="col-lg-6 text-right col-md-12">
+                    <div class="social-icons">
+                        <ul>
+                            <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-dribbble"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end copyright -->
+
+    <!-- jquery -->
+    <script th:src="@{/frontend/assets/js/jquery-1.11.3.min.js}"></script>
+    <!-- bootstrap -->
+    <script th:src="@{/frontend/assets/js/bootstrap.min.js}"></script>
+    <!-- count down -->
+    <script th:src="@{/frontend/assets/js/jquery.countdown.js}"></script>
+    <!-- isotope -->
+    <script th:src="@{/frontend/assets/js/jquery.isotope-3.0.6.min.js}"></script>
+    <!-- waypoints -->
+    <script th:src="@{/frontend/assets/js/waypoints.js}"></script>
+    <!-- owl carousel -->
+    <script th:src="@{/frontend/assets/js/owl.carousel.min.js}"></script>
+    <!-- magnific popup -->
+    <script th:src="@{/frontend/assets/js/jquery.magnific-popup.min.js}"></script>
+    <!-- mean menu -->
+    <script th:src="@{/frontend/assets/js/jquery.meanmenu.min.js}"></script>
+    <!-- sticker js -->
+    <script th:src="@{/frontend/assets/js/sticker.js}"></script>
+    <!-- main js -->
+    <script th:src="@{/frontend/assets/js/main.js}"></script>
+</th:block>
 </body>
 </html>

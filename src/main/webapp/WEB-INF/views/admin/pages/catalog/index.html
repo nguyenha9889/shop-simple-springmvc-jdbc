@@ -5,11 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catalog Management</title>
-    <link rel="stylesheet" th:href="@{/vendors/simple-datatables/style.css}">
-    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
-    <link rel="stylesheet" th:href="@{/css/perfect-scrollbar.css}">
-    <link rel="stylesheet" th:href="@{/css/app.css}">
-    <link rel="shortcut icon" th:href="@{/images/icons/favicon.svg}" type="image/x-icon">
+    <th:block th:include="/admin/fragments/head :: head"></th:block>
 </head>
 
 <body>
@@ -36,7 +32,7 @@
                                     <input class="dataTable-input w-75 me-3" placeholder="Search catalog by name ..."
                                            type="text" id="query" name="query">
                                     <button class="btn rounded-3 btn-outline-secondary btn-sm" type="submit">
-                                        <img th:src="@{/images/icons/search.svg}" alt="search-icon">
+                                        <img th:src="@{/admin/img/search.svg}" alt="search-icon">
                                     </button>
                                 </form>
                             </div>
@@ -99,9 +95,5 @@
         <div th:replace="admin/fragments/footer :: footer"></div>
     </div>
 </div>
-<script th:src="@{/js/feather.min.js}"></script>
-<script th:src="@{/js/app.js}"></script>
-<script th:src="@{/js/main.js}"></script>
-<script th:src="@{/js/perfect-scrollbar.min.js}"></script>
 </body>
 </html>

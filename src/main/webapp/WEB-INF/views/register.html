@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign up - Voler Admin Dashboard</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
-    <link rel="shortcut icon" th:href="@{/images/icons/favicon.svg}" type="image/x-icon">
-    <link rel="stylesheet" th:href="@{/css/app.css}">
+    <th:block th:include="/admin/fragments/head :: head"></th:block>
 </head>
 
 <body>
@@ -19,7 +17,7 @@
                 <div class="card pt-4">
                     <div class="card-body">
                         <div class="text-center mb-5">
-                            <img th:src="@{/images/icons/favicon.svg}" height="48" class='mb-4'>
+                            <img th:src="@{/admin/img/favicon.svg}" height="48" class='mb-4'>
                             <h3>Sign Up</h3>
                             <p>Please fill the form to register.</p>
                         </div>
