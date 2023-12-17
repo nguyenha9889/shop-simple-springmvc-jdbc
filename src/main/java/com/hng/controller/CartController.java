@@ -49,8 +49,6 @@ public class CartController {
       List<CartItem> cartItems = cartItemService.findAll();
       model.addAttribute("cartItems", cartItems);
 
-
-
       Cart cart = (Cart) session.getAttribute("cart");
       double total = cartService.getTotal(cartItems);
       cart.setTotal(total);
