@@ -3,10 +3,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forbidden</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
-    
-    <link rel="shortcut icon" th:href="@{/images/favicon.svg}" type="image/x-icon">
-    <link rel="stylesheet" th:href="@{/css/app.css}">
+    <link rel="stylesheet" th:href="@{/backend/css/app.css}">
+    <link rel="stylesheet" th:href="@{/backend/css/bootstrap.css}">
+    <link rel="shortcut icon" th:href="@{/backend/images/favicon.svg}" type="image/x-icon">
 </head>
 <body>
     <div id="error">
@@ -14,7 +13,7 @@
 <div class="container text-center pt-32">
     <h1 class='error-title'>403</h1>
     <p>You do not have permission to access dashboard page</p>
-    <a th:href="@{'/'}" class='btn btn-primary'>Go Home</a>
+    <a th:href="@{/}" class='btn btn-primary'>Go Home</a>
 </div>
 
         <div class="footer pt-32">

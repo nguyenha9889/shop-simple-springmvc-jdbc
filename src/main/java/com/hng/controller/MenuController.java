@@ -1,6 +1,7 @@
 package com.hng.controller;
 
 import com.hng.dto.request.ProductFilter;
+import com.hng.model.Cart;
 import com.hng.model.Catalog;
 import com.hng.model.Product;
 import com.hng.service.ICatalogService;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,10 +27,14 @@ public class MenuController {
 
    @RequestMapping
    public String menu(Model model,
+                      HttpSession session,
                       @RequestParam(name = "id", defaultValue = "0") long cateId,
                       @RequestParam(name = "sort", defaultValue = "") String sortByPrice,
                       @RequestParam(name = "page", defaultValue = "1") int page,
                       @RequestParam(name = "size", defaultValue = "5") int size){
+
+      Cart cart = (Cart) session.getAttribute("cart");
+      model.addAttribute("cart", cart);
 
       // Chỉ lấy category có sản phẩm
       List<Catalog> catalogs = catalogService.getListHaveProduct();

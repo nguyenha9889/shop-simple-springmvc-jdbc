@@ -53,15 +53,14 @@ public class UserService implements IUserService {
    }
 
    @Override
-   public void save(FormRegister formRegister) {
-     User user = new User(
+   public User create(FormRegister formRegister) {
+     return new User(
             formRegister.getFullName(),
             formRegister.getUsername(),
             formRegister.getPhone(),
             formRegister.getEmail(),
             BCrypt.hashpw(formRegister.getPassword(), BCrypt.gensalt(12))
       );
-     userDao.save(user);
    }
    @Override
    public int delete(Long id) {

@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign up - Voler Admin Dashboard</title>
-    <th:block th:include="/admin/fragments/head :: head"></th:block>
+    <link rel="stylesheet" th:href="@{/backend/css/app.css}">
+    <link rel="stylesheet" th:href="@{/backend/css/bootstrap.css}">
+    <link rel="shortcut icon" th:href="@{/backend/images/favicon.svg}" type="image/x-icon">
 </head>
 
 <body>
@@ -17,7 +19,7 @@
                 <div class="card pt-4">
                     <div class="card-body">
                         <div class="text-center mb-5">
-                            <img th:src="@{/admin/img/favicon.svg}" height="48" class='mb-4'>
+                            <img th:src="@{/backend/images/favicon.svg}" height="48" class='mb-4'>
                             <h3>Sign Up</h3>
                             <p>Please fill the form to register.</p>
                         </div>
@@ -78,8 +80,10 @@
             </div>
         </div>
     </div>
-
 </div>
+<script th:src="@{/backend/js/feather-icons/feather.min.js}"></script>
+<script th:src="@{/backend/js/app.js}"></script>
+<script th:src="@{/backend/js/main.js}"></script>
 </body>
 
 </html>

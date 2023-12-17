@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -35,7 +34,11 @@ public class ProductDao implements IProductDao {
                p.setSold(rs.getInt("sold"));
                p.setFeatured(rs.getBoolean("featured"));
                p.setCreatedAt(rs.getDate("createdAt").toLocalDate());
-               p.setUpdatedAt(rs.getDate("updatedAt").toLocalDate());
+               if (rs.getDate("updatedAt") != null) {
+                  p.setUpdatedAt(rs.getDate("updatedAt").toLocalDate());
+               } else {
+                  p.setUpdatedAt(null);
+               }
                return p;
             });
    }
@@ -57,7 +60,11 @@ public class ProductDao implements IProductDao {
                p.setSold(rs.getInt("sold"));
                p.setFeatured(rs.getBoolean("featured"));
                p.setCreatedAt(rs.getDate("createdAt").toLocalDate());
-               p.setUpdatedAt(rs.getDate("updatedAt").toLocalDate());
+               if (rs.getDate("updatedAt") != null) {
+                  p.setUpdatedAt(rs.getDate("updatedAt").toLocalDate());
+               } else {
+                  p.setUpdatedAt(null);
+               }
                return p;
             });
    }
@@ -86,7 +93,11 @@ public class ProductDao implements IProductDao {
                p.setSold(rs.getInt("sold"));
                p.setFeatured(rs.getBoolean("featured"));
                p.setCreatedAt(rs.getDate("createdAt").toLocalDate());
-               p.setUpdatedAt(rs.getDate("updatedAt").toLocalDate());
+               if (rs.getDate("updatedAt") != null) {
+                  p.setUpdatedAt(rs.getDate("updatedAt").toLocalDate());
+               } else {
+                  p.setUpdatedAt(null);
+               }
                return p;
             });
    }
@@ -122,7 +133,11 @@ public class ProductDao implements IProductDao {
                p.setFeatured(rs.getBoolean("featured"));
                p.setStatus(rs.getBoolean("status"));
                p.setCreatedAt(rs.getDate("createdAt").toLocalDate());
-               p.setUpdatedAt(rs.getDate("updatedAt").toLocalDate());
+               if (rs.getDate("updatedAt") != null) {
+                  p.setUpdatedAt(rs.getDate("updatedAt").toLocalDate());
+               } else {
+                  p.setUpdatedAt(null);
+               }
                return p;
             });
    }
@@ -155,7 +170,11 @@ public class ProductDao implements IProductDao {
                p.setSold(rs.getInt("sold"));
                p.setFeatured(rs.getBoolean("featured"));
                p.setCreatedAt(rs.getDate("createdAt").toLocalDate());
-               p.setUpdatedAt(rs.getDate("updatedAt").toLocalDate());
+               if (rs.getDate("updatedAt") != null) {
+                  p.setUpdatedAt(rs.getDate("updatedAt").toLocalDate());
+               } else {
+                  p.setUpdatedAt(null);
+               }
                return p;
             });
    }

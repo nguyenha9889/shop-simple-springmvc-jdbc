@@ -27,6 +27,7 @@ public class UserDao implements IUserDao {
                user.setEmail(rs.getString("email"));
                user.setPhone(rs.getString("phone"));
                user.setPassword(rs.getString("password"));
+               user.setImagePath(rs.getString("imagePath"));
                user.setRole(rs.getBoolean("roles"));
                user.setStatus(rs.getBoolean("status"));
                return user;
@@ -46,6 +47,7 @@ public class UserDao implements IUserDao {
                user.setEmail(rs.getString("email"));
                user.setPhone(rs.getString("phone"));
                user.setPassword(rs.getString("password"));
+               user.setImagePath(rs.getString("imagePath"));
                user.setRole(rs.getBoolean("roles"));
                user.setStatus(rs.getBoolean("status"));
                return user;
@@ -68,6 +70,7 @@ public class UserDao implements IUserDao {
                   user.setEmail(rs.getString("email"));
                   user.setPhone(rs.getString("phone"));
                   user.setPassword(rs.getString("password"));
+                  user.setImagePath(rs.getString("imagePath"));
                   user.setRole(rs.getBoolean("roles"));
                   user.setStatus(rs.getBoolean("status"));
                }
@@ -91,6 +94,7 @@ public class UserDao implements IUserDao {
                   user.setEmail(rs.getString("email"));
                   user.setPhone(rs.getString("phone"));
                   user.setPassword(rs.getString("password"));
+                  user.setImagePath(rs.getString("imagePath"));
                   user.setRole(rs.getBoolean("roles"));
                   user.setStatus(rs.getBoolean("status"));
                }

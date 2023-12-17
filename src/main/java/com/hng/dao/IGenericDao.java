@@ -3,8 +3,19 @@ package com.hng.dao;
 import java.util.List;
 
 public interface IGenericDao<T, E> {
-   List<T> findAll();
-   T findById(E id);
-   int save(T t);
-   int delete(E id);
+   default List<T> findAll() {
+      return null;
+   }
+
+   default T findById(E id) {
+      return null;
+   }
+
+   default int save(T t) {
+      return 0;
+   }
+
+   default int delete(E id) {
+      return 0;
+   }
 }

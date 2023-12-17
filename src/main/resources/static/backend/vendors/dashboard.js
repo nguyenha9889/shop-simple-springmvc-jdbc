@@ -1,3 +1,4 @@
+
 var chartColors = {
   red: 'rgb(255, 99, 132)',
   orange: 'rgb(255, 159, 64)',
@@ -30,7 +31,7 @@ var config1 = {
   },
   options: {
     responsive: true,
-    maintainAspectRatio: false,
+    maintainAspectRatio: false, 
     layout: {
       padding: {
         left: -10,
@@ -235,7 +236,7 @@ var config4 = {
   },
   options: {
     responsive: true,
-    maintainAspectRatio: false,
+    maintainAspectRatio: false, 
     layout: {
       padding: {
         left: -10,
@@ -360,10 +361,10 @@ Chart.elements.RoundedTopRectangle = Chart.elements.Rectangle.extend({
     var barWidth = Math.abs(left - right);
     var roundness = this._chart.config.options.barRoundness || 0.5;
     var radius = barWidth * roundness * 0.5;
-
+    
     // keep track of the original top of the bar
     var prevTop = top;
-
+    
     // move the top down so there is room to draw the rounded top
     top = prevTop + radius;
     var barRadius = top - prevTop;
@@ -392,7 +393,7 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
   dataElementType: Chart.elements.RoundedTopRectangle
 });
 
-/*var ctxBar = document.getElementById("bar").getContext("2d");
+var ctxBar = document.getElementById("bar").getContext("2d");
 var myBar = new Chart(ctxBar, {
   type: 'bar',
   data: {
@@ -401,13 +402,13 @@ var myBar = new Chart(ctxBar, {
       label: 'Students',
       backgroundColor: [chartColors.grey, chartColors.grey, chartColors.grey, chartColors.grey, chartColors.info, chartColors.blue, chartColors.grey],
       data: [
-        5,
-        10,
-        30,
-        40,
-        35,
-        55,
-        15,
+        5, 
+        10, 
+        30, 
+        40, 
+        35, 
+        55, 
+        15, 
       ]
     }]
   },
@@ -433,14 +434,14 @@ var myBar = new Chart(ctxBar, {
         }
       }],
       xAxes: [{
-        gridLines: {
-          display:false,
-          drawBorder: false
-        }
-      }]
+            gridLines: {
+                display:false,
+                drawBorder: false
+            }
+        }]
     }
   }
-});*/
+});
 var radialBarsOptions = {
   series: [44, 80, 67],
   chart: {
@@ -482,7 +483,6 @@ var radialBarsOptions = {
   },
   labels: ["Apples", "Oranges", "Bananas", "Berries"],
 };
-/*
 var radialBars = new ApexCharts(document.querySelector("#radialBars"), radialBarsOptions);
 radialBars.render();
 let ctx1 = document.getElementById("canvas1").getContext("2d");
@@ -492,4 +492,4 @@ let ctx4 = document.getElementById("canvas4").getContext("2d");
 var lineChart1 = new Chart(ctx1, config1);
 var lineChart2 = new Chart(ctx2, config2);
 var lineChart3 = new Chart(ctx3, config3);
-var lineChart4 = new Chart(ctx4, config4);*/
+var lineChart4 = new Chart(ctx4, config4);

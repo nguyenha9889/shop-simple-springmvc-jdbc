@@ -3,21 +3,13 @@ package com.hng.model;
 import java.time.LocalDate;
 
 public class CartItem {
-   private Long id;
    private Long cartId;
    private Long productId;
    private double unitPrice;
    private int quantity;
    private LocalDate createdAt;
    private LocalDate updatedAt;
-
-   public Long getId() {
-      return id;
-   }
-
-   public void setId(Long id) {
-      this.id = id;
-   }
+   private LocalDate deletedAt;
 
    public Long getCartId() {
       return cartId;
@@ -67,14 +59,25 @@ public class CartItem {
       this.updatedAt = updatedAt;
    }
 
-   public CartItem(Long id, Long cartId, Long productId, double unitPrice, int quantity, LocalDate createdAt, LocalDate updatedAt) {
-      this.id = id;
+   public LocalDate getDeletedAt() {
+      return deletedAt;
+   }
+
+   public void setDeletedAt(LocalDate deletedAt) {
+      this.deletedAt = deletedAt;
+   }
+
+   public CartItem(Long cartId, Long productId, double unitPrice) {
+      this.cartId = cartId;
+      this.productId = productId;
+      this.unitPrice = unitPrice;
+   }
+
+   public CartItem(Long cartId, Long productId, double unitPrice, int quantity) {
       this.cartId = cartId;
       this.productId = productId;
       this.unitPrice = unitPrice;
       this.quantity = quantity;
-      this.createdAt = createdAt;
-      this.updatedAt = updatedAt;
    }
 
    public CartItem() {

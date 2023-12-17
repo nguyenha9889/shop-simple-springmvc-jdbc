@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-<th:block th:fragment="header">
+<th:block th:fragment="header(cart)">
     <!-- header -->
     <div class="top-header-area" id="sticker">
         <div class="container">
@@ -22,21 +22,24 @@
                                 <li class="current-list-item"><a href="#">Home</a></li>
                                 <li><a href="#">About</a></li>
                                 <li><a href="#">Contact</a></li>
-                                <li><a th:href="@{/cart}">Shop</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="#">Check Out</a></li>
-                                        <li><a th:href="@{/product}">Single Product</a></li>
-                                        <li><a th:href="@{/cart}">Cart</a></li>
-                                    </ul>
-                                </li>
+                                <li><a th:href="@{/menu}">Menu</a></li>
                                 <li>
-                                    <div class="header-icons">
-                                        <a class="shopping-cart"
-                                           th:href="@{/}">
-                                            <i class="fas fa-user"></i>
-                                            <span class="ms-1" th:text="${session.userLogin == null} ? 'Login' : ${session.userLogin.username}"></span>
+                                    <div class="header-icons d-flex align-items-center">
+                                        <ul>
+                                            <li><a class="shopping-cart" th:href="@{/auth}">
+                                                <i class="fas fa-user"></i>
+                                                <span class="ms-1" th:text="${session.userLogin == null} ? 'Login' : ${session.userLogin.username}"></span>
+                                            </a>
+                                                <ul class="sub-menu w-100 p-0">
+                                                    <li class="text-center"><a th:href="@{/auth/logout}">Sign out</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+
+                                        <a class="shopping-cart" th:href="@{/cart}">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            <span th:if="${cart != null}" th:text=" '(' + ${cart.quantity} + ')' "></span>
                                         </a>
-                                        <a class="shopping-cart" th:href="@{/cart}"><i class="fas fa-shopping-cart"></i></a>
                                         <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
                                     </div>
                                 </li>

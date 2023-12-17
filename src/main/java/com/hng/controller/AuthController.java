@@ -13,8 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import javax.servlet.http.HttpSession;
 
 
@@ -36,9 +38,8 @@ public class AuthController {
    }
 
    // Xử lý login
-   @RequestMapping(value = "/auth/login", method = RequestMethod.POST)
+   @PostMapping(value = "/auth/login")
    public String doLogin(HttpSession session,
-                         Model model,
                          @ModelAttribute("formLogin") FormLogin formLogin,
                          BindingResult bindingResult){
       loginValidate.validate(formLogin, bindingResult);
@@ -52,14 +53,9 @@ public class AuthController {
          return "admin/dashboard";
       }
 
-      // Khoi tao cart cho moi user register thanh cong
       Cart cart = cartService.findCartByUserId(userLogin.getId());
-      if (cart == null) {
-         cart = new Cart(userLogin.getId());
-         cartService.save(cart);
-      }
-
-      return "index";
+      session.setAttribute("cart", cart);
+      return "redirect:/";
    }
 
    @RequestMapping("/auth/register")
@@ -76,14 +72,20 @@ public class AuthController {
          return "register";
       }
 
-      userService.save(formRegister);
+      userService.save(userService.create(formRegister));
+
+      // Khoi tao cart cho user register thanh cong
+      User user = userService.findByUsername(formRegister.getUsername());
+      Cart cart = new Cart();
+      cart.setUserId(user.getId());
+      cartService.save(cart);
       return "redirect:/auth";
    }
 
    @RequestMapping(value = "/auth/logout")
    public String doLogOut(HttpSession session){
       session.setAttribute("userLogin", null);
-      return "index";
+      return "redirect:/";
    }
 
    @RequestMapping("/error-403")

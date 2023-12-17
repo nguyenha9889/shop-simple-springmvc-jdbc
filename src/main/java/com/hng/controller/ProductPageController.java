@@ -1,6 +1,7 @@
 package com.hng.controller;
 
-import com.hng.dto.request.FormOrderDetail;
+import com.hng.dto.request.FormDetail;
+import com.hng.model.Cart;
 import com.hng.model.Product;
 import com.hng.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -18,7 +20,11 @@ public class ProductPageController {
    private IProductService productService;
    @RequestMapping
    public String product(Model model,
+                         HttpSession session,
                          @RequestParam(name = "id") long id) {
+
+      Cart cart = (Cart) session.getAttribute("cart");
+      model.addAttribute("cart", cart);
 
       // Sản phẩm nổi bật
       List<Product> featuredList = productService.getListFeatured();
@@ -32,7 +38,7 @@ public class ProductPageController {
       Product product = productService.findById(id);
       model.addAttribute("product", product);
 
-      FormOrderDetail form= new FormOrderDetail();
+      FormDetail form= new FormDetail();
       form.setProductId(product.getId());
       model.addAttribute("form", form);
       return "client/product";

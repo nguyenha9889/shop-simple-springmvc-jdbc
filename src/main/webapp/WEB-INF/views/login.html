@@ -5,19 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign in</title>
-    <th:block th:include="/admin/fragments/head :: head"></th:block>
+    <link rel="stylesheet" th:href="@{/backend/css/app.css}">
+    <link rel="stylesheet" th:href="@{/backend/css/bootstrap.css}">
+    <link rel="shortcut icon" th:href="@{/backend/images/favicon.svg}" type="image/x-icon">
 </head>
 
 <body>
 <div id="auth">
-
     <div class="container">
         <div class="row">
             <div class="col-md-5 col-sm-12 mx-auto">
                 <div class="card pt-4">
                     <div class="card-body">
                         <div class="text-center mb-5">
-                            <img th:src="@{/admin/img/favicon.svg}" height="48" class='mb-4' alt="logo">
+                            <img th:src="@{/backend/images/favicon.svg}" height="48" class='mb-4' alt="logo">
                             <h3>Sign In</h3>
                             <p>Please sign in to continue going to Dashboard.</p>
                         </div>
@@ -36,7 +37,7 @@
                             <div class="form-group position-relative has-icon-left">
                                 <div class="clearfix">
                                     <label for="password">Password</label>
-                                    <a class='float-end' onclick="return confirm('Please contact support@voler.com to help')">
+                                    <a class='float-end'>
                                         <small>Forgot password?</small>
                                     </a>
                                 </div>
@@ -70,9 +71,9 @@
     </div>
 
 </div>
-<script th:src="@{/admin/js/feather.min.js}"></script>
-<script th:src="@{/admin/js/app.js}"></script>
-<script th:src="@{/admin/js/main.js}"></script>
+<script th:src="@{/backend/js/feather-icons/feather.min.js}"></script>
+<script th:src="@{/backend/js/app.js}"></script>
+<script th:src="@{/backend/js/main.js}"></script>
 </body>
 
 </html>

@@ -69,9 +69,10 @@ public class OrderDetailDao implements IOrderDetailDao {
     */
    @Override
    public OrderDetail findOrderDetailByProductId(Long productId) {
-      String sql = "select * from order_detail where productId=" + productId;
+      String sql = "select * from order_detail where productId=?";
       return jdbcTemplate.queryForObject(
             sql,
+            new Object[]{productId},
             new BeanPropertyRowMapper<>(OrderDetail.class));
    }
 }

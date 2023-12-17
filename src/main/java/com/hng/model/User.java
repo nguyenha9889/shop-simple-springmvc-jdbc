@@ -9,6 +9,7 @@ public class User {
    private String email;
    private String password;
    private String phone;
+   private String imagePath;
    private boolean role;
    private boolean status;
    private List<OrderDetail> cart;
@@ -59,6 +60,14 @@ public class User {
 
    public void setPhone(String phone) {
       this.phone = phone;
+   }
+
+   public String getImagePath() {
+      return imagePath;
+   }
+
+   public void setImagePath(String imagePath) {
+      this.imagePath = imagePath;
    }
 
    public boolean isRole() {

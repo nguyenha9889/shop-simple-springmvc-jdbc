@@ -13,38 +13,55 @@ import java.util.List;
 public class CartDao implements ICartDao {
    @Autowired
    private JdbcTemplate jdbcTemplate;
-   @Override
-   public List<Cart> findAll() {
-      return null;
-   }
-
-   @Override
-   public Cart findById(Long id) {
-      return null;
-   }
 
    @Override
    public int save(Cart cart) {
-      String sql = "Insert into cart (userId) values (?)";
-      return jdbcTemplate.update(
-            sql,
-            cart.getUserId()
-      );
+      String sql = null;
+      if (cart.getId() == null){
+         sql = "Insert into cart (userId) values (?)";
+         return jdbcTemplate.update(
+               sql,
+               cart.getUserId()
+         );
+      } else if (cart.getTotal() == 0) {
+         sql = "UPDATE cart set quantity=? where userId=?";
+         return jdbcTemplate.update(
+               sql,
+               cart.getQuantity(),
+               cart.getUserId()
+         );
+      } else {
+         sql = "UPDATE cart set quantity=?, total=? where userId=?";
+         return jdbcTemplate.update(
+               sql,
+               cart.getQuantity(),
+               cart.getTotal(),
+               cart.getUserId()
+         );
+      }
+
    }
 
    @Override
    public int delete(Long userId) {
-      String sql = "delete from cart where userId=" + userId;
+      String sql = "delete from cart where userId=?";
       return jdbcTemplate.update(sql, userId);
    }
 
    @Override
    public Cart findCartByUserId(Long userId) {
-      String sql = "select * from cart c where c.userId=" + userId;
-
-      return jdbcTemplate.queryForObject(
+      String sql = "select * from cart c where c.userId=?";
+      List<Cart> carts = jdbcTemplate.query(
             sql,
-            new BeanPropertyRowMapper<>(Cart.class)
-      );
+            new Object[]{userId},
+            (rs, row) -> {
+               Cart cart = new Cart();
+               cart.setId(rs.getLong("id"));
+               cart.setUserId(rs.getLong("userId"));
+               cart.setQuantity(rs.getInt("quantity"));
+               cart.setTotal(rs.getDouble("total"));
+               return cart;
+            });
+      return carts.get(0);
    }
 }

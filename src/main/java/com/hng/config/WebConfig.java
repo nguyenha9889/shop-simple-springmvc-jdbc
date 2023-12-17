@@ -82,7 +82,7 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
     /* **************************************************************** */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/admin/**").addResourceLocations("classpath:static/admin/");
+        registry.addResourceHandler("/backend/**").addResourceLocations("classpath:static/backend/");
         registry.addResourceHandler("/frontend/**").addResourceLocations("classpath:static/frontend/");
     }
 

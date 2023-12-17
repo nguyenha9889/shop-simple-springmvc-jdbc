@@ -66,9 +66,10 @@ public class OrderDao implements IOrderDao {
 
    @Override
    public List<Order> findOrderByUserId(User user) {
-      String sql = "select * from order o join users on o.id=" + user.getId();
+      String sql = "select * from order o join users on o.id=?";
       return jdbcTemplate.query(
             sql,
+            new Object[]{user.getId()},
             (rs, row) -> {
                Order or = new Order();
                or.setId(rs.getLong("id"));
@@ -78,8 +79,18 @@ public class OrderDao implements IOrderDao {
                or.setUserId(rs.getLong("userId"));
                or.setTotal(rs.getDouble("total"));
                or.setDescription(rs.getString("description"));
-               or.setOrderAt(rs.getDate("orderAt").toLocalDate());
-               or.setDeliverAt(rs.getDate("deliverAt").toLocalDate());
+               if (rs.getDate("orderAt") != null) {
+                  or.setOrderAt(rs.getDate("orderAt").toLocalDate());
+               } else {
+                  or.setOrderAt(null);
+               }
+
+               if (rs.getDate("deliverAt") != null) {
+                  or.setOrderAt(rs.getDate("deliverAt").toLocalDate());
+               } else {
+                  or.setDeliverAt(null);
+               }
+
                or.setStatus(rs.getString("status"));
                return or;
             });

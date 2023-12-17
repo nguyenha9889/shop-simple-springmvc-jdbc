@@ -1,82 +1,107 @@
 package com.hng.controller;
 
 
-import com.hng.dto.request.FormOrderDetail;
+import com.hng.dto.request.FormDetail;
 import com.hng.model.Cart;
 import com.hng.model.CartItem;
-import com.hng.model.OrderDetail;
+import com.hng.model.Product;
 import com.hng.model.User;
+import com.hng.service.ICartItemService;
 import com.hng.service.ICartService;
-import com.hng.service.IOrderDetailService;
-import com.hng.service.IOrderService;
+import com.hng.service.IProductService;
 import com.hng.validate.FormCartValidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import javax.servlet.http.HttpSession;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 @Controller
 @RequestMapping("/cart")
 public class CartController {
-
    @Autowired
-   private IOrderDetailService orderDetailService;
+   private IProductService productService;
+   @Autowired
+   private ICartItemService cartItemService;
 
    @Autowired
    private ICartService cartService;
 
    @Autowired
-   private IOrderService orderService;
-
-   @Autowired
    private FormCartValidate cartValidate;
 
    @RequestMapping
-   public String cart(HttpSession session,
-                      Model model,
-                      @RequestParam(name = "id") Long id){
+   public String cart(HttpSession session, Model model){
       User userLogin = (User) session.getAttribute("userLogin");
       if (userLogin == null) {
-         model.addAttribute("loginNull", "Please sign in before add to cart");
-         return "client/product";
+         return "login";
       }
 
-      Cart cart = cartService.findCartByUserId(userLogin.getId());
+      List<CartItem> cartItems = cartItemService.findAll();
+      model.addAttribute("cartItems", cartItems);
 
+
+
+      Cart cart = (Cart) session.getAttribute("cart");
+      double total = cartService.getTotal(cartItems);
+      cart.setTotal(total);
+      cartService.save(cart);
       model.addAttribute("cart", cart);
-      return "client/book";
+      return "client/cart";
    }
 
    @PostMapping
-   public String add(HttpSession session,
-                     Model model,
-                     @ModelAttribute("formOrderDetail") @Validated FormOrderDetail form,
-                     BindingResult bindingResult) {
-
-      cartValidate.validate(form, bindingResult);
-      if (bindingResult.hasFieldErrors()) {
-         return "client/product";
-      }
+   public ModelAndView cartItem(HttpSession session,
+                                ModelMap model,
+                                @ModelAttribute("form") @Validated FormDetail form,
+                                BindingResult bindingResult) {
 
       User userLogin = (User) session.getAttribute("userLogin");
       if (userLogin == null) {
-         model.addAttribute("user_login", "Please sign in before add product");
-         return "client/product";
+         return new ModelAndView("redirect:/auth");
       }
 
-      Cart cart = cartService.findCartByUserId(userLogin.getId());
+      Product product = productService.findById(form.getProductId());
+      Cart cart = (Cart) session.getAttribute("cart");
 
-      CartItem cartItem = new CartItem();
+      cartValidate.validate(form, bindingResult);
+
+      if (!bindingResult.hasFieldErrors()) {
+         CartItem cartItem = cartItemService.create(cart.getId(), product, form);
+         cartItemService.save(cartItem);
+
+         // update so luong san pham them vao cart
+         cart.setQuantity(cartItemService.findAll().size());
+         cartService.save(cart);
+      }
 
       model.addAttribute("cart", cart);
-      return "client/product";
+      // product info
+      model.addAttribute("product", product);
+      // Featured product
+      showFeature(model);
+      model.addAttribute("form", form);
+      model.addAttribute("cart", cart);
+      return new ModelAndView("client/product", model);
+   }
+
+   private void showFeature(ModelMap model){
+      // Sản phẩm nổi bật
+      List<Product> featuredList = productService.getListFeatured();
+      if (featuredList.size() >=3) {
+         List<Product> subList = featuredList.subList(0, 3);
+         model.addAttribute("featured", subList);
+      } else {
+         model.addAttribute("featured", featuredList);
+      }
    }
 }

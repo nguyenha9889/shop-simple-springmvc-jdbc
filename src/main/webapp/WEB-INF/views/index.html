@@ -12,7 +12,7 @@
 </div>
 <!--PreLoader Ends-->
 <!-- header -->
-<th:block th:replace="client/fragments/header :: header"></th:block>
+<th:block th:replace="client/fragments/header :: header(${cart})"></th:block>
 <!-- end header -->
 
 <!-- hero area -->
@@ -25,7 +25,7 @@
                         <p class="subtitle">Fresh & Organic</p>
                         <h1>Delicious Seasonal Fruits</h1>
                         <div class="hero-btns">
-                            <a th:href="@{/cart}" class="boxed-btn">Fruit Collection</a>
+                            <a th:href="@{/menu}" class="boxed-btn">Our menu</a>
                             <a href="#" class="bordered-btn">Contact Us</a>
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                 <div class="col-lg-4 col-md-6 text-center">
                     <div class="single-product-item">
                         <div class="product-image">
-                            <a th:href="@{/cart}"><img th:src="@{${c.imagePath}}" th:alt="${c.name}"></a>
+                            <img th:src="@{${c.imagePath}}" th:alt="${c.name}">
                         </div>
                         <h3 th:text="${c.name}"></h3>
                         <a th:href="@{/menu(id=${c.id})}" class="cart-btn">View more</a>
@@ -163,7 +163,7 @@
             <div class="col-lg-8 col-md-6">
                 <h3>December sale is on! <br> with big <span class="orange-text">Discount...</span></h3>
                 <div class="sale-percent"><span>Sale! <br> Upto</span>50% <span>off</span></div>
-                <a th:href="@{/cart}" class="cart-btn btn-lg">Shop Now</a>
+                <a th:href="@{/menu}" class="cart-btn btn-lg">Order Now</a>
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="product-image">
